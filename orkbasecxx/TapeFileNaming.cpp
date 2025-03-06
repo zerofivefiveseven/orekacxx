@@ -43,7 +43,7 @@ TapeFileNaming::TapeFileNaming()
 	m_currentDay = texp.tm_mday;
 }
 
-CStdString __CDECL__ TapeFileNaming::GetName()
+CStdString  TapeFileNaming::GetName()
 {
 	return "TapeFileNaming";
 }

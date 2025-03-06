@@ -14,8 +14,8 @@
 #ifndef __TAPEMSG_H__
 #define __TAPEMSG_H__
 
-#include "messages/SyncMessage.h"
-#include "messages/AsyncMessage.h"
+#include "SyncMessage.h"
+#include "AsyncMessage.h"
 
 #define TAPE_MESSAGE_NAME "tape"
 #define REC_ID_PARAM "recid"

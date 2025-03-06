@@ -7,10 +7,14 @@
 #!/bin/bash
 
 #!/bin/bash
+if [ ! -d ./arm-buildroot-linux-gnueabihf_sdk-buildroot ]; then
+    echo "C++ toolchain not found"
+    exit 1
+fi
 mkdir ./dependencies
 pushd ./dependencies
-ARG1=${1:-revyakin}
-echo $ARG1
+ARG1=${1:-"revyakin"}
+echo "user directory $ARG1"
 # Set Buildroot SDK path
 export BUILDROOT_SDK="/home/$ARG1/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot"
 export SYSROOT="$BUILDROOT_SDK/arm-buildroot-linux-gnueabihf/sysroot"
@@ -37,47 +41,8 @@ export LIBTOOLIZE="$BUILDROOT_SDK/bin/libtoolize"
 export PATH=$BUILDROOT_SDK/bin:$PATH
 # Include necessary paths for pkg-config if needed
 
-#
-#sudo wget https://dlcdn.apache.org//xerces/c/3/sources/xerces-c-3.3.0.tar.gz
-##export arm-buildroot-linux-gnueabihf-ranlib="/home/revyakin/oreka/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin/arm-buildroot-linux-gnueabihf-ranlib"
-#gzip -d xerces-c-3.3.0.tar.gz
-#mkdir ./xerces-c-3.3.0/
-#tar -xf xerces-c-3.3.0.tar
-#sudo chmod -R 777 .
-#sudo chmod -R 777 ./.libs/
-#pushd xerces-c-3.3.0
-#CC=$CC CXX=$CXX RANLIB=arm-buildroot-linux-gnueabihf-ranlib PATH="/home/revyakin/oreka/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin:$PATH" ./configure --prefix=$SYSROOT/usr --host=arm-buildroot-linux-gnueabihf
-#CC=$CC CXX=$CXX sudo make -j4
-#pushd /home/revyakin/oreka/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot/
-#sudo chmod -R 777 .
-#popd
-#export PATH="/home/revyakin/oreka/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin:$PATH" make install
-#popd
-#export PKG_CONFIG_PATH="$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-#
-#
-#sudo wget https://android.googlesource.com/platform/external/xerces-cpp/+archive/refs/heads/main.tar.gz
-##export arm-buildroot-linux-gnueabihf-ranlib="/home/revyakin/oreka/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin/arm-buildroot-linux-gnueabihf-ranlib"
-#gzip -d main.tar.gz
-#mkdir ./xercesc
-#tar -xf main.tar -C ./xercesc
-#sudo chmod -R 777 .
-#export XERCESCROOT=$SYSROOT/usr
-#pushd xercesc/src/xercesc/
-#CC=$CC CXX=$CXX RANLIB=arm-buildroot-linux-gnueabihf-ranlib ./configure --prefix=$SYSROOT/usr --host=arm-buildroot-linux-gnueabihf
-#CC=$CC CXX=$CXX  sudo make -j4
-#export CC=$CC
-#   export CXX=$CXX
-#   export PATH="/home/revyakin/oreka/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin:$PATH"
-#sudo chmod -R 777 ./.libs/
-#   make install
-#   popd
-
 export PKG_CONFIG_PATH="$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
-if [ ! -d ./arm-buildroot-linux-gnueabihf_sdk-buildroot ]; then
-    echo "C++ toolchain not found"
-    exit 1
-fi
+
 # BCG729 installation
 echo "Buildroot SDK environment set up:"
 echo "PATH: $PATH"
@@ -187,13 +152,13 @@ git clone --depth 1 --branch v0.12.3 https://github.com/yhirose/cpp-httplib.git
 sudo cp ./httplib/httplib.h $SYSROOT/usr/include/httplib/
 
 # json
-#git clone --depth 1 https://github.com/nlohmann/json.git
-#pushd ./json
-#sudo make distclean
-#sudo CC=$CC CXX=$CXX cmake . -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr -DCMAKE_INSTALL_LIBDIR=$SYSROOT/usr/lib -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX
-#sudo CC=$CC CXX=$CXX make
-#sudo CC=$CC CXX=$CXX make install
-#popd
+git clone --depth 1 https://github.com/nlohmann/json.git
+pushd ./json
+sudo make distclean
+sudo CC=$CC CXX=$CXX cmake . -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr -DCMAKE_INSTALL_LIBDIR=$SYSROOT/usr/lib -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX
+sudo CC=$CC CXX=$CXX make
+sudo CC=$CC CXX=$CXX make install
+popd
 
 # srs-librtmp
 sudo git clone --depth 1 --branch 3.0release https://github.com/ossrs/srs.git
@@ -224,32 +189,37 @@ sudo mv srs_librtmp.a libsrs_librtmp.a
 readelf -h libsrs_librtmp.a  | grep 'Class\|File\|Machine' | head
 popd
 popd
-
+sudo chmod -R 777 /srs
 
 
 git clone https://github.com/apache/logging-log4cxx.git
 pushd logging-log4cxx
-mkdir build && cd build
+mkdir build
+cd build
+export LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib"
+export CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
 sudo make distclean
 CC=$CC CXX=$CXX cmake .. \
   -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
   -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
-  -DCMAKE_CXX_STANDARD=17 \
+  -DCMAKE_CXX_STANDARD=11 \
   -D_GLIBCXX_USE_CXX11_ABI=1 \
   -DCMAKE_C_COMPILER=$CC \
   -DCMAKE_CXX_COMPILER=$CXX
-make
-sudo make install
+sudo CC=$CC CXX=$CXX make
+sudo CC=$CC CXX=$CXX make install
 popd
 
 
 #from deps to main
 popd
 
-
+#find /home/revyakin/orekacxx/orkbasecxx/ -type f -name "*.am" -exec sed -i 's|$$(SYSROOT)|/home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot|g' {} +
 pushd ./orkbasecxx
+sudo chmod -R 777 ../orkbasecxx/
 sudo cp $SYSROOT/usr/lib/libopus.a $SYSROOT/usr/lib/libopusstatic.a
-
+export LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib"
+export CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
 sudo autoconf=$BUILDROOT_SDK/bin/autoconf automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
@@ -294,7 +264,11 @@ popd
 #popd
 
 pushd ./orkaudio
+sudo chmod -R 777 $BUILDROOT_SDK
+sudo chmod -R 777 ./orkaudio/
 # Update obsolete macros in configure.ac
+export LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib"
+export CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
 sed -i 's/AM_PROG_LIBTOOL/LT_INIT/g' configure.ac
 export automake-1.15=$BUILDROOT_SDK/bin/automake-1.15
 # Run autotools commands to regenerate build files

@@ -53,7 +53,7 @@ BatchProcessing::BatchProcessing()
 	m_currentDay = texp.tm_mday;
 }
 
-CStdString __CDECL__ BatchProcessing::GetName()
+CStdString  BatchProcessing::GetName()
 {
 	return "BatchProcessing";
 }

@@ -13,8 +13,8 @@
 
 #define _WINSOCKAPI_		// prevents the inclusion of winsock.h
 
-#include "Utils.h"
-#include "Serializers/Serializer.h"
+#include "/home/revyakin/oreka/Utils.h"
+#include "/home/revyakin/oreka/serializers/Serializer.h"
 #include "SoundDeviceConfig.h"
 
 SoundDeviceConfig::SoundDeviceConfig()

@@ -6,6 +6,9 @@
  *
  */
 #include "LiveStreamServer.h"
+
+#include <log4cxx/logger.h>
+
 #include "LiveStreamConfig.h"
 
 using json = nlohmann::json;

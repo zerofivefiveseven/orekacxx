@@ -15,8 +15,8 @@
 
 InitMsg::InitMsg()
 {
-	m_tcpPort = 59140;
-	m_fileServePort = 8080;
+	m_tcpPort = 59141;
+	m_fileServePort = 8085;
 	m_sshPort = 22;
 }
 

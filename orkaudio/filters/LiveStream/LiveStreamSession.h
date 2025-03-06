@@ -9,8 +9,10 @@
 #ifndef __LIVESTREAMSESSION_H__
 #define __LIVESTREAMSESSION_H__
 
-#include "VoIpSession.h"
+//#include "VoIpSession.h"
 #include <set>
+#include <audiocaptureplugins/voip/VoIpSession.h>
+
 #include "AudioCapturePlugin.h"
 #include "Utils.h"
 #include "AudioCapture.h"

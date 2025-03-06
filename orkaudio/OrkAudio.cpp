@@ -13,7 +13,7 @@
  
 #include <cstdlib>
 #include <iostream>
-#include "stdio.h"
+#include <cstdio>
 #include <iostream>
 
 #define BACKWARD_HAS_DW 1
@@ -33,6 +33,8 @@
 #include "messages/InitMsg.h"
 #include "messages/ReadLoggingPropertiesMsg.h"
 //#include "messages/CrashMessage.cpp"
+#include <apr_dso.h>
+
 #include "Config.h"
 #include "LogManager.h"
 #include "ImmediateProcessing.h"
@@ -59,6 +61,7 @@
 #include "SpeexCodec.h"
 #include "G721Codec.h"
 #include "OpusCodec.h"
+#include <memory>
 #include <thread>
 #include "apr_signal.h"
 #include <sys/prctl.h>
@@ -126,24 +129,22 @@ void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
 	}
 	CStdString pluginExtension = ".dll";
 #else
-	if(pluginsDirectory.size() == 0)
+	if(pluginsDirectory.empty())
 	{
 		// default unix plugins directory
 		pluginsDirectory = "/usr/lib/orkaudio/plugins/";
 	}
 	CStdString pluginExtension = ".so";
 #endif
-	CStdString pluginPath;
-	apr_status_t ret;
 	apr_dir_t* dir;
-	
-	ret = apr_dir_open(&dir, (PCSTR)pluginsDirectory, AprLp);
-	if (ret != APR_SUCCESS)
+
+	if (apr_status_t ret = apr_dir_open(&dir, (PCSTR)pluginsDirectory, AprLp); ret != APR_SUCCESS)
 	{
 		LOG4CXX_ERROR(LOG.rootLog, CStdString("Plugins directory could not be found:" + pluginsDirectory + " check your config.xml"));
 	}
 	else
 	{
+		CStdString pluginPath;
 		apr_finfo_t finfo;
 		apr_int32_t wanted = APR_FINFO_NAME | APR_FINFO_SIZE;
 		while((ret = apr_dir_read(&finfo, wanted, dir)) == APR_SUCCESS) 
@@ -202,21 +203,21 @@ void Transcode(CStdString &file)
 	// Register in-built filters
 	FilterRef filter(new AlawToPcmFilter());
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new UlawToPcmFilter());
+	filter = std::make_shared<UlawToPcmFilter>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new GsmToPcmFilter());
+	filter = std::make_shared<GsmToPcmFilter>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new IlbcToPcmFilter());
+	filter = std::make_shared<IlbcToPcmFilter>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new AudioGainFilter());
+	filter = std::make_shared<AudioGainFilter>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new G722ToPcmFilter());
+	filter = std::make_shared<G722ToPcmFilter>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new SpeexDecoder() );
+	filter = std::make_shared<SpeexDecoder>( );
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new G721CodecDecoder());
+	filter = std::make_shared<G721CodecDecoder>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-    filter.reset(new OpusCodecDecoder());
+    filter = std::make_shared<OpusCodecDecoder>();
 	FilterRegistry::instance()->RegisterFilter(filter);
 	
 	// Register in-built tape processors and build the processing chain
@@ -273,35 +274,35 @@ void MainThread()
 	ObjectFactory::GetSingleton()->Initialize();
 
 	ObjectRef objRef;
-	objRef.reset(new PingMsg);
+	objRef = std::make_shared<PingMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new TapeMsg);
+	objRef = std::make_shared<TapeMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new TapeResponse);
+	objRef = std::make_shared<TapeResponse>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new SimpleResponseMsg);
+	objRef = std::make_shared<SimpleResponseMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new DeleteTapeMsg);
+	objRef = std::make_shared<DeleteTapeMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new CaptureMsg);
+	objRef = std::make_shared<CaptureMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new TcpPingMsg);
+	objRef = std::make_shared<TcpPingMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new ReportingSkipTapeMsg);
+	objRef = std::make_shared<ReportingSkipTapeMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new RecordMsg);
+	objRef = std::make_shared<RecordMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new PauseMsg);
+	objRef = std::make_shared<PauseMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new StopMsg);
+	objRef = std::make_shared<StopMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new InitMsg);
+	objRef = std::make_shared<InitMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new ReadLoggingPropertiesMsg);
+	objRef = std::make_shared<ReadLoggingPropertiesMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new ListLoggingPropertiesMsg);
+	objRef = std::make_shared<ListLoggingPropertiesMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
-	objRef.reset(new OrkaudioVersionMsg);
+	objRef = std::make_shared<OrkaudioVersionMsg>();
 	ObjectFactory::GetSingleton()->RegisterObject(objRef);
 	//objRef.reset(new CrashMsg);
 	//ObjectFactory::GetSingleton()->RegisterObject(objRef);
@@ -320,21 +321,21 @@ void MainThread()
 	// Register in-built filters
 	FilterRef filter(new AlawToPcmFilter());
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new UlawToPcmFilter());
+	filter = std::make_shared<UlawToPcmFilter>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new GsmToPcmFilter());
+	filter = std::make_shared<GsmToPcmFilter>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new IlbcToPcmFilter());
+	filter = std::make_shared<IlbcToPcmFilter>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new AudioGainFilter());
+	filter = std::make_shared<AudioGainFilter>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new G722ToPcmFilter());
+	filter = std::make_shared<G722ToPcmFilter>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new SpeexDecoder() );
+	filter = std::make_shared<SpeexDecoder>( );
 	FilterRegistry::instance()->RegisterFilter(filter);
-	filter.reset(new G721CodecDecoder());
+	filter = std::make_shared<G721CodecDecoder>();
 	FilterRegistry::instance()->RegisterFilter(filter);
-    filter.reset(new OpusCodecDecoder());
+    filter = std::make_shared<OpusCodecDecoder>();
 	FilterRegistry::instance()->RegisterFilter(filter);
 	
 	// Register in-built tape processors and build the processing chain

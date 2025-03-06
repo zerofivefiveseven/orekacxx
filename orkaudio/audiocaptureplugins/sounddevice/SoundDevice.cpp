@@ -16,10 +16,10 @@
 #include "ace/OS_NS_unistd.h"
 #include "ace/Singleton.h"
 #include "ace/Min_Max.h"
-#include "AudioCapturePlugin.h"
+#include "/home/revyakin/oreka/AudioCapturePlugin.h"
 #include "AudioCapturePluginCommon.h"
-#include "portaudio.h"
-#include "Utils.h"
+#include "/home/revyakin/oreka/portaudio.h"
+#include "/home/revyakin/oreka/Utils.h"
 #include "SoundDeviceConfig.h"
 
 extern AudioChunkCallBackFunction g_audioChunkCallBack;

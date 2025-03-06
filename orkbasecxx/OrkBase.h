@@ -18,6 +18,6 @@
 	#define DLL_IMPORT_EXPORT_ORKBASE  __declspec( dllimport )
 	#endif
 #else
-	#define DLL_IMPORT_EXPORT_ORKBASE
+	#define DLL_IMPORT_EXPORT_ORKBASE __attribute__((visibility("default")))
 #endif
 

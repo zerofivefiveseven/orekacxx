@@ -14,8 +14,8 @@
 
 extern "C"
 {
-  #include "bcg729/encoder.h"
-  #include "bcg729/decoder.h"
+  #include "encoder.h"
+  #include "decoder.h"
 }
 
 class DLL_IMPORT_EXPORT_ORKBASE G729CodecDecoder : public Filter

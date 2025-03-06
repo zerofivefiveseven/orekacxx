@@ -1,8 +1,8 @@
 # not a GNU package. You can remove this line, if
 # have all needed files, that a GNU package needs
 AUTOMAKE_OPTIONS = foreign 1.4
-
-
+SHELL := '/bin/bash'
+MY_SYSROOT=$$SYSROOT ; echo $$SYSROOT
 lib_LTLIBRARIES = liborkbase.la
 liborkbase_la_LDFLAGS =  -lapr-1 -lpthread -lssl @boost_lib@ -lcap
 liborkbase_la_SOURCES = Filter.cpp g711.c \
@@ -20,7 +20,7 @@ liborkbase_la_SOURCES = Filter.cpp g711.c \
 			SizedBuffer.cpp DirectionSelector.cpp \
 			SslUtils.cpp
 #INCLUDES = -I/projects/ext/xmlrpc++/xmlrpc++0.7/src
-INCLUDES = -I/opt/opus/include/opus -I/usr/include/apr-1 -I/usr/include/apr-1.0
+INCLUDES = -I /home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot/usr/include/opus -I /home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot/usr/include/apr-1/ -I /home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot/usr/include/apr-1/
 SUBDIRS = messages serializers audiofile filters
 liborkbase_la_LIBADD = $(top_builddir)/serializers/libserializers.la \
 	$(top_builddir)/messages/libmessages.la \
@@ -37,4 +37,4 @@ liborkbase_la_LIBADD = $(top_builddir)/serializers/libserializers.la \
 	$(top_builddir)/filters/opuscodec/libopuscodec.la
 	-lm
 
-AM_CXXFLAGS = -D_REENTRANT
+AM_CXXFLAGS = -O2 -D_REENTRANT -std=c++17 -Wall -Wextra -fno-omit-frame-pointer -fno-omit-frame-pointer

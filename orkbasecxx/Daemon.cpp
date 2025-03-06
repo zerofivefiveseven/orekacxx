@@ -23,7 +23,10 @@ SERVICE_STATUS_HANDLE serviceStatusHandle = 0;
 HANDLE stopServiceEvent = 0;
 #endif
 #include "Daemon.h"
-
+#include <signal.h>
+#include <apr_portable.h>
+#include <apr_file_io.h>
+#include <apr_mmap.h>
 void handle_signal(int sig_num)
 {
 #ifndef WIN32

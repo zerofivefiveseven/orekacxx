@@ -21,7 +21,9 @@
 #include <list>
 #include "ConfigManager.h"
 #include "VoIpConfig.h"
-
+#include <apr_portable.h>
+#include <apr_file_io.h>
+#include <apr_mmap.h>
 extern AudioChunkCallBackFunction g_audioChunkCallBack;
 extern CaptureEventCallBackFunction g_captureEventCallBack;
 

@@ -25,11 +25,11 @@ public:
 	static void Initialize();
 	static Reporting* Instance();
 
-	CStdString __CDECL__ GetName();
-	TapeProcessorRef __CDECL__ Instanciate();
-	void __CDECL__ AddAudioTape(AudioTapeRef& audioTapeRef);
-	bool __CDECL__ AddMessage(MessageRef messageRef);
-	void __CDECL__ SkipTapes(int number, CStdString trackingServer="");
+	CStdString  GetName();
+	TapeProcessorRef  Instanciate();
+	void  AddAudioTape(AudioTapeRef& audioTapeRef);
+	bool  AddMessage(MessageRef messageRef);
+	void  SkipTapes(int number, CStdString trackingServer="");
 
 	//static Reporting* GetInstance();
 	static void ThreadHandler();

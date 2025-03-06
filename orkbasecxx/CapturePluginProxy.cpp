@@ -19,7 +19,9 @@
 #include "CapturePluginProxy.h"
 #include "ConfigManager.h"
 #include "CapturePort.h"
-
+#include <apr_portable.h>
+#include <apr_file_io.h>
+#include <apr_mmap.h>
 CapturePluginProxy* CapturePluginProxy::m_singleton;	
 
 CapturePluginProxy::CapturePluginProxy()

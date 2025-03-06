@@ -1,3 +1,4 @@
+#include <optional>
 /*
  * Oreka -- A media capture and retrieval platform
  * 
@@ -12,6 +13,12 @@
  */
 
 #define _WINSOCKAPI_		// prevents the inclusion of winsock.h
+
+//#include "Utils.h"
+//#include "AudioCapturePlugin.h"
+//#include "AudioCapturePluginCommon.h"
+//#include "ConfigManager.h"
+//#include "GeneratorConfig.h"
 
 #include "Utils.h"
 #include "AudioCapturePlugin.h"

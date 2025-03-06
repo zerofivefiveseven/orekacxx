@@ -25,6 +25,9 @@
 #include "MemUtils.h"
 #include <boost/algorithm/string/predicate.hpp>
 #include "../common/DtmfHandling.h"
+#include <apr_portable.h>
+#include <apr_file_io.h>
+#include <apr_mmap.h>
 
 extern AudioChunkCallBackFunction g_audioChunkCallBack;
 extern CaptureEventCallBackFunction g_captureEventCallBack;

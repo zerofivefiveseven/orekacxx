@@ -10,6 +10,7 @@
 * Please refer to http://www.gnu.org/copyleft/gpl.html
 *
 */
+//#include "AudioCapturePluginCommon.h"
 #ifdef WIN32
 #include <WinSock2.h>
 #include <WS2tcpip.h>

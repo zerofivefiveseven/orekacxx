@@ -21,7 +21,7 @@ AudioChunkCallBackFunction g_audioChunkCallBack;
 CaptureEventCallBackFunction g_captureEventCallBack;
 OrkLogManager* g_logManager;
 
-void __CDECL__ RegisterCallBacks(AudioChunkCallBackFunction audioCallBack, CaptureEventCallBackFunction captureEventCallBack, OrkLogManager* logManager)
+void RegisterCallBacks(AudioChunkCallBackFunction audioCallBack, CaptureEventCallBackFunction captureEventCallBack, OrkLogManager* logManager)
 {
 	g_audioChunkCallBack = audioCallBack;
 	g_captureEventCallBack = captureEventCallBack;

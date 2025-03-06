@@ -33,9 +33,9 @@ class DLL_IMPORT_EXPORT_ORKBASE DirectionSelector : public TapeProcessor
 public:
 	static void Initialize();
 
-	CStdString __CDECL__ GetName();
-	TapeProcessorRef __CDECL__ Instanciate();
-	void __CDECL__ AddAudioTape(AudioTapeRef& audioTapeRef);
+	CStdString  GetName();
+	TapeProcessorRef  Instanciate();
+	void  AddAudioTape(AudioTapeRef& audioTapeRef);
 	static void ThreadHandler();
 	void SetQueueSize(int size);
 

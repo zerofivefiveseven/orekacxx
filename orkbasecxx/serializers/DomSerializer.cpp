@@ -17,11 +17,9 @@
 #include <xercesc/dom/DOMElement.hpp>
 #include <xercesc/dom/DOMImplementation.hpp>
 #include <xercesc/dom/DOMImplementationLS.hpp>
-#ifdef XERCES_3
-#include <xercesc/dom/DOMLSSerializer.hpp>
-#else
-#include <xercesc/dom/DOMWriter.hpp>
-#endif
+
+//#include <xercesc/dom/DOMLSSerializer.hpp>
+//include <xercesc/dom/DOMWriter.hpp>
 #include <xercesc/framework/MemBufFormatTarget.hpp>
 
 #include "DomSerializer.h"
@@ -191,7 +189,7 @@ DOMNode* DomSerializer::FindElementByName(DOMNode *node, CStdString name)
 	return NULL;
 }
 
-#ifdef XERCES_3
+//XERCES3
 CStdString DomSerializer::DomNodeToString(DOMNode* node)
 {
 	CStdString output;
@@ -215,35 +213,4 @@ CStdString DomSerializer::DomNodeToString(DOMNode* node)
 
 	return output;
 }
-#else
-CStdString DomSerializer::DomNodeToString(DOMNode* node)
-{
-	CStdString output;
 
-    DOMImplementation *impl          = DOMImplementationRegistry::getDOMImplementation(XStr("LS").unicodeForm());
-    DOMLSSerializer   *theSerializer = ((DOMImplementationLS*)impl)->createLSSerializer();
-		DOMConfiguration	* dc 					 = theSerializer->getDomConfig();
-    // set user specified output encoding
-    //dc->setEncoding(gOutputEncoding);
-		dc->setParameter(XStr("format-pretty-print").unicodeForm(), true);
-
-    XMLFormatTarget *myFormTarget;
-		myFormTarget = new MemBufFormatTarget ();
-
-		DOMLSOutput *outputStream = ((DOMImplementationLS*)impl)->createLSOutput();
-		outputStream->setByteStream(myFormTarget);
-
-    theSerializer->write(node, outputStream);
-
-		output = (char *)((MemBufFormatTarget*)myFormTarget)->getRawBuffer();
-
-	// Clean up
-    delete theSerializer;
-    //
-    // Filter, formatTarget and error handler
-    // are NOT owned by the serializer.
-    delete myFormTarget;
-
-	return output;
-}
-#endif

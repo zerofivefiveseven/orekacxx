@@ -43,6 +43,9 @@
 #include "SipParsers.h"
 #include "Iax2Parsers.h"
 #include "SizedBuffer.h"
+#include <apr_portable.h>
+#include <apr_file_io.h>
+#include <apr_mmap.h>
 
 extern AudioChunkCallBackFunction g_audioChunkCallBack;
 extern CaptureEventCallBackFunction g_captureEventCallBack;
@@ -1562,7 +1565,7 @@ void VoIp::OpenDevices()
 				CStdString deviceName(device->name);
 				deviceName.ToLower();
 				if(	deviceName.Find("dialup") == -1		&&			// Don't want Windows dialup devices (still possible to force them using the configuration file)
-					deviceName.Find("lo") == -1			&&			// Don't want Unix loopback device
+//					deviceName.Find("lo") == -1			&&			// Don't want Unix loopback device
 					deviceName.Find("any") == -1			)		// Don't want Unix "any" device
 				{
 					defaultDevice =  device;
@@ -2271,52 +2274,52 @@ void TcpListenerThread()
 
 #endif
 //================================================================================
-void __CDECL__ Initialize()
+void  Initialize()
 {
 	VoIpSingleton::instance()->Initialize();
 }
 
-void __CDECL__ Run()
+void  Run()
 {
 	VoIpSingleton::instance()->Run();
 }
 
-void __CDECL__ Shutdown()
+void  Shutdown()
 {
 	VoIpSingleton::instance()->Shutdown();
 }
 
-void __CDECL__ StartCapture(CStdString& party, CStdString& orkuid, CStdString& nativecallid, CStdString& side)
+void  StartCapture(CStdString& party, CStdString& orkuid, CStdString& nativecallid, CStdString& side)
 {
 	VoIpSingleton::instance()->StartCapture(party, orkuid, nativecallid, side);
 }
 
-void __CDECL__ PauseCapture(CStdString& party, CStdString& orkuid, CStdString& nativecallid)
+void  PauseCapture(CStdString& party, CStdString& orkuid, CStdString& nativecallid)
 {
 	VoIpSingleton::instance()->PauseCapture(party, orkuid, nativecallid);
 }
 
-void __CDECL__ StopCapture(CStdString& party, CStdString& orkuid, CStdString& nativecallid, CStdString& qos)
+void  StopCapture(CStdString& party, CStdString& orkuid, CStdString& nativecallid, CStdString& qos)
 {
 	VoIpSingleton::instance()->StopCapture(party, orkuid, nativecallid, qos);
 }
 
-void __CDECL__ SetOnHold(CStdString& port, CStdString& orkuid)
+void  SetOnHold(CStdString& port, CStdString& orkuid)
 {
 	;
 }
 
-void __CDECL__ SetOffHold(CStdString& port, CStdString& orkuid)
+void  SetOffHold(CStdString& port, CStdString& orkuid)
 {
 	;
 }
 
-void __CDECL__  GetConnectionStatus(CStdString& msg)
+void   GetConnectionStatus(CStdString& msg)
 {
 	VoIpSingleton::instance()->GetConnectionStatus(msg);
 }
 
-void __CDECL__  ProcessMetadataMsg(SyncMessage* msg)
+void   ProcessMetadataMsg(SyncMessage* msg)
 {
 	VoIpSingleton::instance()->ProcessMetadataMsg(msg);
 }
