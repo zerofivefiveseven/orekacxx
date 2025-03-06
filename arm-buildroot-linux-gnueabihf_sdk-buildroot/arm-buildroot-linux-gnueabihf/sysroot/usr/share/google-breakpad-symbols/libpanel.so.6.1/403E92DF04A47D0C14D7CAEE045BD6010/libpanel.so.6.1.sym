@@ -1,0 +1,20 @@
+MODULE Linux arm 403E92DF04A47D0C14D7CAEE045BD6010 libpanel.so.6.1
+INFO CODE_ID DF923E40A4040C7D14D7CAEE045BD601
+PUBLIC 940 0 ground_panel
+PUBLIC 99c 0 panel_above
+PUBLIC 9cc 0 ceiling_panel
+PUBLIC a24 0 panel_below
+PUBLIC a94 0 bottom_panel
+PUBLIC d48 0 del_panel
+PUBLIC fd4 0 hide_panel
+PUBLIC 1248 0 panel_hidden
+PUBLIC 12a4 0 move_panel
+PUBLIC 14e4 0 new_panel
+PUBLIC 15b0 0 replace_panel
+PUBLIC 17b8 0 show_panel
+PUBLIC 1a5c 0 top_panel
+PUBLIC 1a60 0 update_panels_sp
+PUBLIC 1c48 0 update_panels
+PUBLIC 1c68 0 set_panel_userptr
+PUBLIC 1c7c 0 panel_userptr
+PUBLIC 1c88 0 panel_window

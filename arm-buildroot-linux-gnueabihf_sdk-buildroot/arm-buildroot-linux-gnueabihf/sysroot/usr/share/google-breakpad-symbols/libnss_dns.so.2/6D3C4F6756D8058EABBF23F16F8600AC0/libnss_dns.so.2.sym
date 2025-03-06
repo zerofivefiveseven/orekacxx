@@ -1,0 +1,11 @@
+MODULE Linux arm 6D3C4F6756D8058EABBF23F16F8600AC0 libnss_dns.so.2
+INFO CODE_ID 674F3C6DD8568E05ABBF23F16F8600AC
+PUBLIC 1e1c 0 _nss_dns_gethostbyname3_r
+PUBLIC 1edc 0 _nss_dns_gethostbyname2_r
+PUBLIC 1f5c 0 _nss_dns_gethostbyname_r
+PUBLIC 2030 0 _nss_dns_gethostbyname4_r
+PUBLIC 23b4 0 _nss_dns_gethostbyaddr2_r
+PUBLIC 27d8 0 _nss_dns_gethostbyaddr_r
+PUBLIC 2d44 0 _nss_dns_getnetbyname_r
+PUBLIC 2ebc 0 _nss_dns_getnetbyaddr_r
+PUBLIC 317c 0 _nss_dns_getcanonname_r
