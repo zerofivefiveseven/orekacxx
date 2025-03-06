@@ -13,10 +13,9 @@ if [ ! -d ./arm-buildroot-linux-gnueabihf_sdk-buildroot ]; then
 fi
 mkdir ./dependencies
 pushd ./dependencies
-ARG1=${1:-"revyakin"}
-echo "user directory $ARG1"
+echo "user directory $(../whoami.sh)"
 # Set Buildroot SDK path
-export BUILDROOT_SDK="/home/$ARG1/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot"
+export BUILDROOT_SDK="/home/$(../whoami.sh)/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot"
 export SYSROOT="$BUILDROOT_SDK/arm-buildroot-linux-gnueabihf/sysroot"
 #BUILDROOT_SDK="/home/revyakin/oreka/arm-buildroot-linux-gnueabihf_sdk-buildroot"
 export PATH="$BUILDROOT_SDK/bin:$BUILDROOT_SDK/bin:$PATH"
@@ -191,7 +190,7 @@ popd
 popd
 sudo chmod -R 777 /srs
 
-
+sudo rm -rf logging-log4cxx
 git clone https://github.com/apache/logging-log4cxx.git
 pushd logging-log4cxx
 mkdir build
@@ -199,15 +198,15 @@ cd build
 export LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib"
 export CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
 sudo make distclean
-CC=$CC CXX=$CXX cmake .. \
+CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS cmake .. \
   -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
   -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
   -DCMAKE_CXX_STANDARD=11 \
   -D_GLIBCXX_USE_CXX11_ABI=1 \
   -DCMAKE_C_COMPILER=$CC \
   -DCMAKE_CXX_COMPILER=$CXX
-sudo CC=$CC CXX=$CXX make
-sudo CC=$CC CXX=$CXX make install
+sudo  CC=$CC CXX=$CXX make
+sudo  CC=$CC CXX=$CXX make install
 popd
 
 
@@ -278,7 +277,7 @@ export automake-1.15=$BUILDROOT_SDK/bin/automake-1.15
  sudo automake-1.15=$BUILDROOT_SDK/bin/automake-1.15 aclocal=$BUILDROOT_SDK/bin/aclocal-1.15 automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoconf
 
 # Run configure script
-sudo automake-1.15=$BUILDROOT_SDK/bin/automake-1.15 aclocal=$BUILDROOT_SDK/bin/aclocal-1.15 automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure \
+sudo CXXFLAGS=$CXXFLAGS automake-1.15=$BUILDROOT_SDK/bin/automake-1.15 aclocal=$BUILDROOT_SDK/bin/aclocal-1.15 automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --prefix="$SYSROOT/usr" \
