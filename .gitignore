@@ -1,4 +1,16 @@
-# Created by https://www.gitignore.io/api/c++,cmake,intellij,sublimetext
+**/*.vcxproj
+**/*.dsp
+**/*.dsw
+**/placeholder
+**/*.in.bak
+**/*.sln
+**/*-.s
+#**/#
+**/\#
+**/*.bin
+**/*.m4
+/orkaudio/orkaudio
+/orkaudio/orkaudio.lock
 
 ### C++ ###
 # Prerequisites
@@ -66,7 +78,6 @@ stamp-h1
 
 _libs
 acinclude.m4
-aclocal.m4
 atconfig
 autom4te.cache
 config-h.in
@@ -95,14 +106,11 @@ libtool-*.tar.xz
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
-
-orkaudio/orkaudio
-orkaudio/audiocaptureplugins/*/AudioCapturePluginCommon.cpp
+**/aclocal*
+**/am--*
 !orkaudio/audiocaptureplugins/common/*
--.s
-
+**/.dirtstamp
 .vscode
-
 target/
 .DS_Store
 .settings

@@ -2,11 +2,6 @@
 
 #sudo apt-get install -y libspeex-dev build-essential libtool automake git cmake  libpcap-dev libapr1-dev libopus-dev  libdw-dev libunwind-dev libssl-dev libsndfile1-dev libxerces-c3-dev libssl-dev
 
-#!/bin/bash
-
-#!/bin/bash
-
-#!/bin/bash
 if [ ! -d ./arm-buildroot-linux-gnueabihf_sdk-buildroot ]; then
     echo "C++ toolchain not found"
     exit 1
