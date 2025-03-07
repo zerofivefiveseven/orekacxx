@@ -1,6 +1,0 @@
-MODULE Linux arm 0A6D3420C33097A904462015041B45A40 libparted-fs-resize.so.0.0.2
-INFO CODE_ID 20346D0A30C3A99704462015041B45A4
-PUBLIC 1320 0 ped_file_system_open
-PUBLIC 14dc 0 ped_file_system_close
-PUBLIC 15e8 0 ped_file_system_resize
-PUBLIC 18d4 0 ped_file_system_get_resize_constraint

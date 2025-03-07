@@ -1,1 +1,0 @@
-/opt/backward-cpp/backward.hpp
