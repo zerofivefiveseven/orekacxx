@@ -1,0 +1,84 @@
+MODULE Linux arm 8DEE26A95BB588DBF0C885C290AB0FCF0 libpcrecpp.so.0
+INFO CODE_ID A926EE8DB55BDB88F0C885C290AB0FCF
+PUBLIC 31b4 0 pcrecpp::Arg::parse_null(char const*, int, void*)
+PUBLIC 332c 0 pcrecpp::RE::Cleanup()
+PUBLIC 33e0 0 pcrecpp::RE::~RE()
+PUBLIC 3414 0 pcrecpp::RE::QuoteMeta[abi:cxx11](pcrecpp::StringPiece const&)
+PUBLIC 3644 0 pcrecpp::RE::TryMatch(pcrecpp::StringPiece const&, int, pcrecpp::RE::Anchor, bool, int*, int) const
+PUBLIC 3748 0 pcrecpp::RE::Rewrite(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*, pcrecpp::StringPiece const&, pcrecpp::StringPiece const&, int*, int) const
+PUBLIC 3910 0 pcrecpp::RE::Replace(pcrecpp::StringPiece const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) const
+PUBLIC 3b08 0 pcrecpp::RE::GlobalReplace(pcrecpp::StringPiece const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) const
+PUBLIC 3f54 0 pcrecpp::RE::Extract(pcrecpp::StringPiece const&, pcrecpp::StringPiece const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >*) const
+PUBLIC 3fe8 0 pcrecpp::RE::NumberOfCapturingGroups() const
+PUBLIC 4058 0 pcrecpp::RE::DoMatchImpl(pcrecpp::StringPiece const&, pcrecpp::RE::Anchor, int*, pcrecpp::Arg const* const*, int, int*, int) const
+PUBLIC 41bc 0 pcrecpp::RE::FullMatch(pcrecpp::StringPiece const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&) const
+PUBLIC 4374 0 pcrecpp::RE::PartialMatch(pcrecpp::StringPiece const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&) const
+PUBLIC 452c 0 pcrecpp::RE::Consume(pcrecpp::StringPiece*, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&) const
+PUBLIC 4718 0 pcrecpp::RE::FindAndConsume(pcrecpp::StringPiece*, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&) const
+PUBLIC 4904 0 pcrecpp::RE::DoMatch(pcrecpp::StringPiece const&, pcrecpp::RE::Anchor, int*, pcrecpp::Arg const* const*, int) const
+PUBLIC 4a00 0 pcrecpp::Arg::parse_string(char const*, int, void*)
+PUBLIC 4a3c 0 pcrecpp::Arg::parse_stringpiece(char const*, int, void*)
+PUBLIC 4a4c 0 pcrecpp::Arg::parse_char(char const*, int, void*)
+PUBLIC 4a7c 0 pcrecpp::Arg::parse_uchar(char const*, int, void*)
+PUBLIC 4aac 0 pcrecpp::Arg::parse_long_radix(char const*, int, void*, int)
+PUBLIC 4b98 0 pcrecpp::Arg::parse_ulong_radix(char const*, int, void*, int)
+PUBLIC 4c88 0 pcrecpp::Arg::parse_short_radix(char const*, int, void*, int)
+PUBLIC 4cd4 0 pcrecpp::Arg::parse_ushort_radix(char const*, int, void*, int)
+PUBLIC 4d1c 0 pcrecpp::Arg::parse_int_radix(char const*, int, void*, int)
+PUBLIC 4d58 0 pcrecpp::Arg::parse_uint_radix(char const*, int, void*, int)
+PUBLIC 4d94 0 pcrecpp::Arg::parse_longlong_radix(char const*, int, void*, int)
+PUBLIC 4e7c 0 pcrecpp::Arg::parse_ulonglong_radix(char const*, int, void*, int)
+PUBLIC 4f68 0 pcrecpp::Arg::parse_double(char const*, int, void*)
+PUBLIC 5054 0 pcrecpp::Arg::parse_float(char const*, int, void*)
+PUBLIC 5098 0 pcrecpp::Arg::parse_short(char const*, int, void*)
+PUBLIC 50a0 0 pcrecpp::Arg::parse_short_hex(char const*, int, void*)
+PUBLIC 50a8 0 pcrecpp::Arg::parse_short_octal(char const*, int, void*)
+PUBLIC 50b0 0 pcrecpp::Arg::parse_short_cradix(char const*, int, void*)
+PUBLIC 50b8 0 pcrecpp::Arg::parse_ushort(char const*, int, void*)
+PUBLIC 50c0 0 pcrecpp::Arg::parse_ushort_hex(char const*, int, void*)
+PUBLIC 50c8 0 pcrecpp::Arg::parse_ushort_octal(char const*, int, void*)
+PUBLIC 50d0 0 pcrecpp::Arg::parse_ushort_cradix(char const*, int, void*)
+PUBLIC 50d8 0 pcrecpp::Arg::parse_int(char const*, int, void*)
+PUBLIC 50e0 0 pcrecpp::Arg::parse_int_hex(char const*, int, void*)
+PUBLIC 50e8 0 pcrecpp::Arg::parse_int_octal(char const*, int, void*)
+PUBLIC 50f0 0 pcrecpp::Arg::parse_int_cradix(char const*, int, void*)
+PUBLIC 50f8 0 pcrecpp::Arg::parse_uint(char const*, int, void*)
+PUBLIC 5100 0 pcrecpp::Arg::parse_uint_hex(char const*, int, void*)
+PUBLIC 5108 0 pcrecpp::Arg::parse_uint_octal(char const*, int, void*)
+PUBLIC 5110 0 pcrecpp::Arg::parse_uint_cradix(char const*, int, void*)
+PUBLIC 5118 0 pcrecpp::Arg::parse_long(char const*, int, void*)
+PUBLIC 5120 0 pcrecpp::Arg::parse_long_hex(char const*, int, void*)
+PUBLIC 5128 0 pcrecpp::Arg::parse_long_octal(char const*, int, void*)
+PUBLIC 5130 0 pcrecpp::Arg::parse_long_cradix(char const*, int, void*)
+PUBLIC 5138 0 pcrecpp::Arg::parse_ulong(char const*, int, void*)
+PUBLIC 5140 0 pcrecpp::Arg::parse_ulong_hex(char const*, int, void*)
+PUBLIC 5148 0 pcrecpp::Arg::parse_ulong_octal(char const*, int, void*)
+PUBLIC 5150 0 pcrecpp::Arg::parse_ulong_cradix(char const*, int, void*)
+PUBLIC 5158 0 pcrecpp::Arg::parse_longlong(char const*, int, void*)
+PUBLIC 5160 0 pcrecpp::Arg::parse_longlong_hex(char const*, int, void*)
+PUBLIC 5168 0 pcrecpp::Arg::parse_longlong_octal(char const*, int, void*)
+PUBLIC 5170 0 pcrecpp::Arg::parse_longlong_cradix(char const*, int, void*)
+PUBLIC 5178 0 pcrecpp::Arg::parse_ulonglong(char const*, int, void*)
+PUBLIC 5180 0 pcrecpp::Arg::parse_ulonglong_hex(char const*, int, void*)
+PUBLIC 5188 0 pcrecpp::Arg::parse_ulonglong_octal(char const*, int, void*)
+PUBLIC 5190 0 pcrecpp::Arg::parse_ulonglong_cradix(char const*, int, void*)
+PUBLIC 5198 0 pcrecpp::RE::Compile(pcrecpp::RE::Anchor)
+PUBLIC 5504 0 pcrecpp::RE::Init(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, pcrecpp::RE_Options const*)
+PUBLIC 55a4 0 void std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_construct<char const*>(char const*, char const*, std::forward_iterator_tag)
+PUBLIC 566c 0 pcrecpp::Scanner::Scanner()
+PUBLIC 569c 0 pcrecpp::Scanner::Scanner(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)
+PUBLIC 5784 0 pcrecpp::Scanner::~Scanner()
+PUBLIC 5804 0 pcrecpp::Scanner::DisableSkip()
+PUBLIC 5850 0 pcrecpp::Scanner::LineNumber() const
+PUBLIC 588c 0 pcrecpp::Scanner::Offset() const
+PUBLIC 589c 0 pcrecpp::Scanner::LookingAt(pcrecpp::RE const&) const
+PUBLIC 58d0 0 pcrecpp::Scanner::GetComments(int, int, std::vector<pcrecpp::StringPiece, std::allocator<pcrecpp::StringPiece> >*)
+PUBLIC 59a4 0 pcrecpp::Scanner::GetNextComments(std::vector<pcrecpp::StringPiece, std::allocator<pcrecpp::StringPiece> >*)
+PUBLIC 5a3c 0 pcrecpp::Scanner::ConsumeSkip()
+PUBLIC 5b64 0 pcrecpp::Scanner::SetSkipExpression(char const*)
+PUBLIC 5d2c 0 pcrecpp::Scanner::Skip(char const*)
+PUBLIC 5ef4 0 pcrecpp::Scanner::EnableSkip()
+PUBLIC 5f44 0 pcrecpp::Scanner::Consume(pcrecpp::RE const&, pcrecpp::Arg const&, pcrecpp::Arg const&, pcrecpp::Arg const&)
+PUBLIC 5fe4 0 void std::vector<pcrecpp::StringPiece, std::allocator<pcrecpp::StringPiece> >::_M_realloc_insert<pcrecpp::StringPiece const&>(__gnu_cxx::__normal_iterator<pcrecpp::StringPiece*, std::vector<pcrecpp::StringPiece, std::allocator<pcrecpp::StringPiece> > >, pcrecpp::StringPiece const&)
+PUBLIC 6148 0 void std::vector<pcrecpp::StringPiece, std::allocator<pcrecpp::StringPiece> >::_M_realloc_insert<pcrecpp::StringPiece>(__gnu_cxx::__normal_iterator<pcrecpp::StringPiece*, std::vector<pcrecpp::StringPiece, std::allocator<pcrecpp::StringPiece> > >, pcrecpp::StringPiece&&)
+PUBLIC 62ac 0 operator<<(std::ostream&, pcrecpp::StringPiece const&)

@@ -1,0 +1,19 @@
+#
+# Author: Lasse Collin
+#
+# This file has been put into the public domain.
+# You can do whatever you want with this file.
+#
+
+prefix=/home/revyakin/projects/buildroot-dir/output/host
+exec_prefix=/home/revyakin/projects/buildroot-dir/output/host
+libdir=/home/revyakin/projects/buildroot-dir/output/host/lib
+includedir=/home/revyakin/projects/buildroot-dir/output/host/include
+
+Name: liblzma
+Description: General purpose data compression library
+URL: https://tukaani.org/xz/
+Version: 5.2.4
+Cflags: -I${includedir}
+Libs: -L${libdir} -llzma
+Libs.private:  

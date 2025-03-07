@@ -1,0 +1,19 @@
+MODULE Linux arm 14CEEAB1A34BD4C48F6F151C7D37999C0 libcom_err.so.2.1
+INFO CODE_ID B1EACE144BA3C4D48F6F151C7D37999C
+PUBLIC 1284 0 et_list_lock
+PUBLIC 12cc 0 et_list_unlock
+PUBLIC 12f0 0 set_com_err_gettext
+PUBLIC 130c 0 error_message
+PUBLIC 15a8 0 add_error_table
+PUBLIC 167c 0 remove_error_table
+PUBLIC 17c8 0 add_to_error_table
+PUBLIC 17d0 0 error_table_name
+PUBLIC 1838 0 init_error_table
+PUBLIC 1a40 0 com_err_va
+PUBLIC 1a6c 0 com_err
+PUBLIC 1ad4 0 set_com_err_hook
+PUBLIC 1b14 0 reset_com_err_hook
+PUBLIC 1b44 0 com_right
+PUBLIC 1b8c 0 com_right_r
+PUBLIC 1c1c 0 initialize_error_table_r
+PUBLIC 1cc4 0 free_error_table

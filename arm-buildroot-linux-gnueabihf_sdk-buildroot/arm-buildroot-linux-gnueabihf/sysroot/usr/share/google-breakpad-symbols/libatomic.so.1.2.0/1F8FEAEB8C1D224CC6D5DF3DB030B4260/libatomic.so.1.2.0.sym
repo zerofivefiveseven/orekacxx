@@ -1,0 +1,14 @@
+MODULE Linux arm 1F8FEAEB8C1D224CC6D5DF3DB030B4260 libatomic.so.1.2.0
+INFO CODE_ID EBEA8F1F1D8C4C22C6D5DF3DB030B426
+PUBLIC 1830 0 __atomic_load
+PUBLIC 198c 0 __atomic_store
+PUBLIC 1be0 0 __atomic_compare_exchange
+PUBLIC 2034 0 __atomic_exchange
+PUBLIC 22f0 0 __atomic_is_lock_free
+PUBLIC 24d8 0 __atomic_feraiseexcept
+PUBLIC 258c 0 atomic_thread_fence
+PUBLIC 2594 0 atomic_signal_fence
+PUBLIC 2598 0 atomic_flag_test_and_set
+PUBLIC 25bc 0 atomic_flag_test_and_set_explicit
+PUBLIC 25e0 0 atomic_flag_clear
+PUBLIC 25f4 0 atomic_flag_clear_explicit

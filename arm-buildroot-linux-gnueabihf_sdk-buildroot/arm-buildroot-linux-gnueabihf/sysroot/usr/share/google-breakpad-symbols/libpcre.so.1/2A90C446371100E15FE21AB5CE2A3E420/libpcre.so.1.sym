@@ -1,0 +1,27 @@
+MODULE Linux arm 2A90C446371100E15FE21AB5CE2A3E420 libpcre.so.1
+INFO CODE_ID 46C4902A1137E1005FE21AB5CE2A3E42
+PUBLIC f24 0 pcre_pattern_to_host_byte_order
+PUBLIC bca0 0 pcre_compile2
+PUBLIC d094 0 pcre_compile
+PUBLIC d0b8 0 pcre_config
+PUBLIC 1421c 0 pcre_dfa_exec
+PUBLIC 258f0 0 pcre_exec
+PUBLIC 26a4c 0 pcre_fullinfo
+PUBLIC 26d78 0 pcre_get_stringnumber
+PUBLIC 26e70 0 pcre_get_stringtable_entries
+PUBLIC 270c0 0 pcre_copy_substring
+PUBLIC 2713c 0 pcre_copy_named_substring
+PUBLIC 271b0 0 pcre_get_substring_list
+PUBLIC 272f0 0 pcre_free_substring_list
+PUBLIC 27310 0 pcre_get_substring
+PUBLIC 273c8 0 pcre_get_named_substring
+PUBLIC 27434 0 pcre_free_substring
+PUBLIC 27454 0 pcre_jit_stack_alloc
+PUBLIC 2745c 0 pcre_jit_stack_free
+PUBLIC 27460 0 pcre_assign_jit_stack
+PUBLIC 27464 0 pcre_jit_free_unused_memory
+PUBLIC 27468 0 pcre_maketables
+PUBLIC 27ca0 0 pcre_refcount
+PUBLIC 29478 0 pcre_study
+PUBLIC 297c4 0 pcre_free_study
+PUBLIC 29b88 0 pcre_version

@@ -1,0 +1,13 @@
+prefix=/usr
+exec_prefix=/usr
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+modules=
+
+Name: agent++
+Version: 4.1.2
+Description: Multithreaded SNMP v1/2c/3 Agent API for SNMP++ written in C++
+Requires:
+Libs: -L${libdir} -lsnmp++ -lagent++
+Libs.private:  -L/home/revyakin/projects/buildroot-dir/output/host/bin/../arm-buildroot-linux-gnueabihf/sysroot/usr/lib -lsnmp++
+Cflags: -I${includedir} 

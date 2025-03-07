@@ -1,0 +1,13 @@
+MODULE Linux arm D90AE9955E798F9A1773FA6DFE0F15880 liblogging-stdlog.so.0.1.0
+INFO CODE_ID 95E90AD9795E9A8F1773FA6DFE0F1588
+PUBLIC ac0 0 stdlog_deinit
+PUBLIC ad0 0 stdlog_version
+PUBLIC ae0 0 stdlog_get_msgbuf_size
+PUBLIC ae8 0 stdlog_get_dflt_chanspec
+PUBLIC af8 0 stdlog_open
+PUBLIC c9c 0 stdlog_init
+PUBLIC d70 0 stdlog_close
+PUBLIC dac 0 stdlog_vlog
+PUBLIC e84 0 stdlog_vlog_b
+PUBLIC f2c 0 stdlog_log
+PUBLIC f5c 0 stdlog_log_b

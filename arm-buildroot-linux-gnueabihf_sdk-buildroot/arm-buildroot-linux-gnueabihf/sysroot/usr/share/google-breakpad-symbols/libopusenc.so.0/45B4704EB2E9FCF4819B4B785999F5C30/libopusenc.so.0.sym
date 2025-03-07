@@ -1,0 +1,26 @@
+MODULE Linux arm 45B4704EB2E9FCF4819B4B785999F5C30 libopusenc.so.0
+INFO CODE_ID 4E70B445E9B2F4FC819B4B785999F5C3
+PUBLIC 2b7c 0 ope_comments_create
+PUBLIC 2c5c 0 ope_comments_copy
+PUBLIC 2cd8 0 ope_comments_destroy
+PUBLIC 2d00 0 ope_comments_add
+PUBLIC 2d74 0 ope_comments_add_string
+PUBLIC 2dd0 0 ope_comments_add_picture
+PUBLIC 2e54 0 ope_comments_add_picture_from_memory
+PUBLIC 30fc 0 ope_encoder_create_callbacks
+PUBLIC 3444 0 ope_encoder_create_pull
+PUBLIC 3480 0 ope_encoder_deferred_init_with_mapping
+PUBLIC 35d4 0 ope_encoder_get_page
+PUBLIC 3640 0 ope_encoder_destroy
+PUBLIC 36fc 0 ope_encoder_create_file
+PUBLIC 381c 0 ope_encoder_continue_new_callbacks
+PUBLIC 3900 0 ope_encoder_chain_current
+PUBLIC 3918 0 ope_encoder_continue_new_file
+PUBLIC 39bc 0 ope_encoder_flush_header
+PUBLIC 3a08 0 ope_encoder_ctl
+PUBLIC 4760 0 ope_encoder_write_float
+PUBLIC 4974 0 ope_encoder_write
+PUBLIC 4c10 0 ope_encoder_drain
+PUBLIC 4e94 0 ope_strerror
+PUBLIC 4f0c 0 ope_get_version_string
+PUBLIC 4f1c 0 ope_get_abi_version

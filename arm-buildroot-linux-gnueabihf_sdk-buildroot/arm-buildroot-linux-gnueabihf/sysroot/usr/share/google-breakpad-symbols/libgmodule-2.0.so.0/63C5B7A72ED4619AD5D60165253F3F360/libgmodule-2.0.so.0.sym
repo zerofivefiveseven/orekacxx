@@ -1,0 +1,10 @@
+MODULE Linux arm 63C5B7A72ED4619AD5D60165253F3F360 libgmodule-2.0.so.0
+INFO CODE_ID A7B7C563D42E9A61D5D60165253F3F36
+PUBLIC db0 0 g_module_supported
+PUBLIC df4 0 g_module_make_resident
+PUBLIC e34 0 g_module_error
+PUBLIC e44 0 g_module_close
+PUBLIC 100c 0 g_module_symbol
+PUBLIC 11f8 0 g_module_open
+PUBLIC 1b54 0 g_module_name
+PUBLIC 1be0 0 g_module_build_path

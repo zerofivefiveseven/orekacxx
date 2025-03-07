@@ -1,0 +1,10 @@
+prefix=/home/revyakin/projects/buildroot-dir/output/host
+exec_prefix=/home/revyakin/projects/buildroot-dir/output/host
+libdir=/home/revyakin/projects/buildroot-dir/output/host/lib
+includedir=/home/revyakin/projects/buildroot-dir/output/host/include
+
+Name: smartcols
+Description: table or tree library
+Version: 2.35.1
+Cflags: -I${includedir}/libsmartcols
+Libs: -L${libdir} -lsmartcols

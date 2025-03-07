@@ -1,0 +1,22 @@
+MODULE Linux arm 05F700E0DB0C77FD01E77950AFF3094A0 libestr.so.0.0.0
+INFO CODE_ID E000F7050CDBFD7701E77950AFF3094A
+PUBLIC a60 0 es_version
+PUBLIC a70 0 es_extendBuf
+PUBLIC af8 0 es_newStr
+PUBLIC b3c 0 es_newStrFromCStr
+PUBLIC b88 0 es_newStrFromBuf
+PUBLIC b8c 0 es_newStrFromNumber
+PUBLIC d20 0 es_newStrFromSubStr
+PUBLIC da4 0 es_deleteStr
+PUBLIC da8 0 es_strbufcmp
+PUBLIC e48 0 es_strcasebufcmp
+PUBLIC ef0 0 es_strncmp
+PUBLIC fe8 0 es_strncasecmp
+PUBLIC 1080 0 es_strContains
+PUBLIC 1140 0 es_strCaseContains
+PUBLIC 11f8 0 es_addChar
+PUBLIC 125c 0 es_addBuf
+PUBLIC 12e0 0 es_str2cstr
+PUBLIC 144c 0 es_str2num
+PUBLIC 1738 0 es_unescapeStr
+PUBLIC 1b10 0 es_tolower
