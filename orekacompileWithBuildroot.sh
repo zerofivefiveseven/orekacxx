@@ -24,8 +24,8 @@ export LIBTOOL=$BUILDROOT_SDK/bin/libtool
 export pkgconf=$BUILDROOT_SDK/bin/pkg-config
 #CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1" LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib -lorkbase -llibboost -lxerces-c -lsndfile -lspeex -lapr-1 -lssl -lcrypto -llog4cxx"
 export PATH="$BUILDROOT_SDK/bin:$PATH"
-export CC="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-gcc"
-export CXX="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-g++"
+export CC="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-gcc --sysroot=$SYSROOT"
+export CXX="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-g++ --sysroot=$SYSROOT"
 export AR="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-ar"
 export LD="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-ld"
 
@@ -224,7 +224,7 @@ sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
 sudo automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
-CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot="$SYSROOT"" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure \
+CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --prefix="$BUILDROOT_SDK/usr" \
@@ -269,9 +269,11 @@ popd
 pushd ./orkaudio
 sudo chmod -R 777 ./orkaudio/
 # Update obsolete macros in configure.ac
-export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
-export CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
-export CFLAGS="--sysroot="$SYSROOT""
+sudo make distclean
+export LDFLAGS=" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib --sysroot=$SYSROOT"
+export CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
+export CFLAGS="--sysroot=$SYSROOT"
+export LIBTOOL=$LIBTOOL
 sed -i 's/AM_PROG_LIBTOOL/LT_INIT/g' configure.ac
 export automake_1.15=$BUILDROOT_SDK/bin/automake-1.15
 # Run autotools commands to regenerate build files
@@ -281,17 +283,18 @@ automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 
 automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
 automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
 # Run configure script
-#--sysroot="$SYSROOT"
-sudo env PATH="$PATH" LDFLAGS=" -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
+#--isysroot="$SYSROOT"
+export PATH=/home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin:$PATH
+sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT  -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT CC=$CC CXX=$CXX -fPIC" autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
-    --prefix="$SYSROOT/usr"
-#    --libdir=""$SYSROOT"/usr/lib" \
-#    --bindir=""$SYSROOT"/usr/bin"
+    --prefix="$SYSROOT"
+    --libdir=""$SYSROOT"/lib" \
+    --bindir=""$SYSROOT"/usr/bin"
 #sudo env PATH="$PATH" automake-1.15 --add-missing
 # Build and install the project
-sudo env PATH="$PATH" LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" make -j$(nproc)
-sudo env PATH="$PATH" LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib" CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" make install
+sudo env PATH="$PATH" CXXFLAGS="--isysroot=$SYSROOT CC=$CC CXX=$CXX  -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--isysroot=$SYSROOT -fPIC" make -j$(nproc)
+sudo CC=$CC CXX=$CXX env PATH="$PATH" make install
 
 # Set capabilities for orkaudio (if needed)
 sudo setcap cap_net_raw,cap_net_admin+ep /usr/sbin/orkaudio

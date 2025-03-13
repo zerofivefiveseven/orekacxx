@@ -2,7 +2,6 @@
 # have all needed files, that a GNU package needs
 AUTOMAKE_OPTIONS = foreign 1.4
 SHELL := '/bin/bash'
-MY_SYSROOT=$$SYSROOT ; echo $$SYSROOT
 lib_LTLIBRARIES = liborkbase.la
 liborkbase_la_LDFLAGS =  -lapr-1 -lpthread -lssl @boost_lib@ -lcap
 liborkbase_la_SOURCES = Filter.cpp g711.c \
