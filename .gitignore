@@ -11,7 +11,7 @@
 **/*.m4
 /orkaudio/orkaudio
 /orkaudio/orkaudio.lock
-/dependencies
+/dependencies/
 ### C++ ###
 # Prerequisites
 *.d
