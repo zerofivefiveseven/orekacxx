@@ -19,7 +19,7 @@ liborkbase_la_SOURCES = Filter.cpp g711.c \
 			SizedBuffer.cpp DirectionSelector.cpp \
 			SslUtils.cpp
 #INCLUDES = -I/projects/ext/xmlrpc++/xmlrpc++0.7/src
-INCLUDES = -I /home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot/usr/include/opus -I /home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot/usr/include/apr-1/ -I /home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot/usr/include/apr-1/
+INCLUDES = -I@SYSROOT@/usr/include/opus -I@SYSROOT@/usr/include/apr-1/ -I@SYSROOT@/usr/include/apr-1/
 SUBDIRS = messages serializers audiofile filters
 liborkbase_la_LIBADD = $(top_builddir)/serializers/libserializers.la \
 	$(top_builddir)/messages/libmessages.la \

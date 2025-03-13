@@ -1,5 +1,6 @@
 # Initialize Autoconf with the package name, version, and bug report email
 AC_INIT([orkbase],[1.0],[your-email@example.com])
+AC_ARG_VAR([SYSROOT], [System root directory])
 # Initialize Automake with the specified options
 AM_INIT_AUTOMAKE([foreign subdir-objects])
 AC_CONFIG_MACRO_DIRS([m4])  # Add this line

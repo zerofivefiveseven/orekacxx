@@ -1,5 +1,5 @@
-AC_SUBST(SYSROOT,'$(SYSROOT)')
 AC_INIT([orkaudio],[1.0])
+AC_ARG_VAR([SYSROOT], [System root directory])
 AM_CONFIG_HEADER(config.h)
 AM_INIT_AUTOMAKE([subdir-objects])
 
