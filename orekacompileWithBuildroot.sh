@@ -228,7 +228,7 @@ sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
 automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
-sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT  -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT -fPIC"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT \
+sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT  -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT -fPIC"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT"  \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --prefix="$SYSROOT" \
@@ -288,7 +288,7 @@ automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 
 automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
 # Run configure script
 #--isysroot="$SYSROOT"
-sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT  -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT -fPIC"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT \
+sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT  -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT -fPIC"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --prefix="$SYSROOT" \
