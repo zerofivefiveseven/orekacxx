@@ -18,8 +18,8 @@ export SYSROOT="$BUILDROOT_SDK/arm-buildroot-linux-gnueabihf/sysroot"
 #BUILDROOT_SDK="/home/revyakin/oreka/arm-buildroot-linux-gnueabihf_sdk-buildroot"
 export PATH="$BUILDROOT_SDK/bin:$BUILDROOT_SDK/bin:$PATH"
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
-export LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib"
-export CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
+export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
+export CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
 export LIBTOOL=$BUILDROOT_SDK/bin/libtool
 export pkgconf=$BUILDROOT_SDK/bin/pkg-config
 #CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1" LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib -lorkbase -llibboost -lxerces-c -lsndfile -lspeex -lapr-1 -lssl -lcrypto -llog4cxx"
@@ -38,7 +38,7 @@ export LIBTOOLIZE="$BUILDROOT_SDK/bin/libtoolize"
 export PATH=$BUILDROOT_SDK/bin:$PATH
 # Include necessary paths for pkg-config if needed
 
-export PKG_CONFIG_PATH="$SYSROOT/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PKG_CONFIG_PATH=""$SYSROOT"/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # BCG729 installation
 echo "Buildroot SDK environment set up:"
@@ -57,13 +57,13 @@ fi
 
 git clone --depth 1 https://github.com/BelledonneCommunications/bcg729.git ./bcg729
 pushd ./bcg729
-sudo CC="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-gcc" CXX="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-g++" CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CC=$CC CXX=$CXX cmake . \
-                                                                                               -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr \
-                                                                                               -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
+sudo CC="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-gcc" CXX="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-g++" CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CC=$CC CXX=$CXX cmake . \
+                                                                                               -DCMAKE_INSTALL_PREFIX="$SYSROOT"/usr \
+                                                                                               -DCMAKE_INSTALL_LIBDIR=""$SYSROOT"/usr/lib" \
                                                                                                -DCMAKE_C_COMPILER=$CC \
                                                                                                -DCMAKE_CXX_COMPILER=$CXX \
-                                                                                               -DCMAKE_C_FLAGS="--sysroot=$SYSROOT -fPIC" \
-                                                                                               -DCMAKE_CXX_FLAGS="--sysroot=$SYSROOT -fPIC"
+                                                                                               -DCMAKE_C_FLAGS="--sysroot="$SYSROOT" -fPIC" \
+                                                                                               -DCMAKE_CXX_FLAGS="--sysroot="$SYSROOT" -fPIC"
 sudo make
 sudo make install
 popd
@@ -106,11 +106,11 @@ popd
 #sudo git checkout v1.2.1
 #sudo ./autogen.sh
 #sudo make distclean
-#sudo CC=$CC CXX=$CXX ./configure --host=arm-buildroot-linux-gnueabihf --build=x86_64-linux-gnu --prefix="$SYSROOT/usr" --enable-shared --with-pic --enable-static
+#sudo CC=$CC CXX=$CXX ./configure --host=arm-buildroot-linux-gnueabihf --build=x86_64-linux-gnu --prefix=""$SYSROOT"/usr" --enable-shared --with-pic --enable-static
 #sudo make
 #sudo make install
-#sudo ln -s /usr/local/lib/libopus.so $SYSROOT/usr/lib/libopusstatic.so
-#sudo ln -s /usr/include/opus $SYSROOT/usr/include/
+#sudo ln -s /usr/local/lib/libopus.so "$SYSROOT"/usr/lib/libopusstatic.so
+#sudo ln -s /usr/include/opus "$SYSROOT"/usr/include/
 #popd
 
 #silk
@@ -118,41 +118,41 @@ mkdir -p silk
 git clone --depth 1 https://github.com/gaozehua/SILKCodec.git ./silk
 pushd ./silk/SILK_SDK_SRC_ARM/
 sudo make clean
-sudo DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" TOOLCHAIN_PREFIX=$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf- CC=$CC CXX=$CXX CFLAGS="--sysroot=$SYSROOT -fPIC -I$SYSROOT/usr/include/ " make all TARGRT_CPU=armv7l
-cp libSKP_SILK_SDK.a $SYSROOT/usr/lib
-cp encoder $SYSROOT/usr/lib
-cp decoder $SYSROOT/usr/lib
+sudo DCMAKE_INSTALL_PREFIX=""$SYSROOT"/usr" TOOLCHAIN_PREFIX=$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf- CC=$CC CXX=$CXX CFLAGS="--sysroot="$SYSROOT" -fPIC -I"$SYSROOT"/usr/include/ " make all TARGRT_CPU=armv7l
+cp libSKP_SILK_SDK.a "$SYSROOT"/usr/lib
+cp encoder "$SYSROOT"/usr/lib
+cp decoder "$SYSROOT"/usr/lib
 popd
 
 git clone https://github.com/OrecX/dependencies.git
 sudo tar -xf dependencies/opus-1.2.1.tar.gz
 pushd opus-1.2.1
 sudo ./autogen.sh
-sudo  CC=$CC CXX=$CXX ./configure --host=arm-buildroot-linux-gnueabihf --build=x86_64-linux-gnu --prefix="$SYSROOT/usr" --libdir="$SYSROOT/usr/lib" --bindir="$SYSROOT/usr/bin" --enable-shared --with-pic --enable-static
+sudo  CC=$CC CXX=$CXX ./configure --host=arm-buildroot-linux-gnueabihf --build=x86_64-linux-gnu --prefix=""$SYSROOT"/usr" --libdir=""$SYSROOT"/usr/lib" --bindir=""$SYSROOT"/usr/bin" --enable-shared --with-pic --enable-static
 sudo  CC=$CC CXX=$CXX make CFLAGS="-fPIC"
 sudo  CC=$CC CXX=$CXX make install
-#$BUILDROOT_SDK/bin/libtool --finish $SYSROOT/usr/lib/opus/lib
-sudo cp $SYSROOT/usr/lib/libopus.a $SYSROOT/usr/lib/libopusstatic.a
-sudo cp $SYSROOT/usr/lib/opus/lib/libopus.a $SYSROOT/usr/lib/opus/lib/libopusstatic.a
+#$BUILDROOT_SDK/bin/libtool --finish "$SYSROOT"/usr/lib/opus/lib
+sudo cp "$SYSROOT"/usr/lib/libopus.a "$SYSROOT"/usr/lib/libopusstatic.a
+sudo cp "$SYSROOT"/usr/lib/opus/lib/libopus.a "$SYSROOT"/usr/lib/opus/lib/libopusstatic.a
 popd
-readelf -h $SYSROOT/usr/lib/libopusstatic.a  | grep 'Class\|File\|Machine'
+readelf -h "$SYSROOT"/usr/lib/libopusstatic.a  | grep 'Class\|File\|Machine'
 
 
 
 # backward-cpp HEADER ONLY
 git clone --depth 1 https://github.com/bombela/backward-cpp.git
-sudo ln -s ./backward-cpp/backward.hpp $SYSROOT/usr/include/backward.hpp
+sudo ln -s ./backward-cpp/backward.hpp "$SYSROOT"/usr/include/backward.hpp
 
 # httplib HEADER ONLY
-mkdir -p $SYSROOT/usr/include/httplib
+mkdir -p "$SYSROOT"/usr/include/httplib
 git clone --depth 1 --branch v0.12.3 https://github.com/yhirose/cpp-httplib.git
-sudo cp ./httplib/httplib.h $SYSROOT/usr/include/httplib/
+sudo cp ./httplib/httplib.h "$SYSROOT"/usr/include/httplib/
 
 # json
 git clone --depth 1 https://github.com/nlohmann/json.git
 pushd ./json
 sudo make distclean
-sudo CC=$CC CXX=$CXX cmake . -DCMAKE_INSTALL_PREFIX=$SYSROOT/usr -DCMAKE_INSTALL_LIBDIR=$SYSROOT/usr/lib -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX
+sudo CC=$CC CXX=$CXX cmake . -DCMAKE_INSTALL_PREFIX="$SYSROOT"/usr -DCMAKE_INSTALL_LIBDIR="$SYSROOT"/usr/lib -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX
 sudo CC=$CC CXX=$CXX make
 sudo CC=$CC CXX=$CXX make install
 popd
@@ -163,15 +163,15 @@ sudo git clone --depth 1 --branch 3.0release https://github.com/ossrs/srs.git
 pushd ./srs/trunk
 sudo rm -f ./srs-librtmp/objs/lib/srs_librtmp.a
 sudo rm -rf ./srs-librtmp
-sudo rm -f $SYSROOT/usr/lib/libsrs_librtmp.a
+sudo rm -f "$SYSROOT"/usr/lib/libsrs_librtmp.a
 
 
-sudo CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" CXXFLAGS="--sysroot=$SYSROOT -I$SYSROOT/usr/include -fPIC" ./configure  \
-                                                                                                --prefix="$SYSROOT/usr" \
+sudo CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" CXXFLAGS="--sysroot="$SYSROOT" -I"$SYSROOT"/usr/include -fPIC" ./configure  \
+                                                                                                --prefix=""$SYSROOT"/usr" \
                                                                                                 --with-librtmp \
                                                                                                 --without-ssl \
                                                                                                 --export-librtmp-project=./srs-librtmp \
-                                                                                                --prefix="$SYSROOT/usr" \
+                                                                                                --prefix=""$SYSROOT"/usr" \
                                                                                                 --cc=$CC \
                                                                                                 --cxx=$CXX
 
@@ -179,9 +179,9 @@ popd
 pushd ./srs/trunk/srs-librtmp
 sudo sed -i '/Building the srs-librtmp example/,+1d' Makefile
 sudo CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" make
-sudo cp ./objs/lib/srs_librtmp.a $SYSROOT/usr/lib
-sudo cp -r ./objs/include/* $SYSROOT/usr/include
-pushd $SYSROOT/usr/lib
+sudo cp ./objs/lib/srs_librtmp.a "$SYSROOT"/usr/lib
+sudo cp -r ./objs/include/* "$SYSROOT"/usr/include
+pushd "$SYSROOT"/usr/lib
 sudo mv srs_librtmp.a libsrs_librtmp.a
 readelf -h libsrs_librtmp.a  | grep 'Class\|File\|Machine' | head
 popd
@@ -193,12 +193,12 @@ git clone https://github.com/apache/logging-log4cxx.git
 pushd logging-log4cxx
 mkdir build
 cd build
-export LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib"
-export CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
+export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
+export CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
 sudo make distclean
 CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS cmake .. \
-  -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
-  -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
+  -DCMAKE_INSTALL_PREFIX=""$SYSROOT"/usr" \
+  -DCMAKE_INSTALL_LIBDIR=""$SYSROOT"/usr/lib" \
   -DCMAKE_CXX_STANDARD=11 \
   -D_GLIBCXX_USE_CXX11_ABI=1 \
   -DCMAKE_C_COMPILER=$CC \
@@ -215,21 +215,21 @@ popd
 pushd ./orkbasecxx
 sudo chmod -R 777 $BUILDROOT_SDK
 sudo chmod -R 777 ../orkbasecxx/
-sudo cp $SYSROOT/usr/lib/libopus.a $SYSROOT/usr/lib/libopusstatic.a
+sudo cp "$SYSROOT"/usr/lib/libopus.a "$SYSROOT"/usr/lib/libopusstatic.a
 export PATH=/home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin:$PATH
-export LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib"
-export CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
+export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
+export CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
 sudo autoconf=$BUILDROOT_SDK/bin/autoconf automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
 sudo automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
-CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure \
+CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot="$SYSROOT"" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --prefix="$BUILDROOT_SDK/usr" \
-    --libdir="$SYSROOT/usr/lib" \
-    --bindir="$SYSROOT/usr/bin"#CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1"
+    --libdir=""$SYSROOT"/usr/lib" \
+    --bindir=""$SYSROOT"/usr/bin"#CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1"
 sudo env PATH="$PATH" CC=$CC CXX=$CXX make -j$(nproc)
 CC=$CC CXX=$CXX make install
 popd
@@ -258,7 +258,7 @@ popd
 #
 #automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
 #
-#sudo automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure --host=arm-buildroot-linux-gnueabihf --build=x86_64-linux-gnu --prefix="$SYSROOT/usr" --libdir="$SYSROOT/usr/lib" --bindir="$SYSROOT/usr/bin"
+#sudo automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure --host=arm-buildroot-linux-gnueabihf --build=x86_64-linux-gnu --prefix=""$SYSROOT"/usr" --libdir=""$SYSROOT"/usr/lib" --bindir=""$SYSROOT"/usr/bin"
 ##LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib"
 #sudo CC=$CC CXX=$CXX make -j$(аnproc)
 #sudo CC=$CC CXX=$CXX make install
@@ -269,9 +269,9 @@ popd
 pushd ./orkaudio
 sudo chmod -R 777 ./orkaudio/
 # Update obsolete macros in configure.ac
-export LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib"
-export CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
-export CFLAGS="--sysroot=$SYSROOT"
+export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
+export CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
+export CFLAGS="--sysroot="$SYSROOT""
 sed -i 's/AM_PROG_LIBTOOL/LT_INIT/g' configure.ac
 export automake_1.15=$BUILDROOT_SDK/bin/automake-1.15
 # Run autotools commands to regenerate build files
@@ -281,19 +281,20 @@ automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 
 automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
 automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
 # Run configure script
-sudo env PATH="$PATH" LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT \
+#--sysroot="$SYSROOT"
+sudo env PATH="$PATH" LDFLAGS=" -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
-    --prefix="$BUILDROOT_SDK/usr" \
-    --libdir="$SYSROOT/usr/lib" \
-    --bindir="$SYSROOT/usr/bin"
-sudo env PATH="$PATH" automake-1.15 --add-missing
+    --prefix="$SYSROOT/usr"
+#    --libdir=""$SYSROOT"/usr/lib" \
+#    --bindir=""$SYSROOT"/usr/bin"
+#sudo env PATH="$PATH" automake-1.15 --add-missing
 # Build and install the project
 sudo env PATH="$PATH" LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" make -j$(nproc)
-sudo env PATH="$PATH" LDFLAGS="--sysroot=$SYSROOT -L$SYSROOT/usr/lib -Wl,-rpath=$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" make install
+sudo env PATH="$PATH" LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib" CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT" make install
 
 # Set capabilities for orkaudio (if needed)
 sudo setcap cap_net_raw,cap_net_admin+ep /usr/sbin/orkaudio
 popd
 
-#$SYSROOT/usr/lib/libuuid.so
+#"$SYSROOT"/usr/lib/libuuid.so
