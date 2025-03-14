@@ -197,7 +197,7 @@ pushd logging-log4cxx
 mkdir build
 cd build
 export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
-export CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
+export CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC --enable-debug"
 sudo make distclean
 CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS cmake .. \
   -DCMAKE_INSTALL_PREFIX=""$SYSROOT"/usr" \
