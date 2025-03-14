@@ -216,26 +216,30 @@ popd
 
 #find /home/revyakin/orekacxx/orkbasecxx/ -type f -name "*.am" -exec sed -i 's|$$(SYSROOT)|/home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot|g' {} +
 pushd ./orkbasecxx
+sudo make distclean
 sudo chmod -R 777 $BUILDROOT_SDK
 sudo chmod -R 777 ../orkbasecxx/
 sudo chmod -R 777 ../dependencies/
 sudo cp "$SYSROOT"/usr/lib/libopus.a "$SYSROOT"/usr/lib/libopusstatic.a
 export PATH=/home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin:$PATH
-export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
-export CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
+#-Wl,-rpath="$SYSROOT"/usr/lib
+#-L$SYSROOT/usr/lib
+export CFLAGS="--sysroot=$SYSROOT"
+export LDFLAGS+="--sysroot=$SYSROOT"
+export CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
 sudo autoconf=$BUILDROOT_SDK/bin/autoconf automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
 automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
-sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT  -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT -fPIC"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT"  \
+sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT -fPIC"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT  \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --prefix="$SYSROOT" \
     --libdir=""$SYSROOT"/usr/lib" \
     --bindir=""$SYSROOT"/usr/bin"
 sudo env PATH="$PATH" CC=$CC CXX=$CXX make -j$(nproc)
-CC=$CC CXX=$CXX make install
+sudo env PATH="$PATH" CC=$CC CXX=$CXX make install
 popd
 #LT_INIT
 
