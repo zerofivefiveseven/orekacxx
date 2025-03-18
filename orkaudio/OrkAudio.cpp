@@ -163,7 +163,7 @@ void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
 				}
 				else
 				{
-					LOG4CXX_INFO(LOG.rootLog, CStdString("Loaded plugin: ") + pluginPath);
+					LOG4CXX_INFO(LOG.rootLog, CStdString("Loaded plugin2222222: ") + pluginPath);
 
 					InitializeFunction initfunction;
 					ret = apr_dso_sym((apr_dso_handle_sym_t*)&initfunction, dsoHandle, "OrkInitialize");
