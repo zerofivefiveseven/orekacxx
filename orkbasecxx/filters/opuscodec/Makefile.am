@@ -5,6 +5,5 @@ libopuscodec_la_SOURCES = OpusCodec.cpp
 INCLUDES = -I@top_srcdir@ -I../.. -I@SYSROOT@/usr/include/opus -I@SYSROOT@/usr/include/apr-1
 #-I@SYSROOT@/usr/include/apr-1.0
 libopuscodec_la_LIBADD = -L@SYSROOT@/usr/lib -lopusstatic
-AM_CXXFLAGS = -O2 -D_REENTRANT -std=c++17 -Wall -Wextra -fno-omit-frame-pointer -fno-omit-frame-pointer
-
+AM_CXXFLAGS = -g -O0 -D_REENTRANT -std=c++17 -Wall -Wextra -fPIC
 

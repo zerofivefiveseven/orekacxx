@@ -36,4 +36,4 @@ liborkbase_la_LIBADD = $(top_builddir)/serializers/libserializers.la \
 	$(top_builddir)/filters/opuscodec/libopuscodec.la
 	-lm
 
-AM_CXXFLAGS = -O2 -D_REENTRANT -std=c++17 -Wall -Wextra -fno-omit-frame-pointer -fno-omit-frame-pointer
+AM_CXXFLAGS = -g -O0 -D_REENTRANT -std=c++17 -Wall -Wextra -fPIC

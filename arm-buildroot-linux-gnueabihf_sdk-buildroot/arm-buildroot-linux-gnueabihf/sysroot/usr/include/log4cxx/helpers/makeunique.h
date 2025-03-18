@@ -2,7 +2,7 @@
 #define LOG4CXX_MAKE_UNIQUE_H
 #include <memory>
 
-#define STD_MAKE_UNIQUE_FOUND 0
+#define STD_MAKE_UNIQUE_FOUND 1
 
 #if !STD_MAKE_UNIQUE_FOUND
 namespace std

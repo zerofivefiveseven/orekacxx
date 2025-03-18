@@ -10,4 +10,4 @@ libmessages_la_SOURCES = AsyncMessage.cpp Message.cpp \
 INCLUDES = -I@top_srcdir@ -I../../orkaudio -I@SYSROOT@/usr/include/apr-1 -I@SYSROOT@/usr/usr/local/include/xercesc/dom -I@SYSROOT@/usr/usr/local/include/xercesc/dom/impl -I@SYSROOT@/usr/usr/local/include/xercesc
 
 #-I@SYSROOT@/usr/include/apr-1
-AM_CXXFLAGS = -O2 -D_REENTRANT -std=c++17 -Wall -Wextra -fno-omit-frame-pointer -fno-omit-frame-pointer
+AM_CXXFLAGS = -g -O0 -D_REENTRANT -std=c++17 -Wall -Wextra -fPIC

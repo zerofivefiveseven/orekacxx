@@ -121,21 +121,13 @@ void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
 	OrkAprSubPool locPool;
 
 	CStdString pluginsDirectory = CONFIG.m_pluginsDirectory;
-#ifdef WIN32
-	if(pluginsDirectory.size() == 0)
-	{
-		// default windows plugins directory
-		pluginsDirectory = "./plugins/";
-	}
-	CStdString pluginExtension = ".dll";
-#else
 	if(pluginsDirectory.empty())
 	{
 		// default unix plugins directory
 		pluginsDirectory = "/usr/lib/orkaudio/plugins/";
+		LOG4CXX_WARN(LOG.rootLog, CStdString("Plugins directory could not be found:" + pluginsDirectory + " check your config.xml"));
 	}
 	CStdString pluginExtension = ".so";
-#endif
 	apr_dir_t* dir;
 
 	if (apr_status_t ret = apr_dir_open(&dir, (PCSTR)pluginsDirectory, AprLp); ret != APR_SUCCESS)
@@ -144,6 +136,7 @@ void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
 	}
 	else
 	{
+        LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so"));
 		CStdString pluginPath;
 		apr_finfo_t finfo;
 		apr_int32_t wanted = APR_FINFO_NAME | APR_FINFO_SIZE;
@@ -153,9 +146,11 @@ void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
 			CStdString fileName;
 			fileName.Format("%s", finfo.name);
 			int extensionPos = fileName.Find(pluginExtension);
+            LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so" + fileName + ".so" ));
 			if((extensionPos != -1) && ((fileName.size() - extensionPos) == pluginExtension.size()))
 			{
 				pluginPath = pluginsDirectory + finfo.name;
+				LOG4CXX_INFO(LOG.rootLog, CStdString("Loaded plugin: ") + pluginPath);
 				char errstr[256];
 				// dsoHandle needs to persist beyond this function, so we need to use
 				// a pool that also persists -- use the global pool. this is safe here because 
@@ -231,7 +226,7 @@ void Transcode(CStdString &file)
 	} catch(const std::exception &ex){
 		CStdString logMsg;
 		logMsg.Format("Failed to start BatchProcessing thread reason:%s",  ex.what());
-		LOG4CXX_ERROR(LOG.rootLog, logMsg);	
+		LOG4CXX_ERROR(LOG.rootLog, logMsg);
 	}
 
 	// Transmit the tape to the BatchProcessing
@@ -256,17 +251,13 @@ void MainThread()
 {
 	CStdString logMsg;
     // Avoid program exit on broken pipe
-#ifndef WIN32
     apr_signal(SIGPIPE, SIG_IGN);
-#endif
 	OrkLogManager::Instance()->Initialize();
 	RegisterOrkaudioVersion(orkaudioVersion.version);
 	logMsg.Format("\n\nOrkAudio version %s: service starting\n", orkaudioVersion.version);
 	LOG4CXX_INFO(LOG.rootLog, logMsg);
 
-#ifndef WIN32
 	MakeDumpable();  //allow corefiles to be generated
-#endif
 
 	ConfigManager::Instance()->Initialize();
 
@@ -314,10 +305,10 @@ void MainThread()
 	{
 		capturePluginOk = true;
 	}
-
+    LOG4CXX_WARN(LOG.rootLog,"LoadPlugins before.");
 	std::list<apr_dso_handle_t*> pluginDlls;
 	LoadPlugins(pluginDlls);
-
+	LOG4CXX_WARN(LOG.rootLog,"LoadPlugins after.");
 	// Register in-built filters
 	FilterRef filter(new AlawToPcmFilter());
 	FilterRegistry::instance()->RegisterFilter(filter);

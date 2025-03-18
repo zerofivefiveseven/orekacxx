@@ -22,7 +22,6 @@ export SYSROOT="$BUILDROOT_SDK/arm-buildroot-linux-gnueabihf/sysroot"           
 export PATH="$BUILDROOT_SDK/bin:$BUILDROOT_SDK/bin:$PATH"
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 export LDFLAGS=" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib --sysroot=$SYSROOT"
-export CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
 export LIBTOOL=$BUILDROOT_SDK/bin/libtool
 export pkgconf=$BUILDROOT_SDK/bin/pkg-config
 #CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1" LDFLAGS="-L/usr/local/lib -Wl,-rpath=/usr/local/lib -lorkbase -llibboost -lxerces-c -lsndfile -lspeex -lapr-1 -lssl -lcrypto -llog4cxx"
@@ -60,13 +59,13 @@ fi
 
 git clone --depth 1 https://github.com/BelledonneCommunications/bcg729.git ./bcg729
 pushd ./bcg729
-sudo CC="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-gcc" CXX="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-g++" CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CC=$CC CXX=$CXX cmake . \
-                                                                                               -DCMAKE_INSTALL_PREFIX="$SYSROOT"/usr \
-                                                                                               -DCMAKE_INSTALL_LIBDIR=""$SYSROOT"/usr/lib" \
+sudo CC="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-gcc" CXX="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-g++" CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1" CC=$CC CXX=$CXX cmake . \
+                                                                                               -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
+                                                                                               -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
                                                                                                -DCMAKE_C_COMPILER=$CC \
                                                                                                -DCMAKE_CXX_COMPILER=$CXX \
-                                                                                               -DCMAKE_C_FLAGS="--sysroot="$SYSROOT" -fPIC" \
-                                                                                               -DCMAKE_CXX_FLAGS="--sysroot="$SYSROOT" -fPIC"
+                                                                                               -DCMAKE_C_FLAGS="--sysroot=$SYSROOT -fPIC" \
+
 sudo make -j$(nproc)
 sudo make install
 popd
@@ -121,7 +120,8 @@ mkdir -p silk
 git clone --depth 1 https://github.com/gaozehua/SILKCodec.git ./silk
 pushd ./silk/SILK_SDK_SRC_ARM/
 sudo make clean
-sudo DCMAKE_INSTALL_PREFIX=""$SYSROOT"/usr" TOOLCHAIN_PREFIX=$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf- CC=$CC CXX=$CXX CFLAGS="--sysroot="$SYSROOT" -fPIC -I"$SYSROOT"/usr/include/ " make all TARGRT_CPU=armv7l
+export CXXFLAGS="--sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -fPIC"
+sudo DCMAKE_INSTALL_PREFIX=""$SYSROOT"/usr" TOOLCHAIN_PREFIX=$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf- CC=$CC CXX=$CXX CXXFLAGS = $CXXFLAGS CFLAGS="--sysroot="$SYSROOT" -fPIC -I$SYSROOT/usr/include/ -fPIC -g -O0" make all TARGRT_CPU=armv7l
 cp libSKP_SILK_SDK.a "$SYSROOT"/usr/lib
 cp encoder "$SYSROOT"/usr/lib
 cp decoder "$SYSROOT"/usr/lib
@@ -197,12 +197,12 @@ pushd logging-log4cxx
 mkdir build
 cd build
 export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
-export CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC --enable-debug"
+export CXXFLAGS="--sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -D_REENTRANT -Wall -Wextra -fPIC"
 sudo make distclean
-CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS cmake .. \
-  -DCMAKE_INSTALL_PREFIX=""$SYSROOT"/usr" \
-  -DCMAKE_INSTALL_LIBDIR=""$SYSROOT"/usr/lib" \
-  -DCMAKE_CXX_STANDARD=11 \
+CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT -fPIC"  cmake .. \
+  -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
+  -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
+  -DCMAKE_CXX_STANDARD=17 \
   -D_GLIBCXX_USE_CXX11_ABI=1 \
   -DCMAKE_C_COMPILER=$CC \
   -DCMAKE_CXX_COMPILER=$CXX
@@ -226,18 +226,19 @@ export PATH=/home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/
 #-L$SYSROOT/usr/lib
 export CFLAGS="--sysroot=$SYSROOT"
 export LDFLAGS+="--sysroot=$SYSROOT"
-export CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
+#export CXXFLAGS="-fPIC -std=c++17 -O0  -D_GLIBCXX_USE_CXX11_ABI=1-D_REENTRANT  --sysroot=$SYSROOT"
+export CXXFLAGS=" "
 sudo autoconf=$BUILDROOT_SDK/bin/autoconf automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
 automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
-sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT -fPIC"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT  \
+sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT  \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --prefix="$SYSROOT" \
-    --libdir=""$SYSROOT"/usr/lib" \
-    --bindir=""$SYSROOT"/usr/bin"
+    --libdir="$SYSROOT/usr/lib" \
+    --bindir="$SYSROOT/usr/bin"
 sudo env PATH="$PATH" CC=$CC CXX=$CXX make -j$(nproc)
 sudo env PATH="$PATH" CC=$CC CXX=$CXX make install
 popd
@@ -279,12 +280,11 @@ sudo chmod -R 777 ./orkaudio/
 sudo chmod -R 777 ../dependencies/
 # Update obsolete macros in configure.ac
 sudo make distclean
-export CXXFLAGS="-D_GLIBCXX_USE_CXX11_ABI=1 -fPIC"
 export CFLAGS="--sysroot=$SYSROOT"
 export LIBTOOL=$LIBTOOL
 sed -i 's/AM_PROG_LIBTOOL/LT_INIT/g' configure.ac
-export automake_1.15=$BUILDROOT_SDK/bin/automake-1.15
-# Run autotools commands to regenerate build files
+#export CXXFLAGS="-O0  --sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1-D_REENTRANT -fPIC"
+export CXXFLAGS=" "
 autoconf=$BUILDROOT_SDK/bin/autoconf automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
 automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
 automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
@@ -292,12 +292,12 @@ automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 
 automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
 # Run configure script
 #--isysroot="$SYSROOT"
-sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS="--sysroot=$SYSROOT  -D_GLIBCXX_USE_CXX11_ABI=1 -fPIC" CFLAGS="--sysroot=$SYSROOT -fPIC"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
+sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
-    --prefix="$SYSROOT" \
-    --libdir=""$SYSROOT"/usr/lib" \
-    --bindir=""$SYSROOT"/usr/bin"
+    --libdir="$SYSROOT/usr/lib" \
+    --bindir="$SYSROOT/usr/bin"
+    #    --prefix="$SYSROOT" \
 #sudo env PATH="$PATH" automake-1.15 --add-missing
 # Build and install the project
 sudo env PATH="$PATH" make -j$(nproc)
