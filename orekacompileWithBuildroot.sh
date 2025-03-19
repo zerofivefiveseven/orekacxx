@@ -197,7 +197,7 @@ pushd logging-log4cxx
 mkdir build
 cd build
 export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
-export CXXFLAGS="--sysroot=$SYSROOT -std=c++11 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -D_REENTRANT -Wall -Wextra -fPIC"
+export CXXFLAGS="--sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -D_REENTRANT -Wall -Wextra -fPIC"
 sudo make distclean
 CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT -fPIC"  cmake .. \
   -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
@@ -227,7 +227,7 @@ export PATH=/home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/
 export CFLAGS="--sysroot=$SYSROOT"
 export LDFLAGS+="--sysroot=$SYSROOT"
 #export CXXFLAGS="-fPIC -std=c++17 -O0  -D_GLIBCXX_USE_CXX11_ABI=1-D_REENTRANT  --sysroot=$SYSROOT"
-export CXXFLAGS=" "
+export CXXFLAGS="-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1"
 sudo autoconf=$BUILDROOT_SDK/bin/autoconf automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"

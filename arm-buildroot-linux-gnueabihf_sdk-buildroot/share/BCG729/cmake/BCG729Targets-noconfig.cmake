@@ -9,11 +9,11 @@ set(CMAKE_IMPORT_FILE_VERSION 1)
 set_property(TARGET bcg729 APPEND PROPERTY IMPORTED_CONFIGURATIONS NOCONFIG)
 set_target_properties(bcg729 PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_NOCONFIG "C"
-  IMPORTED_LOCATION_NOCONFIG "/home/revyakin/oreka/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libbcg729.a"
+  IMPORTED_LOCATION_NOCONFIG "/home/revyakin/projects/buildroot-dir/output/host/lib/libbcg729.a"
   )
 
 list(APPEND _IMPORT_CHECK_TARGETS bcg729 )
-list(APPEND _IMPORT_CHECK_FILES_FOR_bcg729 "/home/revyakin/oreka/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot/usr/lib/libbcg729.a" )
+list(APPEND _IMPORT_CHECK_FILES_FOR_bcg729 "/home/revyakin/projects/buildroot-dir/output/host/lib/libbcg729.a" )
 
 # Commands beyond this point should not need to know the version.
 set(CMAKE_IMPORT_FILE_VERSION)

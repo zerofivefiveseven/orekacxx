@@ -146,7 +146,7 @@ void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
 			CStdString fileName;
 			fileName.Format("%s", finfo.name);
 			int extensionPos = fileName.Find(pluginExtension);
-            LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so" + fileName + ".so" ));
+            LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so . Path:" + pluginsDirectory + "Filename:" + fileName + "finfo.name: " + finfo.name ));
 			if((extensionPos != -1) && ((fileName.size() - extensionPos) == pluginExtension.size()))
 			{
 				pluginPath = pluginsDirectory + finfo.name;

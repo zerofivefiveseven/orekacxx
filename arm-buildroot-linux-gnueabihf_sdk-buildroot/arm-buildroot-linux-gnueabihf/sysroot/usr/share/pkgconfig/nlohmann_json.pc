@@ -1,7 +1,0 @@
-prefix=/home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/arm-buildroot-linux-gnueabihf/sysroot/usr
-includedir=${prefix}/include
-
-Name: nlohmann_json
-Description: JSON for Modern C++
-Version: 3.11.3
-Cflags: -I${includedir}
