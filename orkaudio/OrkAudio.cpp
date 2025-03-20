@@ -15,7 +15,8 @@
 #include <iostream>
 #include <cstdio>
 #include <iostream>
-
+#include <filesystem>
+#include <string>
 #define BACKWARD_HAS_DW 1
 #define BACKWARD_HAS_LIBUNWIND 1
 #include "backward.hpp"
@@ -120,68 +121,81 @@ void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
 {
 	OrkAprSubPool locPool;
 
-	CStdString pluginsDirectory = CONFIG.m_pluginsDirectory;
+	std::string pluginsDirectory = CONFIG.m_pluginsDirectory;
 	if(pluginsDirectory.empty())
 	{
 		// default unix plugins directory
 		pluginsDirectory = "/usr/lib/orkaudio/plugins/";
-		LOG4CXX_WARN(LOG.rootLog, CStdString("Plugins directory could not be found:" + pluginsDirectory + " check your config.xml"));
+		LOG4CXX_WARN(LOG.rootLog, "Plugins directory could not be found:" << pluginsDirectory << " check your config.xml");
 	}
-	CStdString pluginExtension = ".so";
+	std::string pluginExtension = ".so";
 	apr_dir_t* dir;
 
-	if (apr_status_t ret = apr_dir_open(&dir, (PCSTR)pluginsDirectory, AprLp); ret != APR_SUCCESS)
-	{
-		LOG4CXX_ERROR(LOG.rootLog, CStdString("Plugins directory could not be found:" + pluginsDirectory + " check your config.xml"));
-	}
+    if(!std::filesystem::exists(pluginsDirectory)){
+		LOG4CXX_ERROR(LOG.rootLog, "Plugins directory could not be found:" << pluginsDirectory << " check your config.xml");
+    }
 	else
 	{
         LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so"));
-		CStdString pluginPath;
-		apr_finfo_t finfo;
-		apr_int32_t wanted = APR_FINFO_NAME | APR_FINFO_SIZE;
-		while((ret = apr_dir_read(&finfo, wanted, dir)) == APR_SUCCESS) 
-		{
-			apr_dso_handle_t *dsoHandle;
-			CStdString fileName;
-			fileName.Format("%s", finfo.name);
-			int extensionPos = fileName.Find(pluginExtension);
-            LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so . Path:" + pluginsDirectory + "Filename:" + fileName + "finfo.name: " + finfo.name ));
-			if((extensionPos != -1) && ((fileName.size() - extensionPos) == pluginExtension.size()))
-			{
-				pluginPath = pluginsDirectory + finfo.name;
-				LOG4CXX_INFO(LOG.rootLog, CStdString("Loaded plugin: ") + pluginPath);
-				char errstr[256];
-				// dsoHandle needs to persist beyond this function, so we need to use
-				// a pool that also persists -- use the global pool. this is safe here because 
-				// we're running in the main thread where the pool was created.
-				ret = apr_dso_load(&dsoHandle, (PCSTR)pluginPath, OrkAprSingleton::GetInstance()->GetAprMp());
-				if(ret != APR_SUCCESS)
-				{
-					apr_dso_error(dsoHandle, errstr, sizeof(errstr));
-					LOG4CXX_ERROR(LOG.rootLog, CStdString("Failed to load plugin: ") + pluginPath + " error:" + errstr);
-				}
-				else
-				{
-					LOG4CXX_INFO(LOG.rootLog, CStdString("Loaded plugin2222222: ") + pluginPath);
-
-					InitializeFunction initfunction;
-					ret = apr_dso_sym((apr_dso_handle_sym_t*)&initfunction, dsoHandle, "OrkInitialize");
-					if (ret == APR_SUCCESS)
-					{
-						initfunction();
-						pluginDlls.push_back(dsoHandle);
-					}
-					else
-					{
-						LOG4CXX_ERROR(LOG.rootLog, CStdString("Failed to initialize plugin: ") + pluginPath);
-					}
-				}
-
-			}
+		for (auto const& dirEntry : std::filesystem::directory_iterator{pluginsDirectory}){
+                  if(dirEntry.path().extension() == pluginExtension ){
+                      LOG4CXX_WARN(LOG.rootLog, "Trying to find .so . Path:" << dirEntry.path());
+                      void* soHandle = dlopen(dirEntry.path().c_str(), RTLD_NOW);
+                      if(!soHandle){
+                        LOG4CXX_WARN(LOG.rootLog, "Can't open .so . Path:" << dirEntry.path()<< "Reason:" << dlerror());
+                      }
+                      else {
+                        LOG4CXX_WARN(LOG.rootLog, "Successfully open .so . Path:" << dirEntry.path());
+                      }
+                  }
 		}
-		apr_dir_close(dir);
+//        LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so"));
+//		CStdString pluginPath;
+//		apr_finfo_t finfo;
+//		apr_int32_t wanted = APR_FINFO_NAME | APR_FINFO_SIZE;
+//		while((ret = apr_dir_read(&finfo, wanted, dir)) == APR_SUCCESS)
+//		{
+//			apr_dso_handle_t *dsoHandle;
+//			CStdString fileName;
+//			fileName.Format("%s", finfo.name);
+//			int extensionPos = fileName.Find(pluginExtension);
+//            LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so . Path:" + pluginsDirectory + "Filename:" + fileName + "finfo.name: " + finfo.name ));
+//			if((extensionPos != -1) && ((fileName.size() - extensionPos) == pluginExtension.size()))
+//			{
+//				pluginPath = pluginsDirectory + finfo.name;
+//				LOG4CXX_INFO(LOG.rootLog, CStdString("Loaded plugin: ") + pluginPath);
+//				char errstr[256];
+//				// dsoHandle needs to persist beyond this function, so we need to use
+//				// a pool that also persists -- use the global pool. this is safe here because
+//				// we're running in the main thread where the pool was created.
+//				ret = apr_dso_load(&dsoHandle, (PCSTR)pluginPath, OrkAprSingleton::GetInstance()->GetAprMp());
+//				if(ret != APR_SUCCESS)
+//				{
+//					apr_dso_error(dsoHandle, errstr, sizeof(errstr));
+//					LOG4CXX_ERROR(LOG.rootLog, CStdString("Failed to load plugin: ") + pluginPath + " error:" + errstr);
+//				}
+//				else
+//				{
+//					LOG4CXX_INFO(LOG.rootLog, CStdString("Loaded plugin2222222: ") + pluginPath);
+//
+//					InitializeFunction initfunction;
+//					ret = apr_dso_sym((apr_dso_handle_sym_t*)&initfunction, dsoHandle, "OrkInitialize");
+//					if (ret == APR_SUCCESS)
+//					{
+//						initfunction();
+//						pluginDlls.push_back(dsoHandle);
+//					}
+//					else
+//					{
+//						LOG4CXX_ERROR(LOG.rootLog, CStdString("Failed to initialize plugin: ") + pluginPath);
+//					}
+//				}
+//
+//			}
+//		}
+//		apr_dir_close(dir);
 	}
+
 }
 
 void Transcode(CStdString &file)
