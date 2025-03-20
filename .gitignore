@@ -26,7 +26,7 @@
 # Precompiled Headers
 *.gch
 *.pch
-
+./arm-buildroot-linux-gnueabihf_sdk-buildroot
 # Compiled Dynamic libraries
 *.so
 *.dylib
