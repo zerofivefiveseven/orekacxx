@@ -123,3 +123,6 @@ target/
 
 .vagrant/
 Vagrantfile
+/arm-buildroot-linux-gnueabihf_sdk-buildroot/
+/dependencies/
+
