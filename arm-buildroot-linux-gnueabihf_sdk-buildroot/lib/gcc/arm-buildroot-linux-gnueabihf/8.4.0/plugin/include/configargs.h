@@ -1,7 +1,0 @@
-/* Generated automatically. */
-static const char configuration_arguments[] = "./configure --prefix=/home/revyakin/projects/buildroot-dir/output/host --sysconfdir=/home/revyakin/projects/buildroot-dir/output/host/etc --enable-static --target=arm-buildroot-linux-gnueabihf --with-sysroot=/home/revyakin/projects/buildroot-dir/output/host/arm-buildroot-linux-gnueabihf/sysroot --enable-__cxa_atexit --with-gnu-ld --disable-libssp --disable-multilib --disable-decimal-float --with-gmp=/home/revyakin/projects/buildroot-dir/output/host --with-mpc=/home/revyakin/projects/buildroot-dir/output/host --with-mpfr=/home/revyakin/projects/buildroot-dir/output/host --with-pkgversion='Buildroot 2020.02.4' --with-bugurl=http://bugs.buildroot.net/ --disable-libquadmath --enable-tls --enable-plugins --enable-lto --enable-threads --with-isl=/home/revyakin/projects/buildroot-dir/output/host --with-abi=aapcs-linux --with-cpu=cortex-a15 --with-fpu=neon-vfpv4 --with-float=hard --with-mode=arm --enable-languages=c,c++ --with-build-time-tools=/home/revyakin/projects/buildroot-dir/output/host/arm-buildroot-linux-gnueabihf/bin --enable-shared --disable-libgomp";
-static const char thread_model[] = "posix";
-
-static const struct {
-  const char *name, *value;
-} configure_default_options[] = { { "abi", "aapcs-linux" }, { "cpu", "cortex-a15" }, { "float", "hard" }, { "mode", "arm" }, { "fpu", "neon-vfpv4" }, { "tls", "gnu" } };

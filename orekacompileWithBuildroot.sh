@@ -55,6 +55,24 @@ if [ ! -f "$CXX" ]; then
     exit 1
 fi
 
+sudo rm -rf logging-log4cxx
+git clone https://github.com/apache/logging-log4cxx.git
+pushd logging-log4cxx
+mkdir build
+cd build
+export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
+export CXXFLAGS="--sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -D_REENTRANT -Wall -Wextra -fPIC"
+sudo make distclean
+CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT -fPIC"  cmake .. \
+  -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
+  -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
+  -DCMAKE_CXX_STANDARD=17 \
+  -D_GLIBCXX_USE_CXX11_ABI=1 \
+  -DCMAKE_C_COMPILER=$CC \
+  -DCMAKE_CXX_COMPILER=$CXX
+sudo  CC=$CC CXX=$CXX make -j$(nproc)
+sudo  CC=$CC CXX=$CXX make install
+popd
 
 
 git clone --depth 1 https://github.com/BelledonneCommunications/bcg729.git ./bcg729
@@ -144,7 +162,7 @@ readelf -h "$SYSROOT"/usr/lib/libopusstatic.a  | grep 'Class\|File\|Machine'
 
 # backward-cpp HEADER ONLY
 git clone --depth 1 https://github.com/bombela/backward-cpp.git
-sudo ln -s ./backward-cpp/backward.hpp "$SYSROOT"/usr/include/backward.hpp
+sudo cp ./backward-cpp/backward.hpp "$SYSROOT"/usr/include/backward.hpp
 
 # httplib HEADER ONLY
 mkdir -p "$SYSROOT"/usr/include/httplib
@@ -191,24 +209,6 @@ popd
 popd
 sudo chmod -R 777 /srs
 
-sudo rm -rf logging-log4cxx
-git clone https://github.com/apache/logging-log4cxx.git
-pushd logging-log4cxx
-mkdir build
-cd build
-export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
-export CXXFLAGS="--sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -D_REENTRANT -Wall -Wextra -fPIC"
-sudo make distclean
-CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT -fPIC"  cmake .. \
-  -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
-  -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
-  -DCMAKE_CXX_STANDARD=17 \
-  -D_GLIBCXX_USE_CXX11_ABI=1 \
-  -DCMAKE_C_COMPILER=$CC \
-  -DCMAKE_CXX_COMPILER=$CXX
-sudo  CC=$CC CXX=$CXX make -j$(nproc)
-sudo  CC=$CC CXX=$CXX make install
-popd
 
 
 #from deps to main
@@ -276,7 +276,7 @@ popd
 #popd
 
 pushd ./orkaudio
-sudo chmod -R 777 ./orkaudio/
+sudo chmod -R 777 ../orkaudio/
 sudo chmod -R 777 ../dependencies/
 # Update obsolete macros in configure.ac
 sudo make distclean
@@ -284,7 +284,7 @@ export CFLAGS="--sysroot=$SYSROOT"
 export LIBTOOL=$LIBTOOL
 sed -i 's/AM_PROG_LIBTOOL/LT_INIT/g' configure.ac
 #export CXXFLAGS="-O0  --sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1-D_REENTRANT -fPIC"
-export CXXFLAGS=" "
+export CXXFLAGS="-std=c++17"
 autoconf=$BUILDROOT_SDK/bin/autoconf automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
 automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
 automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
@@ -292,7 +292,7 @@ automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 
 automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
 # Run configure script
 #--isysroot="$SYSROOT"
-sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
+sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --libdir="$SYSROOT/usr/lib" \

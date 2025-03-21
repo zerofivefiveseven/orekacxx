@@ -1,6 +1,0 @@
-MODULE Linux arm 0789B20871D201EEFE83980B866B02F00 libboost_atomic.so.1.72.0
-INFO CODE_ID 08B28907D271EE01FE83980B866B02F0
-PUBLIC 638 0 boost::atomics::detail::lockpool::scoped_lock::scoped_lock(void const volatile*)
-PUBLIC 7ec 0 boost::atomics::detail::lockpool::scoped_lock::~scoped_lock()
-PUBLIC 89c 0 boost::atomics::detail::lockpool::thread_fence()
-PUBLIC 928 0 boost::atomics::detail::lockpool::signal_fence()
