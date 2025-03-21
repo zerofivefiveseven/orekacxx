@@ -56,7 +56,7 @@ if [ ! -f "$CXX" ]; then
 fi
 
 sudo rm -rf logging-log4cxx
-git clone https://github.com/apache/logging-log4cxx.git
+ git clone -b v0.13.0-RC1 https://github.com/apache/logging-log4cxx.git
 pushd logging-log4cxx
 mkdir build
 cd build

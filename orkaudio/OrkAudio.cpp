@@ -146,6 +146,20 @@ void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
                       }
                       else {
                         LOG4CXX_WARN(LOG.rootLog, "Successfully open .so . Path:" << dirEntry.path());
+                        char *error;
+						InitializeFunction initfunction;
+//						ret = apr_dso_sym((apr_dso_handle_sym_t*)&initfunction, dsoHandle, "OrkInitialize");
+						initfunction = (InitializeFunction)dlsym(soHandle, "OrkInitialize");
+						if (initfunction)
+						{
+                        	LOG4CXX_WARN(LOG.rootLog, "Successfully loaded .so . Path:" << dirEntry.path());
+							initfunction();
+							pluginDlls.push_back(dsoHandle);
+						}
+						else
+						{
+							LOG4CXX_WARN(LOG.rootLog, "Can't load .so . Path:" << dirEntry.path()<< "Reason:" << dlerror());
+						}
                       }
                   }
 		}
