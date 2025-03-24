@@ -117,7 +117,7 @@ long ExceptionFilter(struct _EXCEPTION_POINTERS *ptr)
 }
 #endif
 
-void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
+void LoadPlugins(std::vector<void*>& pluginDlls)
 {
 	OrkAprSubPool locPool;
 
@@ -134,35 +134,41 @@ void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
     if(!std::filesystem::exists(pluginsDirectory)){
 		LOG4CXX_ERROR(LOG.rootLog, "Plugins directory could not be found:" << pluginsDirectory << " check your config.xml");
     }
-	else
-	{
-        LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so"));
-		for (auto const& dirEntry : std::filesystem::directory_iterator{pluginsDirectory}){
-                  if(dirEntry.path().extension() == pluginExtension ){
-                      LOG4CXX_WARN(LOG.rootLog, "Trying to find .so . Path:" << dirEntry.path());
-                      void* soHandle = dlopen(dirEntry.path().c_str(), RTLD_NOW);
-                      if(!soHandle){
-                        LOG4CXX_WARN(LOG.rootLog, "Can't open .so . Path:" << dirEntry.path()<< "Reason:" << dlerror());
-                      }
-                      else {
-                        LOG4CXX_WARN(LOG.rootLog, "Successfully open .so . Path:" << dirEntry.path());
-                        char *error;
-						InitializeFunction initfunction;
-//						ret = apr_dso_sym((apr_dso_handle_sym_t*)&initfunction, dsoHandle, "OrkInitialize");
-						initfunction = (InitializeFunction)dlsym(soHandle, "OrkInitialize");
-						if (initfunction)
-						{
-                        	LOG4CXX_WARN(LOG.rootLog, "Successfully loaded .so . Path:" << dirEntry.path());
-							initfunction();
-							pluginDlls.push_back(dsoHandle);
-						}
-						else
-						{
-							LOG4CXX_WARN(LOG.rootLog, "Can't load .so . Path:" << dirEntry.path()<< "Reason:" << dlerror());
-						}
-                      }
-                  }
-		}
+    else
+    {
+    	LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so"));
+    	for (auto const& dirEntry : std::filesystem::directory_iterator{pluginsDirectory}) {
+    		if(dirEntry.path().extension() == pluginExtension) {
+    			LOG4CXX_WARN(LOG.rootLog, "Trying to find .so . Path:" << dirEntry.path());
+    			void* soHandle = dlopen(dirEntry.path().c_str(), RTLD_NOW);
+    			if(!soHandle) {
+    				LOG4CXX_WARN(LOG.rootLog, "Can't open .so . Path:" << dirEntry.path() << " Reason:" << dlerror());
+    			}
+    			else {
+    				LOG4CXX_WARN(LOG.rootLog, "Successfully open .so . Path:" << dirEntry.path());
+    				dlerror();
+
+    				using InitFuncType = void(*)();
+    				InitFuncType initFunc = reinterpret_cast<InitFuncType>(dlsym(soHandle, "OrkInitialize"));
+
+    				char* error = dlerror();
+    				if (error) {
+    					LOG4CXX_WARN(LOG.rootLog, "Can't load symbol from .so . Path:" << dirEntry.path() << " Reason:" << error);
+    					dlclose(soHandle);
+    				}
+    				else if (initFunc) {
+    					LOG4CXX_WARN(LOG.rootLog, "Successfully loaded .so . Path:" << dirEntry.path());
+    					initFunc();
+    					pluginDlls.push_back(soHandle);
+    				}
+    				else {
+    					LOG4CXX_WARN(LOG.rootLog, "Can't load .so . Path:" << dirEntry.path());
+    					dlclose(soHandle);
+    				}
+    			}
+    		}
+    	}
+    }
 //        LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so"));
 //		CStdString pluginPath;
 //		apr_finfo_t finfo;
@@ -210,8 +216,6 @@ void LoadPlugins(std::list<apr_dso_handle_t*>& pluginDlls)
 //		apr_dir_close(dir);
 	}
 
-}
-
 void Transcode(CStdString &file)
 {
 	OrkLogManager::Instance()->Initialize();
@@ -220,7 +224,7 @@ void Transcode(CStdString &file)
 
 	ConfigManager::Instance()->Initialize();
 
-	std::list<apr_dso_handle_t*> pluginDlls;
+	std::vector<void*> pluginDlls;
 	LoadPlugins(pluginDlls);
 
 	// Register in-built filters
@@ -334,7 +338,7 @@ void MainThread()
 		capturePluginOk = true;
 	}
     LOG4CXX_WARN(LOG.rootLog,"LoadPlugins before.");
-	std::list<apr_dso_handle_t*> pluginDlls;
+	std::vector<void*> pluginDlls;
 	LoadPlugins(pluginDlls);
 	LOG4CXX_WARN(LOG.rootLog,"LoadPlugins after.");
 	// Register in-built filters

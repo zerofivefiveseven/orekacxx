@@ -171,7 +171,7 @@ sudo cp ./backward-cpp/backward.hpp "$SYSROOT"/usr/include/backward.hpp
 # httplib HEADER ONLY
 mkdir -p "$SYSROOT"/usr/include/httplib
 git clone --depth 1 --branch v0.12.3 https://github.com/yhirose/cpp-httplib.git
-sudo cp ./httplib/httplib.h "$SYSROOT"/usr/include/httplib/
+sudo cp ./cpp-httplib/httplib.h "$SYSROOT"/usr/include/httplib/
 
 # json
 git clone --depth 1 https://github.com/nlohmann/json.git

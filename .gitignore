@@ -125,3 +125,10 @@ Vagrantfile
 /arm-buildroot-linux-gnueabihf_sdk-buildroot/
 /dependencies/
 
+/dependencies/backward-cpp/
+/dependencies/bcg729/
+/dependencies/json/
+/dependencies/dependencies/
+/dependencies/cpp-httplib/
+/dependencies/silk/
+/dependencies/srs/
