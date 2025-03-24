@@ -55,24 +55,28 @@ if [ ! -f "$CXX" ]; then
     exit 1
 fi
 
-sudo rm -rf logging-log4cxx
- git clone -b v0.13.0-RC1 https://github.com/apache/logging-log4cxx.git
-pushd logging-log4cxx
-mkdir build
-cd build
-export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
-export CXXFLAGS="--sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -D_REENTRANT -Wall -Wextra -fPIC"
-sudo make distclean
-CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT -fPIC"  cmake .. \
-  -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
-  -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
-  -DCMAKE_CXX_STANDARD=17 \
-  -D_GLIBCXX_USE_CXX11_ABI=1 \
-  -DCMAKE_C_COMPILER=$CC \
-  -DCMAKE_CXX_COMPILER=$CXX
-sudo  CC=$CC CXX=$CXX make -j$(nproc)
-sudo  CC=$CC CXX=$CXX make install
-popd
+#sudo rm -rf apache-log4cxx-0.13.0
+#wget -qO- https://archive.apache.org/dist/logging/log4cxx/0.13.0/apache-log4cxx-0.13.0.tar.gz | gunzip | tar xvf -
+#pushd apache-log4cxx-0.13.0
+#mkdir build
+#mkdir -p _deps/log4j-subbuild/log4j-populate-prefix/src
+#pushd _deps/log4j-subbuild/log4j-populate-prefix/src
+#wget https://archive.apache.org/dist/logging/log4j/1.2.17/log4j-1.2.17.tar.gz
+#popd
+#cd build
+#export LDFLAGS="--sysroot="$SYSROOT" -L"$SYSROOT"/usr/lib -Wl,-rpath="$SYSROOT"/usr/lib"
+#export CXXFLAGS="--sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -D_REENTRANT -Wall -Wextra -fPIC"
+#sudo make distclean
+#CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT -fPIC"  cmake .. \
+#  -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
+#  -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
+#  -DCMAKE_CXX_STANDARD=17 \
+#  -D_GLIBCXX_USE_CXX11_ABI=1 \
+#  -DCMAKE_C_COMPILER=$CC \
+#  -DCMAKE_CXX_COMPILER=$CXX
+#sudo  CC=$CC CXX=$CXX make -j$(nproc)
+#sudo  CC=$CC CXX=$CXX make install
+#popd
 
 
 git clone --depth 1 https://github.com/BelledonneCommunications/bcg729.git ./bcg729
@@ -139,7 +143,7 @@ git clone --depth 1 https://github.com/gaozehua/SILKCodec.git ./silk
 pushd ./silk/SILK_SDK_SRC_ARM/
 sudo make clean
 export CXXFLAGS="--sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -fPIC"
-sudo DCMAKE_INSTALL_PREFIX=""$SYSROOT"/usr" TOOLCHAIN_PREFIX=$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf- CC=$CC CXX=$CXX CXXFLAGS = $CXXFLAGS CFLAGS="--sysroot="$SYSROOT" -fPIC -I$SYSROOT/usr/include/ -fPIC -g -O0" make all TARGRT_CPU=armv7l
+DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" TOOLCHAIN_PREFIX=$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf- CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot="$SYSROOT" -fPIC -I$SYSROOT/usr/include/ -fPIC -g -O0" make all TARGRT_CPU=armv7l
 cp libSKP_SILK_SDK.a "$SYSROOT"/usr/lib
 cp encoder "$SYSROOT"/usr/lib
 cp decoder "$SYSROOT"/usr/lib
@@ -228,19 +232,19 @@ export CFLAGS="--sysroot=$SYSROOT"
 export LDFLAGS+="--sysroot=$SYSROOT"
 #export CXXFLAGS="-fPIC -std=c++17 -O0  -D_GLIBCXX_USE_CXX11_ABI=1-D_REENTRANT  --sysroot=$SYSROOT"
 export CXXFLAGS="-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1"
-sudo autoconf=$BUILDROOT_SDK/bin/autoconf automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
-sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
+sudo autoconf=$BUILDROOT_SDK/bin/autoconf aclocal="$BUILDROOT_SDK/bin/aclocal" automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
+sudo automake=$BUILDROOT_SDK/bin/automake aclocal="$BUILDROOT_SDK/bin/aclocal" LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
-sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
-automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
-sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT  \
+sudo automake=$BUILDROOT_SDK/bin/automake aclocal="$BUILDROOT_SDK/bin/aclocal" LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
+automake=$BUILDROOT_SDK/bin/automake aclocal="$BUILDROOT_SDK/bin/aclocal" CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
+sudo env PATH="$PATH" aclocal="$BUILDROOT_SDK/bin/aclocal" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT  \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --prefix="$SYSROOT" \
     --libdir="$SYSROOT/usr/lib" \
     --bindir="$SYSROOT/usr/bin"
-sudo env PATH="$PATH" CC=$CC CXX=$CXX make -j$(nproc)
-sudo env PATH="$PATH" CC=$CC CXX=$CXX make install
+sudo env PATH="$PATH" aclocal="$BUILDROOT_SDK/bin/aclocal" CC=$CC CXX=$CXX make -j$(nproc)
+sudo env PATH="$PATH" aclocal="$BUILDROOT_SDK/bin/aclocal" CC=$CC CXX=$CXX make install
 popd
 #LT_INIT
 
@@ -282,17 +286,26 @@ sudo chmod -R 777 ../dependencies/
 sudo make distclean
 export CFLAGS="--sysroot=$SYSROOT"
 export LIBTOOL=$LIBTOOL
-sed -i 's/AM_PROG_LIBTOOL/LT_INIT/g' configure.ac
+export ACLOCAL_PATH="/home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin/aclocal-1.15:$ACLOCAL_PATH"
+
+mkdir -p /home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/share/automake-1.15/Automake
+cp /home/revyakin/Documents/arm-buildroot-linux-gnueabihf_sdk-buildroot-STABLE/share/automake-1.15/Automake/Config.pm    /home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/share/automake-1.15/Automake/
+export PERL5LIB="/home/revyakin/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/share/autoconf:$PERL5LIB"sed -i 's/AM_PROG_LIBTOOL/LT_INIT/g' configure.ac
 #export CXXFLAGS="-O0  --sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1-D_REENTRANT -fPIC"
-export CXXFLAGS="-std=c++17"
-autoconf=$BUILDROOT_SDK/bin/autoconf automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
-automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
-automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
-automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
-automake=$BUILDROOT_SDK/bin/automake CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
+export CXXFLAGS="-I$SYSROOT/usr/include -std=c++17"
+
+autoconf=$BUILDROOT_SDK/bin/autoconf PERL5LIB=$PERL5LIB automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
+
+automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
+
+automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
+
+automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
+
+automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf -fvi
 # Run configure script
-#--isysroot="$SYSROOT"
-sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT"  CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
+
+sudo env PATH="$PATH" ACLOCAL_PATH=$ACLOCAL_PATH PERL5LIB=$PERL5LIB autom4te=$autom4te LDFLAGS="-L$SYSROOT/usr/lib  --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT"  CC=$CC CXX=$CXX autom4te=$autom4te m4="$BUILDROOT_SDK/bin/m4" LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --libdir="$SYSROOT/usr/lib" \
@@ -300,7 +313,7 @@ sudo env PATH="$PATH" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS=$
     #    --prefix="$SYSROOT" \
 #sudo env PATH="$PATH" automake-1.15 --add-missing
 # Build and install the project
-sudo env PATH="$PATH" make -j$(nproc)
+sudo env PATH="$PATH" autom4te=$autom4te ACLOCAL_PATH=$ACLOCAL_PATH PERL5LIB=$PERL5LIB m4="$BUILDROOT_SDK/bin/m4" make -j$(nproc)
 sudo CC=$CC CXX=$CXX env PATH="$PATH" make install
 
 # Set capabilities for orkaudio (if needed)
