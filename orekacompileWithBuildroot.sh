@@ -236,7 +236,6 @@ sudo autoconf=$BUILDROOT_SDK/bin/autoconf aclocal="$BUILDROOT_SDK/bin/aclocal" a
 sudo automake=$BUILDROOT_SDK/bin/automake aclocal="$BUILDROOT_SDK/bin/aclocal" LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
 sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
 sudo automake=$BUILDROOT_SDK/bin/automake aclocal="$BUILDROOT_SDK/bin/aclocal" LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
-automake=$BUILDROOT_SDK/bin/automake aclocal="$BUILDROOT_SDK/bin/aclocal" CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf  -fvi
 sudo env PATH="$PATH" aclocal="$BUILDROOT_SDK/bin/aclocal" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT  \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
@@ -301,13 +300,14 @@ automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4t
 automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
 
 automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
-
+automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/automake --add-missing
 automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf -fvi
 # Run configure script
 
 sudo env PATH="$PATH" ACLOCAL_PATH=$ACLOCAL_PATH PERL5LIB=$PERL5LIB autom4te=$autom4te LDFLAGS="-L$SYSROOT/usr/lib  --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT"  CC=$CC CXX=$CXX autom4te=$autom4te m4="$BUILDROOT_SDK/bin/m4" LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
+    --prefix="$SYSROOT" \
     --libdir="$SYSROOT/usr/lib" \
     --bindir="$SYSROOT/usr/bin"
     #    --prefix="$SYSROOT" \

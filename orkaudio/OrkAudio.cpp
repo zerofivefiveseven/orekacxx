@@ -126,26 +126,26 @@ void LoadPlugins(std::vector<void*>& pluginDlls)
 	{
 		// default unix plugins directory
 		pluginsDirectory = "/usr/lib/orkaudio/plugins/";
-		LOG4CXX_WARN(LOG.rootLog, "Plugins directory could not be found:" << pluginsDirectory << " check your config.xml");
+		LOG4CXX_WARN(LOG.rootLog, "Config provided plugin directory could not be found. Using built-in path for plugins:"
+                                              << pluginsDirectory << " check your config.xml");
 	}
 	std::string pluginExtension = ".so";
-	apr_dir_t* dir;
 
     if(!std::filesystem::exists(pluginsDirectory)){
-		LOG4CXX_ERROR(LOG.rootLog, "Plugins directory could not be found:" << pluginsDirectory << " check your config.xml");
+		LOG4CXX_ERROR(LOG.rootLog, "Plugins directory which is default could not be found:" << pluginsDirectory << " check your config.xml");
     }
     else
     {
     	LOG4CXX_WARN(LOG.rootLog, CStdString("Trying to find .so"));
     	for (auto const& dirEntry : std::filesystem::directory_iterator{pluginsDirectory}) {
     		if(dirEntry.path().extension() == pluginExtension) {
-    			LOG4CXX_WARN(LOG.rootLog, "Trying to find .so . Path:" << dirEntry.path());
+    			LOG4CXX_WARN(LOG.rootLog, "Found *.so; Path:" << dirEntry.path());
     			void* soHandle = dlopen(dirEntry.path().c_str(), RTLD_NOW);
     			if(!soHandle) {
-    				LOG4CXX_WARN(LOG.rootLog, "Can't open .so . Path:" << dirEntry.path() << " Reason:" << dlerror());
+    				LOG4CXX_WARN(LOG.rootLog, "Can't open .so; Path:" << dirEntry.path() << " Reason:" << dlerror());
     			}
     			else {
-    				LOG4CXX_WARN(LOG.rootLog, "Successfully open .so . Path:" << dirEntry.path());
+    				LOG4CXX_WARN(LOG.rootLog, "Successfully open .so; Path:" << dirEntry.path());
     				dlerror();
 
     				using InitFuncType = void(*)();
@@ -153,16 +153,16 @@ void LoadPlugins(std::vector<void*>& pluginDlls)
 
     				char* error = dlerror();
     				if (error) {
-    					LOG4CXX_WARN(LOG.rootLog, "Can't load symbol from .so . Path:" << dirEntry.path() << " Reason:" << error);
+    					LOG4CXX_WARN(LOG.rootLog, "Can't load symbol from .so; Path:" << dirEntry.path() << " Reason:" << error);
     					dlclose(soHandle);
     				}
     				else if (initFunc) {
-    					LOG4CXX_WARN(LOG.rootLog, "Successfully loaded .so . Path:" << dirEntry.path());
+    					LOG4CXX_WARN(LOG.rootLog, "Successfully loaded .so; Path:" << dirEntry.path());
     					initFunc();
     					pluginDlls.push_back(soHandle);
     				}
     				else {
-    					LOG4CXX_WARN(LOG.rootLog, "Can't load .so . Path:" << dirEntry.path());
+    					LOG4CXX_WARN(LOG.rootLog, "Can't load .so; Path:" << dirEntry.path());
     					dlclose(soHandle);
     				}
     			}
@@ -337,10 +337,8 @@ void MainThread()
 	{
 		capturePluginOk = true;
 	}
-    LOG4CXX_WARN(LOG.rootLog,"LoadPlugins before.");
 	std::vector<void*> pluginDlls;
 	LoadPlugins(pluginDlls);
-	LOG4CXX_WARN(LOG.rootLog,"LoadPlugins after.");
 	// Register in-built filters
 	FilterRef filter(new AlawToPcmFilter());
 	FilterRegistry::instance()->RegisterFilter(filter);

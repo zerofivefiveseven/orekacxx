@@ -1,0 +1,920 @@
+2025-03-20 15:50:00,479  INFO root:272 - 
+
+OrkAudio version : service starting
+
+2025-03-20 15:50:00,532  INFO root:111 - Loaded plugin: /usr/lib/libvoip.so
+2025-03-20 15:50:00,565  INFO packet:1850 - Initializing VoIP plugin
+2025-03-20 15:50:00,567  INFO packet:1557 - Available pcap devices:
+2025-03-20 15:50:00,568  INFO packet:1564 - * eth0 - 
+2025-03-20 15:50:00,568  INFO packet:1356 - Setting pcap socket buffer size:67108864 bytes successful
+2025-03-20 15:50:00,613  INFO packet:1380 - Activating pcaphandle:11b448 successfully
+2025-03-20 15:50:00,614  INFO packet:1395 - Setting setsockopt with bufsize:8388608 successfully
+2025-03-20 15:50:00,614  INFO packet:1487 - Successfully opened device. pcap handle:11b448 message:
+2025-03-20 15:50:00,614  INFO packet:1564 - * eth1 - 
+2025-03-20 15:50:00,615  INFO packet:1356 - Setting pcap socket buffer size:67108864 bytes successful
+2025-03-20 15:50:00,659  INFO packet:1380 - Activating pcaphandle:12bee8 successfully
+2025-03-20 15:50:00,660  INFO packet:1395 - Setting setsockopt with bufsize:8388608 successfully
+2025-03-20 15:50:00,660  INFO packet:1487 - Successfully opened device. pcap handle:12bee8 message:
+2025-03-20 15:50:00,660  INFO packet:1564 - * lo - 
+2025-03-20 15:50:00,660  INFO packet:1564 - * any - Pseudo-device that captures on all interfaces
+2025-03-20 15:50:00,661  INFO packet:1729 - Detected localpartymap.csv modification, timestamp:1741959164 oldtimestamp:0
+2025-03-20 15:50:00,661  INFO packet:1753 - Loading localpartymap.csv
+2025-03-20 15:50:00,661  INFO packet:1808 - LoadSkinnyGlobalNumbersList: Could not open file:skinnyglobalnumbers.csv -- trying:/etc/orkaudio/skinnyglobalnumbers.csv now
+2025-03-20 15:50:00,662  WARN root:322 - LoadPlugins before.
+2025-03-20 15:50:00,662  WARN root:139 - Trying to find .so
+2025-03-20 15:50:00,662  WARN root:142 - Trying to find .so . Path:"/usr/lib/plugins/libsilkcodec.so"
+2025-03-20 15:50:00,673  WARN root:148 - Successfully open .so . Path:"/usr/lib/plugins/libsilkcodec.so"
+2025-03-20 15:50:00,673  WARN root:142 - Trying to find .so . Path:"/usr/lib/plugins/livestream.so"
+2025-03-20 15:50:00,684  WARN root:148 - Successfully open .so . Path:"/usr/lib/plugins/livestream.so"
+2025-03-20 15:50:00,685  WARN root:142 - Trying to find .so . Path:"/usr/lib/plugins/libg729codec.so"
+2025-03-20 15:50:00,686  WARN root:148 - Successfully open .so . Path:"/usr/lib/plugins/libg729codec.so"
+2025-03-20 15:50:00,686  WARN root:142 - Trying to find .so . Path:"/usr/lib/plugins/librtpmixer.so"
+2025-03-20 15:50:00,687  WARN root:148 - Successfully open .so . Path:"/usr/lib/plugins/librtpmixer.so"
+2025-03-20 15:50:00,687  WARN root:325 - LoadPlugins after.
+2025-03-20 15:50:00,688  INFO taperegistry:62 - Registered processor: BatchProcessing
+2025-03-20 15:50:00,689  INFO taperegistry:62 - Registered processor: CommandProcessing
+2025-03-20 15:50:00,689  INFO taperegistry:62 - Registered processor: Reporting
+2025-03-20 15:50:00,689  INFO taperegistry:62 - Registered processor: TapeFileNaming
+2025-03-20 15:50:00,690  INFO taperegistry:62 - Registered processor: DirectionSelector
+2025-03-20 15:50:00,691  INFO httpserver:247 - Started HttpServer on port:59140
+2025-03-20 15:50:00,691  INFO tlsserver:318 - HTTPS server disabled
+2025-03-20 15:50:00,691  INFO eventstreamingserver:736 - Started EventstreamingServer on port:59150
+2025-03-20 15:50:00,692  INFO batchProcessing:106 - Command Processing thread Th0 starting - queue size:10000
+2025-03-20 15:50:00,692  INFO directionSelector:184 - thread Th0 starting - queue size:20000
+2025-03-20 15:50:00,692  INFO directionSelector:129 - LoadAreaCodesMaps: Could not open file:area-codes-recorded-side.csv -- trying:/etc/orkaudio/area-codes-recorded-side.csv now
+2025-03-20 15:50:00,693  INFO tapeFileNamingLog:86 - Started
+2025-03-20 15:50:00,693  INFO batchProcessing:233 - thread Th0 starting - queue size:20000
+2025-03-20 15:50:00,694  INFO batchProcessing:233 - thread Th1 starting - queue size:20000
+2025-03-20 15:50:00,694  INFO immediateProcessing:90 - thread starting - queue size:10000
+2025-03-20 15:50:00,695  INFO reporting:283 - [localhost:8080/orktrack] reporting thread started.
+2025-03-20 15:50:00,697  INFO packet:983 - Start Capturing: pcap handle:12bee8
+2025-03-20 15:50:00,697  INFO packet:983 - Start Capturing: pcap handle:11b448
+2025-03-20 15:50:00,698 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 15:50:00,699  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:50:10,294  INFO pcapstats:1909 - eth0: handle:11b448 received:101 received10s:101 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:50:10,294  INFO pcapstats:1909 - eth1: handle:12bee8 received:3 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:50:10,294  INFO pcapstats:834 - numPackets:97 maxPPS:71 minPPS:1
+2025-03-20 15:50:20,034  INFO pcapstats:1909 - eth0: handle:11b448 received:169 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:50:20,034  INFO pcapstats:1909 - eth1: handle:12bee8 received:7 received10s:4 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:50:20,034  INFO pcapstats:834 - numPackets:76 maxPPS:34 minPPS:1
+2025-03-20 15:50:30,184  INFO pcapstats:1909 - eth0: handle:11b448 received:282 received10s:113 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:50:30,184  INFO pcapstats:1909 - eth1: handle:12bee8 received:18 received10s:11 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:50:30,184  INFO pcapstats:834 - numPackets:125 maxPPS:53 minPPS:3
+2025-03-20 15:50:40,384  INFO pcapstats:1909 - eth0: handle:11b448 received:360 received10s:78 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:50:40,384  INFO pcapstats:1909 - eth1: handle:12bee8 received:21 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:50:40,384  INFO pcapstats:834 - numPackets:83 maxPPS:26 minPPS:1
+2025-03-20 15:50:50,074  INFO pcapstats:1909 - eth0: handle:11b448 received:431 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:50:50,074  INFO pcapstats:1909 - eth1: handle:12bee8 received:22 received10s:1 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:50:50,074  INFO pcapstats:834 - numPackets:70 maxPPS:22 minPPS:3
+2025-03-20 15:51:00,274  INFO pcapstats:1909 - eth0: handle:11b448 received:500 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:00,274  INFO pcapstats:1909 - eth1: handle:12bee8 received:24 received10s:2 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:00,274  INFO pcapstats:834 - numPackets:73 maxPPS:22 minPPS:1
+2025-03-20 15:51:10,984  INFO pcapstats:1909 - eth0: handle:11b448 received:605 received10s:105 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:10,984  INFO pcapstats:1909 - eth1: handle:12bee8 received:36 received10s:12 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:10,984  INFO pcapstats:834 - numPackets:114 maxPPS:37 minPPS:2
+2025-03-20 15:51:15,764 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 15:51:15,764  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:51:18,174  INFO sip:1746 - INVITE: sender:192.168.23.247 from:6693@192.168.2.40 RTP:192.168.23.247,26760 to:6692@192.168.2.40 rcvr:192.168.2.40 callid:00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 smac:00:16:47:52:01:ef rmac:00:1b:21:86:b6:0f fromname:6693 toname: ua:Cisco-CP7940G/7.5 requesturi:6692 a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:18,174  INFO rtpsessions:3205 - [SANL] media address:192.168.23.247,26760 Sip callId:00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 endpoint:0.0.0.0
+2025-03-20 15:51:18,175  INFO rtpsessions:2124 - [SANL] created by INVITE:sender:192.168.23.247 from:6693@192.168.2.40 RTP:192.168.23.247,26760 to:6692@192.168.2.40 rcvr:192.168.2.40 callid:00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 smac:00:16:47:52:01:ef rmac:00:1b:21:86:b6:0f fromname:6693 toname: ua:Cisco-CP7940G/7.5 requesturi:6692 a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:18,684  INFO sip:1746 - INVITE: sender:192.168.23.247 from:6693@192.168.2.40 RTP:192.168.23.247,26760 to:6692@192.168.2.40 rcvr:192.168.2.40 callid:00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 smac:00:16:47:52:01:ef rmac:00:1b:21:86:b6:0f fromname:6693 toname: ua:Cisco-CP7940G/7.5 requesturi:6692 a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:18,684  INFO rtpsession:1605 - [SANL] associating INVITE:sender:192.168.23.247 from:6693@192.168.2.40 RTP:192.168.23.247,26760 to:6692@192.168.2.40 rcvr:192.168.2.40 callid:00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 smac:00:16:47:52:01:ef rmac:00:1b:21:86:b6:0f fromname:6693 toname: ua:Cisco-CP7940G/7.5 requesturi:6692 a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:18,684  INFO sip:1746 - INVITE: sender:192.168.2.40 from:6693@192.168.2.40 RTP:192.168.2.40,11806 to:6692@192.168.22.237 rcvr:192.168.22.237 callid:4125a6ed1fa081793fc2560119d38236@192.168.2.40 smac:00:1b:21:86:b6:0f rmac:00:0e:08:de:6f:bd fromname:Test phone2 CISCO 7940 toname: ua:STC_PBX requesturi:6692 a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:18,685  INFO rtpsessions:3205 - [SANM] media address:192.168.2.40,11806 Sip callId:4125a6ed1fa081793fc2560119d38236@192.168.2.40 endpoint:0.0.0.0
+2025-03-20 15:51:18,685  INFO rtpsessions:2124 - [SANM] created by INVITE:sender:192.168.2.40 from:6693@192.168.2.40 RTP:192.168.2.40,11806 to:6692@192.168.22.237 rcvr:192.168.22.237 callid:4125a6ed1fa081793fc2560119d38236@192.168.2.40 smac:00:1b:21:86:b6:0f rmac:00:0e:08:de:6f:bd fromname:Test phone2 CISCO 7940 toname: ua:STC_PBX requesturi:6692 a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:18,686  INFO sip:1746 - INVITE: sender:192.168.2.40 from:6693@192.168.2.40 RTP:192.168.2.40,11806 to:6692@192.168.22.237 rcvr:192.168.22.237 callid:4125a6ed1fa081793fc2560119d38236@192.168.2.40 smac:00:1b:21:86:b6:0f rmac:00:0e:08:de:6f:bd fromname:Test phone2 CISCO 7940 toname: ua:STC_PBX requesturi:6692 a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:18,686  INFO rtpsession:1605 - [SANM] associating INVITE:sender:192.168.2.40 from:6693@192.168.2.40 RTP:192.168.2.40,11806 to:6692@192.168.22.237 rcvr:192.168.22.237 callid:4125a6ed1fa081793fc2560119d38236@192.168.2.40 smac:00:1b:21:86:b6:0f rmac:00:0e:08:de:6f:bd fromname:Test phone2 CISCO 7940 toname: ua:STC_PBX requesturi:6692 a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:20,164  INFO pcapstats:1909 - eth0: handle:11b448 received:664 received10s:59 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:20,164  INFO pcapstats:1909 - eth1: handle:12bee8 received:469 received10s:433 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:20,164  INFO pcapstats:834 - numPackets:467 maxPPS:149 minPPS:3
+2025-03-20 15:51:21,744  INFO sip:1746 - 200 OK: sender:192.168.2.40 from:6693@192.168.2.40 RTP:192.168.22.237,16480 to:6692@192.168.22.237 rcvr:192.168.22.237 callid:4125a6ed1fa081793fc2560119d38236@192.168.2.40 smac:00:0e:08:de:6f:bd rmac:00:1b:21:86:b6:0f fromname:Test phone2 CISCO 7940 toname: ua: requesturi: a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:21,744  INFO rtpsessions:3205 - [SANM] media address:192.168.22.237,16480 Sip callId:4125a6ed1fa081793fc2560119d38236@192.168.2.40 endpoint:0.0.0.0
+2025-03-20 15:51:21,744  INFO rtpsession:1605 - [SANM] associating INVITE:sender:192.168.2.40 from:6693@192.168.2.40 RTP:192.168.22.237,16480 to:6692@192.168.22.237 rcvr:192.168.22.237 callid:4125a6ed1fa081793fc2560119d38236@192.168.2.40 smac:00:0e:08:de:6f:bd rmac:00:1b:21:86:b6:0f fromname:Test phone2 CISCO 7940 toname: ua: requesturi: a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:21,745  INFO sip:1746 - 200 OK: sender:192.168.2.40 from:6693@192.168.2.40 RTP:192.168.22.237,16480 to:6692@192.168.22.237 rcvr:192.168.22.237 callid:4125a6ed1fa081793fc2560119d38236@192.168.2.40 smac:00:0e:08:de:6f:bd rmac:00:1b:21:86:b6:0f fromname:Test phone2 CISCO 7940 toname: ua: requesturi: a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:21,745  INFO rtpsession:1605 - [SANM] associating INVITE:sender:192.168.2.40 from:6693@192.168.2.40 RTP:192.168.22.237,16480 to:6692@192.168.22.237 rcvr:192.168.22.237 callid:4125a6ed1fa081793fc2560119d38236@192.168.2.40 smac:00:0e:08:de:6f:bd rmac:00:1b:21:86:b6:0f fromname:Test phone2 CISCO 7940 toname: ua: requesturi: a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:21,745  INFO sip:1746 - 200 OK: sender:192.168.23.247 from:6693@192.168.2.40 RTP:192.168.2.40,12716 to:6692@192.168.2.40 rcvr:192.168.2.40 callid:00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 smac:00:1b:21:86:b6:0f rmac:00:16:47:52:01:ef fromname:6693 toname: ua:STC_PBX requesturi: a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:21,746  INFO rtpsessions:3205 - [SANL] media address:192.168.2.40,12716 Sip callId:00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 endpoint:0.0.0.0
+2025-03-20 15:51:21,746  INFO rtpsession:1605 - [SANL] associating INVITE:sender:192.168.23.247 from:6693@192.168.2.40 RTP:192.168.2.40,12716 to:6692@192.168.2.40 rcvr:192.168.2.40 callid:00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 smac:00:1b:21:86:b6:0f rmac:00:16:47:52:01:ef fromname:6693 toname: ua:STC_PBX requesturi: a:sendonly:not-present telephone-event-payload-type:0
+2025-03-20 15:51:21,746  INFO orksession:130 - [SANM] 1st packet s1: 192.168.22.237,16480 192.168.2.40,11806 ssrc:0xfb6ebd6c seq:2648 ts:128336476 len:30 type:18 ats:1742485881
+2025-03-20 15:51:21,746  INFO rtpsession:1397 - [SANM] new RTP stream: 192.168.22.237,16480 192.168.2.40,11806 ssrc:0xfb6ebd6c seq:2648 ts:128336476 len:30 type:18 ats:1742485881
+2025-03-20 15:51:21,746  INFO orksession:130 - [SANL] 1st packet s1: 192.168.2.40,12716 192.168.23.247,26760 ssrc:0x5d6e4a50 seq:19944 ts:0 len:20 type:18 ats:1742485881
+2025-03-20 15:51:21,746  INFO rtpsession:1397 - [SANL] new RTP stream: 192.168.2.40,12716 192.168.23.247,26760 ssrc:0x5d6e4a50 seq:19944 ts:0 len:20 type:18 ats:1742485881
+2025-03-20 15:51:21,747  INFO rtpsession:309 - [SANM] SANM Sip Session start, timestamp:1742485881
+2025-03-20 15:51:21,747  INFO port:306 - [SANM] #SANM start
+2025-03-20 15:51:21,748  INFO reporting:196 - [localhost:8080/orktrack] queuesize:1 enqueued: type=tape recid=19700101_000749_SANM stage=start captureport=SANM timestamp=1742485881 filename=1970/01/01/00/19700101_000749_SANM localparty=6693 localentrypoint= remoteparty=6692 direction=out duration=0 service=orkaudio-sl4-14 localip=192.168.2.40 remoteip=192.168.22.237 nativecallid=4125a6ed1fa081793fc2560119d38236@192.168.2.40 tags= ondemand=false side=both live=true hostname=sl4-14 
+2025-03-20 15:51:21,751  INFO rtpsession:309 - [SANL] SANL Sip Session start, timestamp:1742485881
+2025-03-20 15:51:21,751  INFO port:306 - [SANL] #SANL start
+2025-03-20 15:51:21,752  INFO reporting:196 - [localhost:8080/orktrack] queuesize:2 enqueued: type=tape recid=19700101_000749_SANL stage=start captureport=SANL timestamp=1742485881 filename=1970/01/01/00/19700101_000749_SANL localparty=6693 localentrypoint= remoteparty=6692 direction=out duration=0 service=orkaudio-sl4-14 localip=192.168.23.247 remoteip=192.168.2.40 nativecallid=00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 tags= ondemand=false side=both live=true hostname=sl4-14 
+2025-03-20 15:51:21,753  INFO orksession:151 - [SANL] 1st packet s2: 192.168.23.247,26760 192.168.2.40,12716 ssrc:0xef015247 seq:52778 ts:71283232 len:20 type:18 ats:1742485881
+2025-03-20 15:51:21,754  INFO orksession:151 - [SANM] 1st packet s2: 192.168.2.40,11806 192.168.22.237,16480 ssrc:0x729ccb77 seq:3652 ts:32 len:20 type:18 ats:1742485881
+2025-03-20 15:51:30,364  INFO pcapstats:1909 - eth0: handle:11b448 received:739 received10s:75 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:30,364  INFO pcapstats:1909 - eth1: handle:12bee8 received:3439 received10s:2970 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:30,364  INFO pcapstats:834 - numPackets:2948 maxPPS:418 minPPS:68
+2025-03-20 15:51:40,054  INFO pcapstats:1909 - eth0: handle:11b448 received:816 received10s:77 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:40,054  INFO pcapstats:1909 - eth1: handle:12bee8 received:6637 received10s:3198 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:40,054  INFO pcapstats:834 - numPackets:3227 maxPPS:403 minPPS:158
+2025-03-20 15:51:44,696  INFO sip:495 - BYE: sender:192.168.23.247 rcvr:192.168.2.40 callid:00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 from:6693 to:6692 fromDomain:192.168.2.40 toDomain:192.168.2.40 fromName:6693 toName:
+2025-03-20 15:51:44,696  INFO rtpsession:93 - [SANL] SANL Session stop, numRtpPkts:2272 dupl:1 seqDelta:1 rtpNumMissingPkts:0 rtpNumSeqGaps:0 lastUpdated:1742485904
+2025-03-20 15:51:44,697  INFO port:329 - [SANL] #SANL stop
+2025-03-20 15:51:44,697  INFO tapelist:437 - date=2025-03-20_15-51-44 duration=23 direction=out localside=both audiokeepdirection=both capturePort=SANL localParty=6693 remoteParty=6692 localEntryPoint= localIp=192.168.23.247 remoteIp=192.168.2.40 filename=1970/01/01/00/19700101_000749_SANL.wav nativeCallId=00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 ondemand=false 
+2025-03-20 15:51:44,698  INFO reporting:196 - [localhost:8080/orktrack] queuesize:3 enqueued: type=tape recid=19700101_000749_SANL stage=stop captureport=SANL timestamp=1742485881 filename=1970/01/01/00/19700101_000749_SANL.wav localparty=6693 localentrypoint= remoteparty=6692 direction=out duration=23 service=orkaudio-sl4-14 localip=192.168.23.247 remoteip=192.168.2.40 nativecallid=00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 tags= ondemand=false side=both live=true hostname=sl4-14 
+2025-03-20 15:51:44,703  INFO sip:495 - BYE: sender:192.168.2.40 rcvr:192.168.22.237 callid:4125a6ed1fa081793fc2560119d38236@192.168.2.40 from:6693 to:6692 fromDomain:192.168.2.40 toDomain:192.168.22.237 fromName:Test phone2 CISCO 7940 toName:
+2025-03-20 15:51:44,705  INFO rtpsession:93 - [SANM] SANM Session stop, numRtpPkts:1892 dupl:1 seqDelta:1 rtpNumMissingPkts:0 rtpNumSeqGaps:0 lastUpdated:1742485904
+2025-03-20 15:51:44,705  INFO batchProcessing:267 - [SANL] Th0 processing 19700101_000749_SANL localside:both audiokeepdirection:both
+2025-03-20 15:51:44,707 ERROR batchProcessing:422 - [SANL] Th0 unsupported RTP payload type:18(G729)
+2025-03-20 15:51:44,714  INFO port:329 - [SANM] #SANM stop
+2025-03-20 15:51:44,714  INFO tapelist:437 - date=2025-03-20_15-51-44 duration=23 direction=out localside=both audiokeepdirection=both capturePort=SANM localParty=6693 remoteParty=6692 localEntryPoint= localIp=192.168.2.40 remoteIp=192.168.22.237 filename=1970/01/01/00/19700101_000749_SANM.wav nativeCallId=4125a6ed1fa081793fc2560119d38236@192.168.2.40 ondemand=false 
+2025-03-20 15:51:44,715  INFO reporting:196 - [localhost:8080/orktrack] queuesize:4 enqueued: type=tape recid=19700101_000749_SANM stage=stop captureport=SANM timestamp=1742485881 filename=1970/01/01/00/19700101_000749_SANM.wav localparty=6693 localentrypoint= remoteparty=6692 direction=out duration=23 service=orkaudio-sl4-14 localip=192.168.2.40 remoteip=192.168.22.237 nativecallid=4125a6ed1fa081793fc2560119d38236@192.168.2.40 tags= ondemand=false side=both live=true hostname=sl4-14 
+2025-03-20 15:51:44,719  INFO sip:495 - BYE: sender:192.168.2.40 rcvr:192.168.22.237 callid:4125a6ed1fa081793fc2560119d38236@192.168.2.40 from:6693 to:6692 fromDomain:192.168.2.40 toDomain:192.168.22.237 fromName:Test phone2 CISCO 7940 toName:
+2025-03-20 15:51:44,720  INFO batchProcessing:267 - [SANM] Th1 processing 19700101_000749_SANM localside:both audiokeepdirection:both
+2025-03-20 15:51:44,721 ERROR batchProcessing:422 - [SANM] Th1 unsupported RTP payload type:18(G729)
+2025-03-20 15:51:44,728  INFO batchProcessing:600 - [SANM] Th1 stop: num samples: s1:0 s2:0 out:0 queueSize:0
+2025-03-20 15:51:44,729  INFO batchProcessing:600 - [SANL] Th0 stop: num samples: s1:0 s2:0 out:0 queueSize:0
+2025-03-20 15:51:44,729 ERROR batchProcessing:618 - [SANL] Th0 Error setting permissions of /var/log/orkaudio/audio/1970/01/01/00//19700101_000749_SANL.wav to 644: No such file or directory
+2025-03-20 15:51:44,729 ERROR batchProcessing:635 - [SANL] Th0 Error setting ownership and group of /var/log/orkaudio/audio/1970/01/01/00//19700101_000749_SANL.wav to tomcat:tomcat: No such file or directory
+2025-03-20 15:51:44,730 ERROR batchProcessing:618 - [SANM] Th1 Error setting permissions of /var/log/orkaudio/audio/1970/01/01/00//19700101_000749_SANM.wav to 644: No such file or directory
+2025-03-20 15:51:44,730 ERROR batchProcessing:635 - [SANM] Th1 Error setting ownership and group of /var/log/orkaudio/audio/1970/01/01/00//19700101_000749_SANM.wav to tomcat:tomcat: No such file or directory
+2025-03-20 15:51:50,254  INFO pcapstats:1909 - eth0: handle:11b448 received:926 received10s:110 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:50,254  INFO pcapstats:1909 - eth1: handle:12bee8 received:8155 received10s:1518 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:51:50,254  INFO pcapstats:834 - numPackets:1800 maxPPS:363 minPPS:9
+2025-03-20 15:52:00,454  INFO pcapstats:1909 - eth0: handle:11b448 received:1042 received10s:116 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:00,454  INFO pcapstats:1909 - eth1: handle:12bee8 received:8166 received10s:11 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:00,454  INFO pcapstats:834 - numPackets:128 maxPPS:40 minPPS:1
+2025-03-20 15:52:10,144  INFO pcapstats:1909 - eth0: handle:11b448 received:1108 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:10,144  INFO pcapstats:1909 - eth1: handle:12bee8 received:8169 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:10,144  INFO pcapstats:834 - numPackets:69 maxPPS:29 minPPS:1
+2025-03-20 15:52:20,344  INFO pcapstats:1909 - eth0: handle:11b448 received:1178 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:20,344  INFO pcapstats:1909 - eth1: handle:12bee8 received:8170 received10s:1 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:20,344  INFO pcapstats:834 - numPackets:71 maxPPS:26 minPPS:1
+2025-03-20 15:52:30,034  INFO pcapstats:1909 - eth0: handle:11b448 received:1220 received10s:42 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:30,034  INFO pcapstats:1909 - eth1: handle:12bee8 received:8172 received10s:2 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:30,034  INFO pcapstats:834 - numPackets:35 maxPPS:10 minPPS:1
+2025-03-20 15:52:30,818 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 15:52:30,818  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:52:40,234  INFO pcapstats:1909 - eth0: handle:11b448 received:1325 received10s:105 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:40,234  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:2 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:40,234  INFO pcapstats:834 - numPackets:115 maxPPS:37 minPPS:1
+2025-03-20 15:52:50,944  INFO pcapstats:1909 - eth0: handle:11b448 received:1408 received10s:83 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:50,944  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:52:50,944  INFO pcapstats:834 - numPackets:84 maxPPS:29 minPPS:1
+2025-03-20 15:53:00,124  INFO pcapstats:1909 - eth0: handle:11b448 received:1479 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:00,124  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:00,124  INFO pcapstats:834 - numPackets:71 maxPPS:21 minPPS:1
+2025-03-20 15:53:10,324  INFO pcapstats:1909 - eth0: handle:11b448 received:1546 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:10,324  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:10,324  INFO pcapstats:834 - numPackets:65 maxPPS:26 minPPS:1
+2025-03-20 15:53:20,014  INFO pcapstats:1909 - eth0: handle:11b448 received:1614 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:20,014  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:20,014  INFO pcapstats:834 - numPackets:67 maxPPS:30 minPPS:2
+2025-03-20 15:53:30,214  INFO pcapstats:1909 - eth0: handle:11b448 received:1680 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:30,214  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:30,214  INFO pcapstats:834 - numPackets:69 maxPPS:25 minPPS:1
+2025-03-20 15:53:40,414  INFO pcapstats:1909 - eth0: handle:11b448 received:1745 received10s:65 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:40,414  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:40,414  INFO pcapstats:834 - numPackets:49 maxPPS:20 minPPS:1
+2025-03-20 15:53:45,870 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 15:53:45,871  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:53:50,104  INFO pcapstats:1909 - eth0: handle:11b448 received:1785 received10s:40 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:50,104  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:53:50,104  INFO pcapstats:834 - numPackets:55 maxPPS:34 minPPS:1
+2025-03-20 15:54:00,304  INFO pcapstats:1909 - eth0: handle:11b448 received:1863 received10s:78 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:00,304  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:00,304  INFO pcapstats:834 - numPackets:79 maxPPS:36 minPPS:1
+2025-03-20 15:54:10,504  INFO pcapstats:1909 - eth0: handle:11b448 received:1944 received10s:81 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:10,504  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:10,504  INFO pcapstats:834 - numPackets:81 maxPPS:25 minPPS:3
+2025-03-20 15:54:20,194  INFO pcapstats:1909 - eth0: handle:11b448 received:2013 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:20,194  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:20,194  INFO pcapstats:834 - numPackets:68 maxPPS:26 minPPS:1
+2025-03-20 15:54:30,904  INFO pcapstats:1909 - eth0: handle:11b448 received:2081 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:30,904  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:30,904  INFO pcapstats:834 - numPackets:68 maxPPS:26 minPPS:1
+2025-03-20 15:54:40,084  INFO pcapstats:1909 - eth0: handle:11b448 received:2148 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:40,084  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:40,084  INFO pcapstats:834 - numPackets:67 maxPPS:21 minPPS:1
+2025-03-20 15:54:50,284  INFO pcapstats:1909 - eth0: handle:11b448 received:2205 received10s:57 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:50,284  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:54:50,284  INFO pcapstats:834 - numPackets:40 maxPPS:14 minPPS:1
+2025-03-20 15:55:00,933 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 15:55:00,933  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:55:00,994  INFO pcapstats:1909 - eth0: handle:11b448 received:2255 received10s:50 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:00,994  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:00,994  INFO pcapstats:834 - numPackets:56 maxPPS:32 minPPS:1
+2025-03-20 15:55:10,174  INFO pcapstats:1909 - eth0: handle:11b448 received:2332 received10s:77 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:10,174  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:10,174  INFO pcapstats:834 - numPackets:87 maxPPS:42 minPPS:1
+2025-03-20 15:55:20,374  INFO pcapstats:1909 - eth0: handle:11b448 received:2402 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:20,374  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:20,374  INFO pcapstats:834 - numPackets:72 maxPPS:21 minPPS:2
+2025-03-20 15:55:30,064  INFO pcapstats:1909 - eth0: handle:11b448 received:2482 received10s:80 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:30,064  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:30,064  INFO pcapstats:834 - numPackets:77 maxPPS:30 minPPS:1
+2025-03-20 15:55:40,264  INFO pcapstats:1909 - eth0: handle:11b448 received:2556 received10s:74 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:40,264  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:40,264  INFO pcapstats:834 - numPackets:76 maxPPS:22 minPPS:2
+2025-03-20 15:55:50,464  INFO pcapstats:1909 - eth0: handle:11b448 received:2626 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:50,464  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:55:50,464  INFO pcapstats:834 - numPackets:69 maxPPS:32 minPPS:1
+2025-03-20 15:56:00,154  INFO pcapstats:1909 - eth0: handle:11b448 received:2686 received10s:60 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:00,154  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:00,154  INFO pcapstats:834 - numPackets:44 maxPPS:21 minPPS:1
+2025-03-20 15:56:10,354  INFO pcapstats:1909 - eth0: handle:11b448 received:2723 received10s:37 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:10,354  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:10,354  INFO pcapstats:834 - numPackets:51 maxPPS:28 minPPS:1
+2025-03-20 15:56:15,974 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 15:56:15,975  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:56:20,044  INFO pcapstats:1909 - eth0: handle:11b448 received:2803 received10s:80 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:20,044  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:20,044  INFO pcapstats:834 - numPackets:81 maxPPS:28 minPPS:1
+2025-03-20 15:56:30,244  INFO pcapstats:1909 - eth0: handle:11b448 received:2870 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:30,244  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:30,244  INFO pcapstats:834 - numPackets:70 maxPPS:33 minPPS:1
+2025-03-20 15:56:40,444  INFO pcapstats:1909 - eth0: handle:11b448 received:2941 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:40,444  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:40,444  INFO pcapstats:834 - numPackets:70 maxPPS:25 minPPS:1
+2025-03-20 15:56:50,134  INFO pcapstats:1909 - eth0: handle:11b448 received:3006 received10s:65 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:50,134  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:56:50,134  INFO pcapstats:834 - numPackets:66 maxPPS:22 minPPS:1
+2025-03-20 15:57:00,334  INFO pcapstats:1909 - eth0: handle:11b448 received:3095 received10s:89 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:00,334  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:00,334  INFO pcapstats:834 - numPackets:84 maxPPS:37 minPPS:2
+2025-03-20 15:57:10,024  INFO pcapstats:1909 - eth0: handle:11b448 received:3205 received10s:110 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:10,024  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:10,024  INFO pcapstats:834 - numPackets:98 maxPPS:22 minPPS:2
+2025-03-20 15:57:16,016 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 15:57:16,016  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:57:20,224  INFO pcapstats:1909 - eth0: handle:11b448 received:3272 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:20,225  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:20,225  INFO pcapstats:834 - numPackets:83 maxPPS:37 minPPS:1
+2025-03-20 15:57:30,934  INFO pcapstats:1909 - eth0: handle:11b448 received:3353 received10s:81 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:30,934  INFO pcapstats:1909 - eth1: handle:12bee8 received:8174 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:30,934  INFO pcapstats:834 - numPackets:81 maxPPS:37 minPPS:2
+2025-03-20 15:57:40,114  INFO pcapstats:1909 - eth0: handle:11b448 received:3492 received10s:139 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:40,114  INFO pcapstats:1909 - eth1: handle:12bee8 received:8186 received10s:12 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:40,114  INFO pcapstats:834 - numPackets:144 maxPPS:39 minPPS:1
+2025-03-20 15:57:50,314  INFO pcapstats:1909 - eth0: handle:11b448 received:3564 received10s:72 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:50,314  INFO pcapstats:1909 - eth1: handle:12bee8 received:8191 received10s:5 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:57:50,314  INFO pcapstats:834 - numPackets:85 maxPPS:28 minPPS:2
+2025-03-20 15:58:00,004  INFO pcapstats:1909 - eth0: handle:11b448 received:3638 received10s:74 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:00,004  INFO pcapstats:1909 - eth1: handle:12bee8 received:8191 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:00,004  INFO pcapstats:834 - numPackets:67 maxPPS:25 minPPS:1
+2025-03-20 15:58:10,204  INFO pcapstats:1909 - eth0: handle:11b448 received:3702 received10s:64 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:10,204  INFO pcapstats:1909 - eth1: handle:12bee8 received:8194 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:10,204  INFO pcapstats:834 - numPackets:74 maxPPS:25 minPPS:1
+2025-03-20 15:58:20,404  INFO pcapstats:1909 - eth0: handle:11b448 received:3776 received10s:74 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:20,404  INFO pcapstats:1909 - eth1: handle:12bee8 received:8199 received10s:5 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:20,404  INFO pcapstats:834 - numPackets:78 maxPPS:34 minPPS:1
+2025-03-20 15:58:30,094  INFO pcapstats:1909 - eth0: handle:11b448 received:3850 received10s:74 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:30,094  INFO pcapstats:1909 - eth1: handle:12bee8 received:8209 received10s:10 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:30,094  INFO pcapstats:834 - numPackets:76 maxPPS:39 minPPS:1
+2025-03-20 15:58:31,068 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 15:58:31,069  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:58:40,294  INFO pcapstats:1909 - eth0: handle:11b448 received:3928 received10s:78 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:40,294  INFO pcapstats:1909 - eth1: handle:12bee8 received:8212 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:40,294  INFO pcapstats:834 - numPackets:89 maxPPS:35 minPPS:1
+2025-03-20 15:58:51,004  INFO pcapstats:1909 - eth0: handle:11b448 received:3998 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:51,004  INFO pcapstats:1909 - eth1: handle:12bee8 received:8214 received10s:2 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:58:51,004  INFO pcapstats:834 - numPackets:70 maxPPS:27 minPPS:1
+2025-03-20 15:59:01,204  INFO pcapstats:1909 - eth0: handle:11b448 received:4105 received10s:107 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:01,204  INFO pcapstats:1909 - eth1: handle:12bee8 received:8215 received10s:1 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:01,204  INFO pcapstats:834 - numPackets:105 maxPPS:27 minPPS:2
+2025-03-20 15:59:11,404  INFO pcapstats:1909 - eth0: handle:11b448 received:4256 received10s:151 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:11,404  INFO pcapstats:1909 - eth1: handle:12bee8 received:8229 received10s:14 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:11,404  INFO pcapstats:834 - numPackets:171 maxPPS:43 minPPS:2
+2025-03-20 15:59:21,094  INFO pcapstats:1909 - eth0: handle:11b448 received:4374 received10s:118 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:21,094  INFO pcapstats:1909 - eth1: handle:12bee8 received:8234 received10s:5 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:21,094  INFO pcapstats:834 - numPackets:122 maxPPS:41 minPPS:5
+2025-03-20 15:59:31,294  INFO pcapstats:1909 - eth0: handle:11b448 received:4445 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:31,294  INFO pcapstats:1909 - eth1: handle:12bee8 received:8234 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:31,294  INFO pcapstats:834 - numPackets:71 maxPPS:31 minPPS:1
+2025-03-20 15:59:41,494  INFO pcapstats:1909 - eth0: handle:11b448 received:4528 received10s:83 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:41,494  INFO pcapstats:1909 - eth1: handle:12bee8 received:8237 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:41,494  INFO pcapstats:834 - numPackets:87 maxPPS:32 minPPS:2
+2025-03-20 15:59:46,134 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 15:59:46,134  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:59:51,184  INFO pcapstats:1909 - eth0: handle:11b448 received:4569 received10s:41 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:51,184  INFO pcapstats:1909 - eth1: handle:12bee8 received:8243 received10s:6 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 15:59:51,184  INFO pcapstats:834 - numPackets:33 maxPPS:10 minPPS:1
+2025-03-20 16:00:01,384  INFO pcapstats:1909 - eth0: handle:11b448 received:4663 received10s:94 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:01,384  INFO pcapstats:1909 - eth1: handle:12bee8 received:8252 received10s:9 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:01,384  INFO pcapstats:834 - numPackets:117 maxPPS:65 minPPS:1
+2025-03-20 16:00:11,074  INFO pcapstats:1909 - eth0: handle:11b448 received:4736 received10s:73 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:11,074  INFO pcapstats:1909 - eth1: handle:12bee8 received:8255 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:11,074  INFO pcapstats:834 - numPackets:76 maxPPS:36 minPPS:1
+2025-03-20 16:00:21,274  INFO pcapstats:1909 - eth0: handle:11b448 received:4813 received10s:77 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:21,274  INFO pcapstats:1909 - eth1: handle:12bee8 received:8257 received10s:2 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:21,274  INFO pcapstats:834 - numPackets:79 maxPPS:45 minPPS:1
+2025-03-20 16:00:31,474  INFO pcapstats:1909 - eth0: handle:11b448 received:4880 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:31,474  INFO pcapstats:1909 - eth1: handle:12bee8 received:8258 received10s:1 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:31,474  INFO pcapstats:834 - numPackets:68 maxPPS:31 minPPS:1
+2025-03-20 16:00:41,164  INFO pcapstats:1909 - eth0: handle:11b448 received:4986 received10s:106 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:41,164  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:2 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:41,164  INFO pcapstats:834 - numPackets:108 maxPPS:36 minPPS:1
+2025-03-20 16:00:51,874  INFO pcapstats:1909 - eth0: handle:11b448 received:5088 received10s:102 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:51,874  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:00:51,874  INFO pcapstats:834 - numPackets:95 maxPPS:26 minPPS:2
+2025-03-20 16:01:01,054  INFO pcapstats:1909 - eth0: handle:11b448 received:5122 received10s:34 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:01,054  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:01,054  INFO pcapstats:834 - numPackets:31 maxPPS:8 minPPS:1
+2025-03-20 16:01:01,189 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:01:01,189  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:01:11,254  INFO pcapstats:1909 - eth0: handle:11b448 received:5183 received10s:61 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:11,254  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:11,254  INFO pcapstats:834 - numPackets:71 maxPPS:29 minPPS:1
+2025-03-20 16:01:21,964  INFO pcapstats:1909 - eth0: handle:11b448 received:5256 received10s:73 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:21,964  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:21,964  INFO pcapstats:834 - numPackets:73 maxPPS:32 minPPS:1
+2025-03-20 16:01:31,144  INFO pcapstats:1909 - eth0: handle:11b448 received:5321 received10s:65 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:31,144  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:31,144  INFO pcapstats:834 - numPackets:65 maxPPS:27 minPPS:1
+2025-03-20 16:01:41,344  INFO pcapstats:1909 - eth0: handle:11b448 received:5393 received10s:72 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:41,344  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:41,344  INFO pcapstats:834 - numPackets:72 maxPPS:31 minPPS:1
+2025-03-20 16:01:51,034  INFO pcapstats:1909 - eth0: handle:11b448 received:5460 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:51,034  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:01:51,034  INFO pcapstats:834 - numPackets:67 maxPPS:24 minPPS:2
+2025-03-20 16:02:01,234  INFO pcapstats:1909 - eth0: handle:11b448 received:5541 received10s:81 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:01,234  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:01,234  INFO pcapstats:834 - numPackets:81 maxPPS:24 minPPS:1
+2025-03-20 16:02:11,434  INFO pcapstats:1909 - eth0: handle:11b448 received:5590 received10s:49 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:11,434  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:11,434  INFO pcapstats:834 - numPackets:37 maxPPS:11 minPPS:1
+2025-03-20 16:02:16,258 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:02:16,258  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:02:21,124  INFO pcapstats:1909 - eth0: handle:11b448 received:5654 received10s:64 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:21,124  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:21,124  INFO pcapstats:834 - numPackets:74 maxPPS:36 minPPS:1
+2025-03-20 16:02:31,324  INFO pcapstats:1909 - eth0: handle:11b448 received:5724 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:31,324  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:31,324  INFO pcapstats:834 - numPackets:72 maxPPS:29 minPPS:1
+2025-03-20 16:02:41,014  INFO pcapstats:1909 - eth0: handle:11b448 received:5795 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:41,014  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:41,014  INFO pcapstats:834 - numPackets:71 maxPPS:29 minPPS:1
+2025-03-20 16:02:51,214  INFO pcapstats:1909 - eth0: handle:11b448 received:5863 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:51,214  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:02:51,214  INFO pcapstats:834 - numPackets:67 maxPPS:32 minPPS:1
+2025-03-20 16:03:01,924  INFO pcapstats:1909 - eth0: handle:11b448 received:5934 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:01,924  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:01,924  INFO pcapstats:834 - numPackets:71 maxPPS:23 minPPS:2
+2025-03-20 16:03:11,104  INFO pcapstats:1909 - eth0: handle:11b448 received:6010 received10s:76 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:11,104  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:11,104  INFO pcapstats:834 - numPackets:77 maxPPS:22 minPPS:1
+2025-03-20 16:03:21,304  INFO pcapstats:1909 - eth0: handle:11b448 received:6074 received10s:64 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:21,304  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:21,304  INFO pcapstats:834 - numPackets:45 maxPPS:18 minPPS:1
+2025-03-20 16:03:31,310 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:03:31,311  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:03:31,504  INFO pcapstats:1909 - eth0: handle:11b448 received:6115 received10s:41 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:31,504  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:31,504  INFO pcapstats:834 - numPackets:57 maxPPS:30 minPPS:1
+2025-03-20 16:03:41,194  INFO pcapstats:1909 - eth0: handle:11b448 received:6186 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:41,194  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:41,194  INFO pcapstats:834 - numPackets:74 maxPPS:26 minPPS:1
+2025-03-20 16:03:51,904  INFO pcapstats:1909 - eth0: handle:11b448 received:6256 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:51,904  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:03:51,904  INFO pcapstats:834 - numPackets:68 maxPPS:32 minPPS:1
+2025-03-20 16:04:01,084  INFO pcapstats:1909 - eth0: handle:11b448 received:6322 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:01,084  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:01,084  INFO pcapstats:834 - numPackets:68 maxPPS:24 minPPS:1
+2025-03-20 16:04:11,284  INFO pcapstats:1909 - eth0: handle:11b448 received:6390 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:11,284  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:11,284  INFO pcapstats:834 - numPackets:68 maxPPS:24 minPPS:2
+2025-03-20 16:04:22,504  INFO pcapstats:1909 - eth0: handle:11b448 received:6480 received10s:90 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:22,504  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:22,504  INFO pcapstats:834 - numPackets:89 maxPPS:32 minPPS:2
+2025-03-20 16:04:32,704  INFO pcapstats:1909 - eth0: handle:11b448 received:6552 received10s:72 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:32,704  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:32,704  INFO pcapstats:834 - numPackets:72 maxPPS:26 minPPS:1
+2025-03-20 16:04:42,394  INFO pcapstats:1909 - eth0: handle:11b448 received:6599 received10s:47 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:42,394  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:42,394  INFO pcapstats:834 - numPackets:37 maxPPS:13 minPPS:2
+2025-03-20 16:04:46,359 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:04:46,360  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:04:52,084  INFO pcapstats:1909 - eth0: handle:11b448 received:6651 received10s:52 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:52,084  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:04:52,084  INFO pcapstats:834 - numPackets:58 maxPPS:33 minPPS:1
+2025-03-20 16:05:02,284  INFO pcapstats:1909 - eth0: handle:11b448 received:6718 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:02,284  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:02,284  INFO pcapstats:834 - numPackets:72 maxPPS:32 minPPS:1
+2025-03-20 16:05:12,484  INFO pcapstats:1909 - eth0: handle:11b448 received:6796 received10s:78 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:12,484  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:12,484  INFO pcapstats:834 - numPackets:78 maxPPS:23 minPPS:1
+2025-03-20 16:05:22,684  INFO pcapstats:1909 - eth0: handle:11b448 received:6866 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:22,684  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:22,684  INFO pcapstats:834 - numPackets:69 maxPPS:32 minPPS:1
+2025-03-20 16:05:32,374  INFO pcapstats:1909 - eth0: handle:11b448 received:6955 received10s:89 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:32,374  INFO pcapstats:1909 - eth1: handle:12bee8 received:8260 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:32,374  INFO pcapstats:834 - numPackets:90 maxPPS:37 minPPS:1
+2025-03-20 16:05:42,114  INFO pcapstats:1909 - eth0: handle:11b448 received:7087 received10s:132 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:42,114  INFO pcapstats:1909 - eth1: handle:12bee8 received:8275 received10s:15 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:42,114  INFO pcapstats:834 - numPackets:147 maxPPS:54 minPPS:1
+2025-03-20 16:05:52,264  INFO pcapstats:1909 - eth0: handle:11b448 received:7158 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:52,264  INFO pcapstats:1909 - eth1: handle:12bee8 received:8278 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:05:52,264  INFO pcapstats:834 - numPackets:57 maxPPS:21 minPPS:1
+2025-03-20 16:06:01,430 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:06:01,430  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:06:02,464  INFO pcapstats:1909 - eth0: handle:11b448 received:7194 received10s:36 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:02,464  INFO pcapstats:1909 - eth1: handle:12bee8 received:8278 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:02,464  INFO pcapstats:834 - numPackets:53 maxPPS:28 minPPS:1
+2025-03-20 16:06:12,664  INFO pcapstats:1909 - eth0: handle:11b448 received:7262 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:12,664  INFO pcapstats:1909 - eth1: handle:12bee8 received:8281 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:12,664  INFO pcapstats:834 - numPackets:71 maxPPS:30 minPPS:1
+2025-03-20 16:06:22,354  INFO pcapstats:1909 - eth0: handle:11b448 received:7332 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:22,354  INFO pcapstats:1909 - eth1: handle:12bee8 received:8289 received10s:8 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:22,354  INFO pcapstats:834 - numPackets:76 maxPPS:35 minPPS:1
+2025-03-20 16:06:32,044  INFO pcapstats:1909 - eth0: handle:11b448 received:7442 received10s:110 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:32,044  INFO pcapstats:1909 - eth1: handle:12bee8 received:8294 received10s:5 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:32,044  INFO pcapstats:834 - numPackets:115 maxPPS:39 minPPS:1
+2025-03-20 16:06:42,244  INFO pcapstats:1909 - eth0: handle:11b448 received:7531 received10s:89 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:42,244  INFO pcapstats:1909 - eth1: handle:12bee8 received:8297 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:42,244  INFO pcapstats:834 - numPackets:94 maxPPS:29 minPPS:2
+2025-03-20 16:06:52,444  INFO pcapstats:1909 - eth0: handle:11b448 received:7603 received10s:72 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:52,444  INFO pcapstats:1909 - eth1: handle:12bee8 received:8300 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:06:52,444  INFO pcapstats:834 - numPackets:75 maxPPS:27 minPPS:2
+2025-03-20 16:07:02,134  INFO pcapstats:1909 - eth0: handle:11b448 received:7703 received10s:100 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:02,134  INFO pcapstats:1909 - eth1: handle:12bee8 received:8300 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:02,134  INFO pcapstats:834 - numPackets:82 maxPPS:32 minPPS:2
+2025-03-20 16:07:12,334  INFO pcapstats:1909 - eth0: handle:11b448 received:7820 received10s:117 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:12,334  INFO pcapstats:1909 - eth1: handle:12bee8 received:8315 received10s:15 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:12,334  INFO pcapstats:834 - numPackets:143 maxPPS:42 minPPS:5
+2025-03-20 16:07:16,470 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:07:16,470  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:07:22,534  INFO pcapstats:1909 - eth0: handle:11b448 received:7896 received10s:76 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:22,534  INFO pcapstats:1909 - eth1: handle:12bee8 received:8318 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:22,534  INFO pcapstats:834 - numPackets:86 maxPPS:36 minPPS:2
+2025-03-20 16:07:32,224  INFO pcapstats:1909 - eth0: handle:11b448 received:7968 received10s:72 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:32,224  INFO pcapstats:1909 - eth1: handle:12bee8 received:8319 received10s:1 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:32,224  INFO pcapstats:834 - numPackets:72 maxPPS:27 minPPS:1
+2025-03-20 16:07:42,424  INFO pcapstats:1909 - eth0: handle:11b448 received:8037 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:42,424  INFO pcapstats:1909 - eth1: handle:12bee8 received:8321 received10s:2 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:42,424  INFO pcapstats:834 - numPackets:72 maxPPS:26 minPPS:1
+2025-03-20 16:07:52,114  INFO pcapstats:1909 - eth0: handle:11b448 received:8149 received10s:112 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:52,114  INFO pcapstats:1909 - eth1: handle:12bee8 received:8331 received10s:10 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:07:52,114  INFO pcapstats:834 - numPackets:116 maxPPS:34 minPPS:1
+2025-03-20 16:08:02,314  INFO pcapstats:1909 - eth0: handle:11b448 received:8221 received10s:72 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:02,314  INFO pcapstats:1909 - eth1: handle:12bee8 received:8337 received10s:6 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:02,314  INFO pcapstats:834 - numPackets:83 maxPPS:28 minPPS:2
+2025-03-20 16:08:12,004  INFO pcapstats:1909 - eth0: handle:11b448 received:8285 received10s:64 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:12,004  INFO pcapstats:1909 - eth1: handle:12bee8 received:8339 received10s:2 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:12,004  INFO pcapstats:834 - numPackets:47 maxPPS:11 minPPS:2
+2025-03-20 16:08:22,714  INFO pcapstats:1909 - eth0: handle:11b448 received:8335 received10s:50 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:22,714  INFO pcapstats:1909 - eth1: handle:12bee8 received:8342 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:22,714  INFO pcapstats:834 - numPackets:63 maxPPS:34 minPPS:1
+2025-03-20 16:08:31,529 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:08:31,529  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:08:32,404  INFO pcapstats:1909 - eth0: handle:11b448 received:8407 received10s:72 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:32,404  INFO pcapstats:1909 - eth1: handle:12bee8 received:8342 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:32,404  INFO pcapstats:834 - numPackets:70 maxPPS:38 minPPS:1
+2025-03-20 16:08:42,604  INFO pcapstats:1909 - eth0: handle:11b448 received:8510 received10s:103 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:42,604  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:2 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:42,604  INFO pcapstats:834 - numPackets:115 maxPPS:49 minPPS:1
+2025-03-20 16:08:52,294  INFO pcapstats:1909 - eth0: handle:11b448 received:8585 received10s:75 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:52,294  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:08:52,294  INFO pcapstats:834 - numPackets:77 maxPPS:24 minPPS:1
+2025-03-20 16:09:02,494  INFO pcapstats:1909 - eth0: handle:11b448 received:8710 received10s:125 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:02,494  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:02,494  INFO pcapstats:834 - numPackets:124 maxPPS:37 minPPS:1
+2025-03-20 16:09:12,184  INFO pcapstats:1909 - eth0: handle:11b448 received:8823 received10s:113 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:12,184  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:12,184  INFO pcapstats:834 - numPackets:109 maxPPS:34 minPPS:2
+2025-03-20 16:09:22,384  INFO pcapstats:1909 - eth0: handle:11b448 received:8930 received10s:107 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:22,384  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:22,384  INFO pcapstats:834 - numPackets:112 maxPPS:31 minPPS:1
+2025-03-20 16:09:32,074  INFO pcapstats:1909 - eth0: handle:11b448 received:8967 received10s:37 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:32,074  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:32,074  INFO pcapstats:834 - numPackets:24 maxPPS:6 minPPS:1
+2025-03-20 16:09:42,274  INFO pcapstats:1909 - eth0: handle:11b448 received:9030 received10s:63 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:42,274  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:42,274  INFO pcapstats:834 - numPackets:76 maxPPS:28 minPPS:2
+2025-03-20 16:09:46,574 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:09:46,574  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:09:52,474  INFO pcapstats:1909 - eth0: handle:11b448 received:9100 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:52,474  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:09:52,474  INFO pcapstats:834 - numPackets:70 maxPPS:31 minPPS:3
+2025-03-20 16:10:02,164  INFO pcapstats:1909 - eth0: handle:11b448 received:9166 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:02,164  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:02,164  INFO pcapstats:834 - numPackets:65 maxPPS:34 minPPS:1
+2025-03-20 16:10:12,364  INFO pcapstats:1909 - eth0: handle:11b448 received:9247 received10s:81 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:12,364  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:12,364  INFO pcapstats:834 - numPackets:81 maxPPS:24 minPPS:2
+2025-03-20 16:10:22,054  INFO pcapstats:1909 - eth0: handle:11b448 received:9314 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:22,054  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:22,054  INFO pcapstats:834 - numPackets:68 maxPPS:18 minPPS:1
+2025-03-20 16:10:32,254  INFO pcapstats:1909 - eth0: handle:11b448 received:9387 received10s:73 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:32,254  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:32,254  INFO pcapstats:834 - numPackets:71 maxPPS:30 minPPS:1
+2025-03-20 16:10:42,454  INFO pcapstats:1909 - eth0: handle:11b448 received:9458 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:42,454  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:42,454  INFO pcapstats:834 - numPackets:55 maxPPS:17 minPPS:1
+2025-03-20 16:10:52,144  INFO pcapstats:1909 - eth0: handle:11b448 received:9499 received10s:41 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:52,144  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:10:52,144  INFO pcapstats:834 - numPackets:59 maxPPS:31 minPPS:1
+2025-03-20 16:11:01,638 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:11:01,639  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:11:02,344  INFO pcapstats:1909 - eth0: handle:11b448 received:9569 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:02,344  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:02,344  INFO pcapstats:834 - numPackets:69 maxPPS:26 minPPS:1
+2025-03-20 16:11:12,034  INFO pcapstats:1909 - eth0: handle:11b448 received:9638 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:12,034  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:12,034  INFO pcapstats:834 - numPackets:67 maxPPS:30 minPPS:1
+2025-03-20 16:11:22,234  INFO pcapstats:1909 - eth0: handle:11b448 received:9720 received10s:82 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:22,234  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:22,234  INFO pcapstats:834 - numPackets:82 maxPPS:35 minPPS:1
+2025-03-20 16:11:32,434  INFO pcapstats:1909 - eth0: handle:11b448 received:9787 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:32,434  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:32,434  INFO pcapstats:834 - numPackets:69 maxPPS:31 minPPS:1
+2025-03-20 16:11:42,634  INFO pcapstats:1909 - eth0: handle:11b448 received:9855 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:42,634  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:42,634  INFO pcapstats:834 - numPackets:68 maxPPS:33 minPPS:1
+2025-03-20 16:11:52,324  INFO pcapstats:1909 - eth0: handle:11b448 received:9926 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:52,324  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:11:52,324  INFO pcapstats:834 - numPackets:56 maxPPS:24 minPPS:2
+2025-03-20 16:12:02,524  INFO pcapstats:1909 - eth0: handle:11b448 received:9961 received10s:35 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:02,524  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:02,524  INFO pcapstats:834 - numPackets:42 maxPPS:19 minPPS:1
+2025-03-20 16:12:12,214  INFO pcapstats:1909 - eth0: handle:11b448 received:10019 received10s:58 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:12,214  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:12,214  INFO pcapstats:834 - numPackets:67 maxPPS:23 minPPS:1
+2025-03-20 16:12:16,679 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:12:16,680  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:12:22,414  INFO pcapstats:1909 - eth0: handle:11b448 received:10090 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:22,414  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:22,414  INFO pcapstats:834 - numPackets:71 maxPPS:29 minPPS:1
+2025-03-20 16:12:32,104  INFO pcapstats:1909 - eth0: handle:11b448 received:10167 received10s:77 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:32,104  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:32,104  INFO pcapstats:834 - numPackets:75 maxPPS:23 minPPS:1
+2025-03-20 16:12:42,304  INFO pcapstats:1909 - eth0: handle:11b448 received:10238 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:42,304  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:42,304  INFO pcapstats:834 - numPackets:71 maxPPS:29 minPPS:1
+2025-03-20 16:12:52,504  INFO pcapstats:1909 - eth0: handle:11b448 received:10308 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:52,504  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:12:52,504  INFO pcapstats:834 - numPackets:72 maxPPS:22 minPPS:1
+2025-03-20 16:13:02,194  INFO pcapstats:1909 - eth0: handle:11b448 received:10373 received10s:65 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:02,194  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:02,194  INFO pcapstats:834 - numPackets:54 maxPPS:21 minPPS:1
+2025-03-20 16:13:12,394  INFO pcapstats:1909 - eth0: handle:11b448 received:10414 received10s:41 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:12,394  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:12,394  INFO pcapstats:834 - numPackets:42 maxPPS:16 minPPS:1
+2025-03-20 16:13:22,594  INFO pcapstats:1909 - eth0: handle:11b448 received:10470 received10s:56 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:22,594  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:22,594  INFO pcapstats:834 - numPackets:66 maxPPS:28 minPPS:1
+2025-03-20 16:13:31,736 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:13:31,736  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:13:32,284  INFO pcapstats:1909 - eth0: handle:11b448 received:10542 received10s:72 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:32,284  INFO pcapstats:1909 - eth1: handle:12bee8 received:8344 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:32,284  INFO pcapstats:834 - numPackets:72 maxPPS:27 minPPS:1
+2025-03-20 16:13:42,024  INFO pcapstats:1909 - eth0: handle:11b448 received:10689 received10s:147 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:42,024  INFO pcapstats:1909 - eth1: handle:12bee8 received:8358 received10s:14 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:42,024  INFO pcapstats:834 - numPackets:160 maxPPS:54 minPPS:1
+2025-03-20 16:13:52,174  INFO pcapstats:1909 - eth0: handle:11b448 received:10767 received10s:78 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:52,174  INFO pcapstats:1909 - eth1: handle:12bee8 received:8361 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:13:52,174  INFO pcapstats:834 - numPackets:82 maxPPS:35 minPPS:2
+2025-03-20 16:14:02,374  INFO pcapstats:1909 - eth0: handle:11b448 received:10836 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:02,374  INFO pcapstats:1909 - eth1: handle:12bee8 received:8361 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:02,374  INFO pcapstats:834 - numPackets:67 maxPPS:25 minPPS:1
+2025-03-20 16:14:12,064  INFO pcapstats:1909 - eth0: handle:11b448 received:10901 received10s:65 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:12,064  INFO pcapstats:1909 - eth1: handle:12bee8 received:8364 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:12,064  INFO pcapstats:834 - numPackets:58 maxPPS:22 minPPS:1
+2025-03-20 16:14:22,264  INFO pcapstats:1909 - eth0: handle:11b448 received:10942 received10s:41 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:22,264  INFO pcapstats:1909 - eth1: handle:12bee8 received:8373 received10s:9 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:22,264  INFO pcapstats:834 - numPackets:52 maxPPS:16 minPPS:1
+2025-03-20 16:14:32,464  INFO pcapstats:1909 - eth0: handle:11b448 received:11042 received10s:100 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:32,464  INFO pcapstats:1909 - eth1: handle:12bee8 received:8379 received10s:6 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:32,464  INFO pcapstats:834 - numPackets:115 maxPPS:53 minPPS:1
+2025-03-20 16:14:42,664  INFO pcapstats:1909 - eth0: handle:11b448 received:11116 received10s:74 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:42,664  INFO pcapstats:1909 - eth1: handle:12bee8 received:8382 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:42,664  INFO pcapstats:834 - numPackets:76 maxPPS:18 minPPS:1
+2025-03-20 16:14:46,794 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:14:46,794  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:14:52,354  INFO pcapstats:1909 - eth0: handle:11b448 received:11201 received10s:85 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:52,354  INFO pcapstats:1909 - eth1: handle:12bee8 received:8384 received10s:2 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:14:52,354  INFO pcapstats:834 - numPackets:89 maxPPS:35 minPPS:1
+2025-03-20 16:15:02,554  INFO pcapstats:1909 - eth0: handle:11b448 received:11268 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:02,554  INFO pcapstats:1909 - eth1: handle:12bee8 received:8385 received10s:1 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:02,554  INFO pcapstats:834 - numPackets:68 maxPPS:21 minPPS:2
+2025-03-20 16:15:12,244  INFO pcapstats:1909 - eth0: handle:11b448 received:11380 received10s:112 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:12,244  INFO pcapstats:1909 - eth1: handle:12bee8 received:8399 received10s:14 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:12,244  INFO pcapstats:834 - numPackets:126 maxPPS:43 minPPS:1
+2025-03-20 16:15:22,444  INFO pcapstats:1909 - eth0: handle:11b448 received:11452 received10s:72 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:22,444  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:3 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:22,444  INFO pcapstats:834 - numPackets:74 maxPPS:28 minPPS:1
+2025-03-20 16:15:32,134  INFO pcapstats:1909 - eth0: handle:11b448 received:11504 received10s:52 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:32,134  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:32,134  INFO pcapstats:834 - numPackets:53 maxPPS:14 minPPS:2
+2025-03-20 16:15:42,334  INFO pcapstats:1909 - eth0: handle:11b448 received:11565 received10s:61 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:42,334  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:42,334  INFO pcapstats:834 - numPackets:59 maxPPS:22 minPPS:1
+2025-03-20 16:15:52,534  INFO pcapstats:1909 - eth0: handle:11b448 received:11631 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:52,534  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:15:52,534  INFO pcapstats:834 - numPackets:68 maxPPS:27 minPPS:2
+2025-03-20 16:16:01,861 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:16:01,861  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:16:02,224  INFO pcapstats:1909 - eth0: handle:11b448 received:11705 received10s:74 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:02,224  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:02,224  INFO pcapstats:834 - numPackets:74 maxPPS:36 minPPS:1
+2025-03-20 16:16:12,424  INFO pcapstats:1909 - eth0: handle:11b448 received:11775 received10s:70 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:12,424  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:12,424  INFO pcapstats:834 - numPackets:69 maxPPS:25 minPPS:1
+2025-03-20 16:16:22,624  INFO pcapstats:1909 - eth0: handle:11b448 received:11837 received10s:62 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:22,624  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:22,624  INFO pcapstats:834 - numPackets:63 maxPPS:32 minPPS:2
+2025-03-20 16:16:32,314  INFO pcapstats:1909 - eth0: handle:11b448 received:11899 received10s:62 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:32,314  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:32,314  INFO pcapstats:834 - numPackets:62 maxPPS:22 minPPS:1
+2025-03-20 16:16:42,004  INFO pcapstats:1909 - eth0: handle:11b448 received:11934 received10s:35 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:42,004  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:42,004  INFO pcapstats:834 - numPackets:31 maxPPS:8 minPPS:1
+2025-03-20 16:16:52,204  INFO pcapstats:1909 - eth0: handle:11b448 received:11983 received10s:49 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:52,204  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:16:52,204  INFO pcapstats:834 - numPackets:53 maxPPS:23 minPPS:1
+2025-03-20 16:17:02,404  INFO pcapstats:1909 - eth0: handle:11b448 received:12096 received10s:113 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:02,404  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:02,404  INFO pcapstats:834 - numPackets:103 maxPPS:29 minPPS:2
+2025-03-20 16:17:12,094  INFO pcapstats:1909 - eth0: handle:11b448 received:12190 received10s:94 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:12,094  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:12,094  INFO pcapstats:834 - numPackets:100 maxPPS:28 minPPS:3
+2025-03-20 16:17:16,918 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:17:16,919  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:17:22,294  INFO pcapstats:1909 - eth0: handle:11b448 received:12262 received10s:72 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:22,294  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:22,294  INFO pcapstats:834 - numPackets:76 maxPPS:30 minPPS:1
+2025-03-20 16:17:32,494  INFO pcapstats:1909 - eth0: handle:11b448 received:12325 received10s:63 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:32,494  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:32,494  INFO pcapstats:834 - numPackets:62 maxPPS:31 minPPS:1
+2025-03-20 16:17:42,184  INFO pcapstats:1909 - eth0: handle:11b448 received:12383 received10s:58 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:42,184  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:42,184  INFO pcapstats:834 - numPackets:57 maxPPS:28 minPPS:1
+2025-03-20 16:17:52,384  INFO pcapstats:1909 - eth0: handle:11b448 received:12441 received10s:58 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:52,384  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:17:52,384  INFO pcapstats:834 - numPackets:40 maxPPS:21 minPPS:1
+2025-03-20 16:18:02,074  INFO pcapstats:1909 - eth0: handle:11b448 received:12460 received10s:19 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:02,074  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:02,074  INFO pcapstats:834 - numPackets:38 maxPPS:22 minPPS:1
+2025-03-20 16:18:12,274  INFO pcapstats:1909 - eth0: handle:11b448 received:12518 received10s:58 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:12,274  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:12,274  INFO pcapstats:834 - numPackets:58 maxPPS:22 minPPS:1
+2025-03-20 16:18:22,474  INFO pcapstats:1909 - eth0: handle:11b448 received:12589 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:22,474  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:22,474  INFO pcapstats:834 - numPackets:72 maxPPS:37 minPPS:1
+2025-03-20 16:18:31,974 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:18:31,974  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:18:32,164  INFO pcapstats:1909 - eth0: handle:11b448 received:12645 received10s:56 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:32,164  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:32,164  INFO pcapstats:834 - numPackets:56 maxPPS:28 minPPS:1
+2025-03-20 16:18:42,364  INFO pcapstats:1909 - eth0: handle:11b448 received:12704 received10s:59 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:42,364  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:42,364  INFO pcapstats:834 - numPackets:58 maxPPS:25 minPPS:1
+2025-03-20 16:18:52,564  INFO pcapstats:1909 - eth0: handle:11b448 received:12771 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:52,564  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:18:52,564  INFO pcapstats:834 - numPackets:67 maxPPS:28 minPPS:1
+2025-03-20 16:19:02,254  INFO pcapstats:1909 - eth0: handle:11b448 received:12875 received10s:104 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:02,254  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:02,254  INFO pcapstats:834 - numPackets:83 maxPPS:32 minPPS:1
+2025-03-20 16:19:12,454  INFO pcapstats:1909 - eth0: handle:11b448 received:12943 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:12,454  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:12,454  INFO pcapstats:834 - numPackets:78 maxPPS:29 minPPS:1
+2025-03-20 16:19:22,654  INFO pcapstats:1909 - eth0: handle:11b448 received:13042 received10s:99 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:22,654  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:22,654  INFO pcapstats:834 - numPackets:110 maxPPS:43 minPPS:3
+2025-03-20 16:19:32,014 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:19:32,014  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:19:32,344  INFO pcapstats:1909 - eth0: handle:11b448 received:13110 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:32,344  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:32,344  INFO pcapstats:834 - numPackets:68 maxPPS:32 minPPS:1
+2025-03-20 16:19:42,544  INFO pcapstats:1909 - eth0: handle:11b448 received:13170 received10s:60 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:42,544  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:42,544  INFO pcapstats:834 - numPackets:60 maxPPS:33 minPPS:1
+2025-03-20 16:19:52,234  INFO pcapstats:1909 - eth0: handle:11b448 received:13228 received10s:58 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:52,234  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:19:52,234  INFO pcapstats:834 - numPackets:59 maxPPS:21 minPPS:1
+2025-03-20 16:20:02,434  INFO pcapstats:1909 - eth0: handle:11b448 received:13287 received10s:59 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:02,434  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:02,434  INFO pcapstats:834 - numPackets:58 maxPPS:32 minPPS:1
+2025-03-20 16:20:12,634  INFO pcapstats:1909 - eth0: handle:11b448 received:13344 received10s:57 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:12,634  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:12,634  INFO pcapstats:834 - numPackets:56 maxPPS:31 minPPS:1
+2025-03-20 16:20:22,324  INFO pcapstats:1909 - eth0: handle:11b448 received:13380 received10s:36 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:22,324  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:22,324  INFO pcapstats:834 - numPackets:28 maxPPS:13 minPPS:1
+2025-03-20 16:20:32,524  INFO pcapstats:1909 - eth0: handle:11b448 received:13421 received10s:41 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:32,524  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:32,524  INFO pcapstats:834 - numPackets:50 maxPPS:29 minPPS:1
+2025-03-20 16:20:42,214  INFO pcapstats:1909 - eth0: handle:11b448 received:13487 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:42,214  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:42,214  INFO pcapstats:834 - numPackets:67 maxPPS:34 minPPS:1
+2025-03-20 16:20:47,069 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:20:47,069  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:20:52,414  INFO pcapstats:1909 - eth0: handle:11b448 received:13555 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:52,414  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:20:52,414  INFO pcapstats:834 - numPackets:67 maxPPS:28 minPPS:1
+2025-03-20 16:21:02,614  INFO pcapstats:1909 - eth0: handle:11b448 received:13655 received10s:100 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:02,614  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:02,614  INFO pcapstats:834 - numPackets:101 maxPPS:37 minPPS:2
+2025-03-20 16:21:12,304  INFO pcapstats:1909 - eth0: handle:11b448 received:13722 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:12,304  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:12,304  INFO pcapstats:834 - numPackets:67 maxPPS:31 minPPS:1
+2025-03-20 16:21:22,504  INFO pcapstats:1909 - eth0: handle:11b448 received:13782 received10s:60 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:22,504  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:22,504  INFO pcapstats:834 - numPackets:60 maxPPS:33 minPPS:1
+2025-03-20 16:21:32,194  INFO pcapstats:1909 - eth0: handle:11b448 received:13830 received10s:48 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:32,194  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:32,194  INFO pcapstats:834 - numPackets:36 maxPPS:12 minPPS:1
+2025-03-20 16:21:42,394  INFO pcapstats:1909 - eth0: handle:11b448 received:13880 received10s:50 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:42,394  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:42,394  INFO pcapstats:834 - numPackets:61 maxPPS:31 minPPS:1
+2025-03-20 16:21:52,084  INFO pcapstats:1909 - eth0: handle:11b448 received:13954 received10s:74 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:52,084  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:21:52,084  INFO pcapstats:834 - numPackets:73 maxPPS:26 minPPS:2
+2025-03-20 16:22:02,125 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:22:02,125  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:22:02,284  INFO pcapstats:1909 - eth0: handle:11b448 received:14027 received10s:73 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:02,284  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:02,284  INFO pcapstats:834 - numPackets:74 maxPPS:23 minPPS:1
+2025-03-20 16:22:12,484  INFO pcapstats:1909 - eth0: handle:11b448 received:14087 received10s:60 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:12,484  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:12,484  INFO pcapstats:834 - numPackets:61 maxPPS:33 minPPS:1
+2025-03-20 16:22:22,174  INFO pcapstats:1909 - eth0: handle:11b448 received:14147 received10s:60 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:22,174  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:22,174  INFO pcapstats:834 - numPackets:58 maxPPS:24 minPPS:1
+2025-03-20 16:22:32,374  INFO pcapstats:1909 - eth0: handle:11b448 received:14210 received10s:63 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:32,374  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:32,374  INFO pcapstats:834 - numPackets:65 maxPPS:29 minPPS:1
+2025-03-20 16:22:42,064  INFO pcapstats:1909 - eth0: handle:11b448 received:14256 received10s:46 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:42,064  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:42,064  INFO pcapstats:834 - numPackets:34 maxPPS:13 minPPS:1
+2025-03-20 16:22:52,264  INFO pcapstats:1909 - eth0: handle:11b448 received:14301 received10s:45 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:52,264  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:22:52,264  INFO pcapstats:834 - numPackets:53 maxPPS:32 minPPS:1
+2025-03-20 16:23:02,464  INFO pcapstats:1909 - eth0: handle:11b448 received:14375 received10s:74 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:02,464  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:02,464  INFO pcapstats:834 - numPackets:76 maxPPS:26 minPPS:1
+2025-03-20 16:23:12,154  INFO pcapstats:1909 - eth0: handle:11b448 received:14444 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:12,154  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:12,154  INFO pcapstats:834 - numPackets:71 maxPPS:28 minPPS:1
+2025-03-20 16:23:17,185 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:23:17,185  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:23:22,354  INFO pcapstats:1909 - eth0: handle:11b448 received:14506 received10s:62 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:22,354  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:22,354  INFO pcapstats:834 - numPackets:59 maxPPS:27 minPPS:1
+2025-03-20 16:23:32,554  INFO pcapstats:1909 - eth0: handle:11b448 received:14572 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:32,554  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:32,554  INFO pcapstats:834 - numPackets:65 maxPPS:29 minPPS:1
+2025-03-20 16:23:42,244  INFO pcapstats:1909 - eth0: handle:11b448 received:14640 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:42,244  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:42,244  INFO pcapstats:834 - numPackets:72 maxPPS:26 minPPS:1
+2025-03-20 16:23:52,444  INFO pcapstats:1909 - eth0: handle:11b448 received:14709 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:52,444  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:23:52,444  INFO pcapstats:834 - numPackets:61 maxPPS:27 minPPS:1
+2025-03-20 16:24:02,134  INFO pcapstats:1909 - eth0: handle:11b448 received:14731 received10s:22 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:02,134  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:02,134  INFO pcapstats:834 - numPackets:30 maxPPS:11 minPPS:1
+2025-03-20 16:24:12,334  INFO pcapstats:1909 - eth0: handle:11b448 received:14802 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:12,334  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:12,334  INFO pcapstats:834 - numPackets:71 maxPPS:30 minPPS:1
+2025-03-20 16:24:22,534  INFO pcapstats:1909 - eth0: handle:11b448 received:14861 received10s:59 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:22,534  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:22,534  INFO pcapstats:834 - numPackets:57 maxPPS:29 minPPS:1
+2025-03-20 16:24:32,224  INFO pcapstats:1909 - eth0: handle:11b448 received:14924 received10s:63 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:32,224  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:32,224  INFO pcapstats:834 - numPackets:65 maxPPS:31 minPPS:1
+2025-03-20 16:24:32,244 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:24:32,244  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:24:42,424  INFO pcapstats:1909 - eth0: handle:11b448 received:14990 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:42,424  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:42,424  INFO pcapstats:834 - numPackets:63 maxPPS:29 minPPS:1
+2025-03-20 16:24:52,114  INFO pcapstats:1909 - eth0: handle:11b448 received:15053 received10s:63 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:52,114  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:24:52,114  INFO pcapstats:834 - numPackets:66 maxPPS:28 minPPS:1
+2025-03-20 16:25:02,314  INFO pcapstats:1909 - eth0: handle:11b448 received:15119 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:02,314  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:02,314  INFO pcapstats:834 - numPackets:62 maxPPS:28 minPPS:2
+2025-03-20 16:25:12,004  INFO pcapstats:1909 - eth0: handle:11b448 received:15154 received10s:35 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:12,004  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:12,004  INFO pcapstats:834 - numPackets:36 maxPPS:6 minPPS:1
+2025-03-20 16:25:22,204  INFO pcapstats:1909 - eth0: handle:11b448 received:15230 received10s:76 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:22,204  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:22,204  INFO pcapstats:834 - numPackets:78 maxPPS:31 minPPS:1
+2025-03-20 16:25:32,404  INFO pcapstats:1909 - eth0: handle:11b448 received:15298 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:32,404  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:32,404  INFO pcapstats:834 - numPackets:64 maxPPS:28 minPPS:1
+2025-03-20 16:25:42,094  INFO pcapstats:1909 - eth0: handle:11b448 received:15367 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:42,094  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:42,094  INFO pcapstats:834 - numPackets:74 maxPPS:29 minPPS:1
+2025-03-20 16:25:47,304 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:25:47,304  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:25:52,294  INFO pcapstats:1909 - eth0: handle:11b448 received:15438 received10s:71 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:52,294  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:25:52,294  INFO pcapstats:834 - numPackets:69 maxPPS:27 minPPS:1
+2025-03-20 16:26:02,494  INFO pcapstats:1909 - eth0: handle:11b448 received:15505 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:02,494  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:02,494  INFO pcapstats:834 - numPackets:69 maxPPS:28 minPPS:1
+2025-03-20 16:26:12,184  INFO pcapstats:1909 - eth0: handle:11b448 received:15570 received10s:65 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:12,184  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:12,184  INFO pcapstats:834 - numPackets:64 maxPPS:31 minPPS:1
+2025-03-20 16:26:22,384  INFO pcapstats:1909 - eth0: handle:11b448 received:15612 received10s:42 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:22,384  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:22,384  INFO pcapstats:834 - numPackets:30 maxPPS:6 minPPS:1
+2025-03-20 16:26:32,584  INFO pcapstats:1909 - eth0: handle:11b448 received:15667 received10s:55 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:32,584  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:32,584  INFO pcapstats:834 - numPackets:66 maxPPS:32 minPPS:1
+2025-03-20 16:26:42,274  INFO pcapstats:1909 - eth0: handle:11b448 received:15724 received10s:57 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:42,274  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:42,274  INFO pcapstats:834 - numPackets:58 maxPPS:23 minPPS:1
+2025-03-20 16:26:52,474  INFO pcapstats:1909 - eth0: handle:11b448 received:15793 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:52,474  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:26:52,474  INFO pcapstats:834 - numPackets:66 maxPPS:30 minPPS:1
+2025-03-20 16:27:02,164  INFO pcapstats:1909 - eth0: handle:11b448 received:15890 received10s:97 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:02,164  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:02,164  INFO pcapstats:834 - numPackets:101 maxPPS:32 minPPS:2
+2025-03-20 16:27:02,344 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:27:02,344  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:27:12,364  INFO pcapstats:1909 - eth0: handle:11b448 received:15999 received10s:109 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:12,364  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:12,364  INFO pcapstats:834 - numPackets:106 maxPPS:36 minPPS:2
+2025-03-20 16:27:22,054  INFO pcapstats:1909 - eth0: handle:11b448 received:16068 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:22,054  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:22,054  INFO pcapstats:834 - numPackets:72 maxPPS:26 minPPS:1
+2025-03-20 16:27:32,254  INFO pcapstats:1909 - eth0: handle:11b448 received:16114 received10s:46 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:32,254  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:32,254  INFO pcapstats:834 - numPackets:38 maxPPS:11 minPPS:1
+2025-03-20 16:27:42,454  INFO pcapstats:1909 - eth0: handle:11b448 received:16173 received10s:59 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:42,454  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:42,454  INFO pcapstats:834 - numPackets:65 maxPPS:28 minPPS:1
+2025-03-20 16:27:52,654  INFO pcapstats:1909 - eth0: handle:11b448 received:16237 received10s:64 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:52,654  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:27:52,654  INFO pcapstats:834 - numPackets:63 maxPPS:18 minPPS:1
+2025-03-20 16:28:02,344  INFO pcapstats:1909 - eth0: handle:11b448 received:16306 received10s:69 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:02,344  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:02,344  INFO pcapstats:834 - numPackets:72 maxPPS:27 minPPS:1
+2025-03-20 16:28:12,544  INFO pcapstats:1909 - eth0: handle:11b448 received:16374 received10s:68 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:12,544  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:12,544  INFO pcapstats:834 - numPackets:67 maxPPS:26 minPPS:2
+2025-03-20 16:28:17,397 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:28:17,398  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:28:22,234  INFO pcapstats:1909 - eth0: handle:11b448 received:16438 received10s:64 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:22,234  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:22,234  INFO pcapstats:834 - numPackets:65 maxPPS:28 minPPS:1
+2025-03-20 16:28:32,434  INFO pcapstats:1909 - eth0: handle:11b448 received:16505 received10s:67 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:32,434  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:32,434  INFO pcapstats:834 - numPackets:65 maxPPS:18 minPPS:1
+2025-03-20 16:28:42,124  INFO pcapstats:1909 - eth0: handle:11b448 received:16542 received10s:37 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:42,124  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:42,124  INFO pcapstats:834 - numPackets:37 maxPPS:14 minPPS:1
+2025-03-20 16:28:52,324  INFO pcapstats:1909 - eth0: handle:11b448 received:16600 received10s:58 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:52,324  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:28:52,324  INFO pcapstats:834 - numPackets:60 maxPPS:22 minPPS:1
+2025-03-20 16:29:02,014  INFO pcapstats:1909 - eth0: handle:11b448 received:16702 received10s:102 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:02,014  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:02,014  INFO pcapstats:834 - numPackets:98 maxPPS:32 minPPS:3
+2025-03-20 16:29:12,214  INFO pcapstats:1909 - eth0: handle:11b448 received:16813 received10s:111 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:12,214  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:12,214  INFO pcapstats:834 - numPackets:115 maxPPS:37 minPPS:2
+2025-03-20 16:29:22,414  INFO pcapstats:1909 - eth0: handle:11b448 received:16916 received10s:103 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:22,414  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:22,414  INFO pcapstats:834 - numPackets:102 maxPPS:38 minPPS:2
+2025-03-20 16:29:32,459 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:29:32,459  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:29:32,614  INFO pcapstats:1909 - eth0: handle:11b448 received:16980 received10s:64 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:32,614  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:32,614  INFO pcapstats:834 - numPackets:65 maxPPS:24 minPPS:1
+2025-03-20 16:29:42,304  INFO pcapstats:1909 - eth0: handle:11b448 received:17038 received10s:58 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:42,304  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:42,304  INFO pcapstats:834 - numPackets:57 maxPPS:26 minPPS:1
+2025-03-20 16:29:52,504  INFO pcapstats:1909 - eth0: handle:11b448 received:17113 received10s:75 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:52,504  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:29:52,504  INFO pcapstats:834 - numPackets:60 maxPPS:31 minPPS:1
+2025-03-20 16:30:02,194  INFO pcapstats:1909 - eth0: handle:11b448 received:17143 received10s:30 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:02,194  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:02,194  INFO pcapstats:834 - numPackets:45 maxPPS:17 minPPS:1
+2025-03-20 16:30:12,394  INFO pcapstats:1909 - eth0: handle:11b448 received:17209 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:12,394  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:12,394  INFO pcapstats:834 - numPackets:66 maxPPS:23 minPPS:1
+2025-03-20 16:30:22,594  INFO pcapstats:1909 - eth0: handle:11b448 received:17268 received10s:59 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:22,594  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:22,594  INFO pcapstats:834 - numPackets:57 maxPPS:28 minPPS:1
+2025-03-20 16:30:32,284  INFO pcapstats:1909 - eth0: handle:11b448 received:17329 received10s:61 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:32,284  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:32,284  INFO pcapstats:834 - numPackets:64 maxPPS:27 minPPS:1
+2025-03-20 16:30:42,484  INFO pcapstats:1909 - eth0: handle:11b448 received:17394 received10s:65 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:42,484  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:42,484  INFO pcapstats:834 - numPackets:65 maxPPS:29 minPPS:1
+2025-03-20 16:30:47,522 ERROR orkclient:40 - apr_socket_connect connect failed errno:Connection refused
+2025-03-20 16:30:47,522  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:30:52,684  INFO pcapstats:1909 - eth0: handle:11b448 received:17452 received10s:58 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:52,684  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:30:52,684  INFO pcapstats:834 - numPackets:58 maxPPS:25 minPPS:1
+2025-03-20 16:31:02,374  INFO pcapstats:1909 - eth0: handle:11b448 received:17528 received10s:76 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:31:02,374  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:31:02,374  INFO pcapstats:834 - numPackets:62 maxPPS:27 minPPS:1
+2025-03-20 16:31:12,064  INFO pcapstats:1909 - eth0: handle:11b448 received:17545 received10s:17 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:31:12,064  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:31:12,064  INFO pcapstats:834 - numPackets:31 maxPPS:16 minPPS:1
+2025-03-20 16:31:22,264  INFO pcapstats:1909 - eth0: handle:11b448 received:17604 received10s:59 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:31:22,264  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:31:22,264  INFO pcapstats:834 - numPackets:59 maxPPS:22 minPPS:1
+2025-03-20 16:31:32,464  INFO pcapstats:1909 - eth0: handle:11b448 received:17670 received10s:66 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:31:32,464  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:31:32,464  INFO pcapstats:834 - numPackets:66 maxPPS:28 minPPS:1
+2025-03-20 16:31:42,664  INFO pcapstats:1909 - eth0: handle:11b448 received:17730 received10s:60 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:31:42,664  INFO pcapstats:1909 - eth1: handle:12bee8 received:8402 received10s:0 dropped:0 dropped10s:0 ifdropped:0 ifdropped10s:0
+2025-03-20 16:31:42,664  INFO pcapstats:834 - numPackets:60 maxPPS:21 minPPS:2

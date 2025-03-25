@@ -1,0 +1,39 @@
+2025-03-20 15:50:00,695  INFO reporting:283 - [localhost:8080/orktrack] reporting thread started.
+2025-03-20 15:50:00,699  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:51:15,764  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:51:21,748  INFO reporting:196 - [localhost:8080/orktrack] queuesize:1 enqueued: type=tape recid=19700101_000749_SANM stage=start captureport=SANM timestamp=1742485881 filename=1970/01/01/00/19700101_000749_SANM localparty=6693 localentrypoint= remoteparty=6692 direction=out duration=0 service=orkaudio-sl4-14 localip=192.168.2.40 remoteip=192.168.22.237 nativecallid=4125a6ed1fa081793fc2560119d38236@192.168.2.40 tags= ondemand=false side=both live=true hostname=sl4-14 
+2025-03-20 15:51:21,752  INFO reporting:196 - [localhost:8080/orktrack] queuesize:2 enqueued: type=tape recid=19700101_000749_SANL stage=start captureport=SANL timestamp=1742485881 filename=1970/01/01/00/19700101_000749_SANL localparty=6693 localentrypoint= remoteparty=6692 direction=out duration=0 service=orkaudio-sl4-14 localip=192.168.23.247 remoteip=192.168.2.40 nativecallid=00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 tags= ondemand=false side=both live=true hostname=sl4-14 
+2025-03-20 15:51:44,698  INFO reporting:196 - [localhost:8080/orktrack] queuesize:3 enqueued: type=tape recid=19700101_000749_SANL stage=stop captureport=SANL timestamp=1742485881 filename=1970/01/01/00/19700101_000749_SANL.wav localparty=6693 localentrypoint= remoteparty=6692 direction=out duration=23 service=orkaudio-sl4-14 localip=192.168.23.247 remoteip=192.168.2.40 nativecallid=00164752-01ef0026-1a6dc0ca-22984e8a@192.168.23.247 tags= ondemand=false side=both live=true hostname=sl4-14 
+2025-03-20 15:51:44,715  INFO reporting:196 - [localhost:8080/orktrack] queuesize:4 enqueued: type=tape recid=19700101_000749_SANM stage=stop captureport=SANM timestamp=1742485881 filename=1970/01/01/00/19700101_000749_SANM.wav localparty=6693 localentrypoint= remoteparty=6692 direction=out duration=23 service=orkaudio-sl4-14 localip=192.168.2.40 remoteip=192.168.22.237 nativecallid=4125a6ed1fa081793fc2560119d38236@192.168.2.40 tags= ondemand=false side=both live=true hostname=sl4-14 
+2025-03-20 15:52:30,818  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:53:45,871  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:55:00,933  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:56:15,975  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:57:16,016  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:58:31,069  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 15:59:46,134  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:01:01,189  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:02:16,258  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:03:31,311  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:04:46,360  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:06:01,430  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:07:16,470  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:08:31,529  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:09:46,574  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:11:01,639  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:12:16,680  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:13:31,736  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:14:46,794  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:16:01,861  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:17:16,919  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:18:31,974  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:19:32,014  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:20:47,069  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:22:02,125  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:23:17,185  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:24:32,244  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:25:47,304  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:27:02,344  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:28:17,398  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:29:32,459  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
+2025-03-20 16:30:47,522  WARN reporting:322 - [localhost:8080/orktrack] init connection:false success:false comment: 
