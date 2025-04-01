@@ -39,7 +39,7 @@ AudioTapeRef ImmediateProcessing::Pop(CStdString& after)
 
 	AudioTapeRef audioTapeRef;
 
-	if(m_audioTapeQueue.size() > 0)
+	if(!m_audioTapeQueue.empty())
 	{
 		audioTapeRef = m_audioTapeQueue.front();
 		m_audioTapeQueue.pop_front();
@@ -89,9 +89,7 @@ void ImmediateProcessing::ThreadHandler()
 	logMsg.Format("thread starting - queue size:%d", CONFIG.m_immediateProcessingQueueSize);
 	LOG4CXX_INFO(LOG.immediateProcessingLog, logMsg);
 
-	bool stop = false;
-
-	for(;stop == false;)
+	for(bool stop = false;stop == false;)
 	{
 		try
 		{
