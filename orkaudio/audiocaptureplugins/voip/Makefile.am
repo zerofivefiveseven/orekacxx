@@ -8,7 +8,7 @@ libvoip_la_LDFLAGS = -module
 AM_CPPFLAGS = -D_REENTRANT
 LDFLAGS += --sysroot=@SYSROOT@ -L@SYSROOT@/usr/lib -L@SYSROOT@/lib
 libvoip_la_LIBADD = -lxerces-c -llog4cxx -lorkbase -lpcap
-INCLUDES = -I@top_srcdir@ -I../../../orkbasecxx -I../common -I@SYSROOT@/usr/include/apr-1 -I@SYSROOT@/usr/include/xercesc
+INCLUDES = -I@top_srcdir@ -I../../../orkbasecxx -I../common -I@SYSROOT@/usr/include/apr-1 -I@SYSROOT@/usr/include/apr-1.0  -I@SYSROOT@/usr/include/xercesc
 #-I$(SYSROOT)/usr/include/apr-1
 AudioCapturePluginCommon.cpp:
 	ln -s ../common/AudioCapturePluginCommon.cpp AudioCapturePluginCommon.cpp

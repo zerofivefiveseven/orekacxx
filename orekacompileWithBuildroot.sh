@@ -47,14 +47,14 @@ fi
 
 git clone --depth 1 https://github.com/BelledonneCommunications/bcg729.git ./bcg729
 pushd ./bcg729
-sudo CC="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-gcc" CXX="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-g++" CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1" CC=$CC CXX=$CXX cmake . \
+ CC="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-gcc" CXX="$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf-g++" CXXFLAGS="--sysroot="$SYSROOT" -D_GLIBCXX_USE_CXX11_ABI=1" CC=$CC CXX=$CXX cmake . \
                                                                                                -DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" \
                                                                                                -DCMAKE_INSTALL_LIBDIR="$SYSROOT/usr/lib" \
                                                                                                -DCMAKE_C_COMPILER=$CC \
                                                                                                -DCMAKE_CXX_COMPILER=$CXX \
                                                                                                -DCMAKE_C_FLAGS="--sysroot=$SYSROOT -fPIC"
-sudo make -j$(nproc)
-sudo make install
+ make -j$(nproc)
+ make install
 
 popd
 
@@ -62,7 +62,7 @@ popd
 mkdir -p silk
 git clone --depth 1 https://github.com/gaozehua/SILKCodec.git ./silk
 pushd ./silk/SILK_SDK_SRC_ARM/
-sudo make clean
+ make clean
 export CXXFLAGS="--sysroot=$SYSROOT -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -fPIC"
 DCMAKE_INSTALL_PREFIX="$SYSROOT/usr" TOOLCHAIN_PREFIX=$BUILDROOT_SDK/bin/arm-buildroot-linux-gnueabihf- CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot="$SYSROOT" -fPIC -I$SYSROOT/usr/include/ -fPIC -g -O0" make all TARGRT_CPU=armv7l
 cp libSKP_SILK_SDK.a "$SYSROOT"/usr/lib
@@ -71,44 +71,44 @@ cp decoder "$SYSROOT"/usr/lib
 popd
 
 git clone https://github.com/OrecX/dependencies.git
-sudo tar -xf dependencies/opus-1.2.1.tar.gz
+ tar -xf dependencies/opus-1.2.1.tar.gz
 pushd opus-1.2.1
-sudo ./autogen.sh
-sudo  CC=$CC CXX=$CXX ./configure --host=arm-buildroot-linux-gnueabihf --build=x86_64-linux-gnu --prefix=""$SYSROOT"/usr" --libdir=""$SYSROOT"/usr/lib" --bindir=""$SYSROOT"/usr/bin" --enable-shared --with-pic --enable-static
-sudo  CC=$CC CXX=$CXX make -j$(nproc) CFLAGS="-fPIC"
-sudo  CC=$CC CXX=$CXX make install
-sudo cp "$SYSROOT"/usr/lib/libopus.a "$SYSROOT"/usr/lib/libopusstatic.a
-sudo cp "$SYSROOT"/usr/lib/opus/lib/libopus.a "$SYSROOT"/usr/lib/opus/lib/libopusstatic.a
+ ./autogen.sh
+  CC=$CC CXX=$CXX ./configure --host=arm-buildroot-linux-gnueabihf --build=x86_64-linux-gnu --prefix=""$SYSROOT"/usr" --libdir=""$SYSROOT"/usr/lib" --bindir=""$SYSROOT"/usr/bin" --enable-shared --with-pic --enable-static
+  CC=$CC CXX=$CXX make -j$(nproc) CFLAGS="-fPIC"
+  CC=$CC CXX=$CXX make install
+ cp "$SYSROOT"/usr/lib/libopus.a "$SYSROOT"/usr/lib/libopusstatic.a
+ cp "$SYSROOT"/usr/lib/opus/lib/libopus.a "$SYSROOT"/usr/lib/opus/lib/libopusstatic.a
 popd
 readelf -h "$SYSROOT"/usr/lib/libopusstatic.a  | grep 'Class\|File\|Machine'
 
 
 # backward-cpp HEADER ONLY
 git clone --depth 1 https://github.com/bombela/backward-cpp.git
-sudo cp ./backward-cpp/backward.hpp "$SYSROOT"/usr/include/backward.hpp
+ cp ./backward-cpp/backward.hpp "$SYSROOT"/usr/include/backward.hpp
 
 # httplib HEADER ONLY
 mkdir -p "$SYSROOT"/usr/include/httplib
 git clone --depth 1 --branch v0.12.3 https://github.com/yhirose/cpp-httplib.git
-sudo cp ./cpp-httplib/httplib.h "$SYSROOT"/usr/include/httplib/
+ cp ./cpp-httplib/httplib.h "$SYSROOT"/usr/include/httplib/
 
 git clone --depth 1 https://github.com/nlohmann/json.git
 pushd ./json
-sudo make distclean
-sudo CC=$CC CXX=$CXX cmake . -DCMAKE_INSTALL_PREFIX="$SYSROOT"/usr -DCMAKE_INSTALL_LIBDIR="$SYSROOT"/usr/lib -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX
-sudo CC=$CC CXX=$CXX make -j$(nproc)
-sudo CC=$CC CXX=$CXX make install
+ make distclean
+ CC=$CC CXX=$CXX cmake . -DCMAKE_INSTALL_PREFIX="$SYSROOT"/usr -DCMAKE_INSTALL_LIBDIR="$SYSROOT"/usr/lib -DCMAKE_C_COMPILER=$CC -DCMAKE_CXX_COMPILER=$CXX
+ CC=$CC CXX=$CXX make -j$(nproc)
+ CC=$CC CXX=$CXX make install
 popd
 
 # srs-librtmp
-sudo git clone --depth 1 --branch 3.0release https://github.com/ossrs/srs.git
+ git clone --depth 1 --branch 3.0release https://github.com/ossrs/srs.git
 pushd ./srs/trunk
-sudo rm -f ./srs-librtmp/objs/lib/srs_librtmp.a
-sudo rm -rf ./srs-librtmp
-sudo rm -f "$SYSROOT"/usr/lib/libsrs_librtmp.a
+ rm -f ./srs-librtmp/objs/lib/srs_librtmp.a
+ rm -rf ./srs-librtmp
+ rm -f "$SYSROOT"/usr/lib/libsrs_librtmp.a
 
 
-sudo CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" CXXFLAGS="--sysroot="$SYSROOT" -I"$SYSROOT"/usr/include -fPIC" ./configure  \
+ CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" CXXFLAGS="--sysroot="$SYSROOT" -I"$SYSROOT"/usr/include -fPIC" ./configure  \
                                                                                                 --prefix=""$SYSROOT"/usr" \
                                                                                                 --with-librtmp \
                                                                                                 --without-ssl \
@@ -119,42 +119,42 @@ sudo CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" CXXFLAGS="--sysroot=
 
 popd
 pushd ./srs/trunk/srs-librtmp
-sudo sed -i '/Building the srs-librtmp example/,+1d' Makefile
-sudo CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" make
-sudo cp ./objs/lib/srs_librtmp.a "$SYSROOT"/usr/lib
-sudo cp -r ./objs/include/* "$SYSROOT"/usr/include
+ sed -i '/Building the srs-librtmp example/,+1d' Makefile
+ CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" make
+ cp ./objs/lib/srs_librtmp.a "$SYSROOT"/usr/lib
+ cp -r ./objs/include/* "$SYSROOT"/usr/include
 pushd "$SYSROOT"/usr/lib
-sudo mv srs_librtmp.a libsrs_librtmp.a
+ mv srs_librtmp.a libsrs_librtmp.a
 readelf -h libsrs_librtmp.a  | grep 'Class\|File\|Machine' | head
 popd
 popd
-sudo chmod -R 777 /srs
+ chmod -R 777 /srs
 
 
 popd
 
 pushd ./orkbasecxx
-sudo make distclean
-sudo cp "$SYSROOT"/usr/lib/libopus.a "$SYSROOT"/usr/lib/libopusstatic.a
+ make distclean
+ cp "$SYSROOT"/usr/lib/libopus.a "$SYSROOT"/usr/lib/libopusstatic.a
 export CFLAGS="--sysroot=$SYSROOT"
 export LDFLAGS+="--sysroot=$SYSROOT"
 export CXXFLAGS="-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1"
-sudo autoconf=$BUILDROOT_SDK/bin/autoconf aclocal="$BUILDROOT_SDK/bin/aclocal" automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
-sudo automake=$BUILDROOT_SDK/bin/automake aclocal="$BUILDROOT_SDK/bin/aclocal" LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
-sudo automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
-sudo automake=$BUILDROOT_SDK/bin/automake aclocal="$BUILDROOT_SDK/bin/aclocal" LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
-sudo env PATH="$PATH" aclocal="$BUILDROOT_SDK/bin/aclocal" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT  \
+ autoconf=$BUILDROOT_SDK/bin/autoconf aclocal="$BUILDROOT_SDK/bin/aclocal" automake=$BUILDROOT_SDK/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoupdate
+ automake=$BUILDROOT_SDK/bin/automake aclocal="$BUILDROOT_SDK/bin/aclocal" LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/libtoolize --force --copy --automake
+ automake=$BUILDROOT_SDK/bin/automake LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/aclocal -I m4 -I /usr/share/aclocal -I "$BUILDROOT_SDK/share/aclocal/"
+ automake=$BUILDROOT_SDK/bin/automake aclocal="$BUILDROOT_SDK/bin/aclocal" LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/autoconf
+ env PATH="$PATH" aclocal="$BUILDROOT_SDK/bin/aclocal" LDFLAGS="-L$SYSROOT/usr/lib --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ./configure SYSROOT=$SYSROOT  \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --prefix="$SYSROOT" \
     --libdir="$SYSROOT/usr/lib" \
     --bindir="$SYSROOT/usr/bin"
-sudo env PATH="$PATH" aclocal="$BUILDROOT_SDK/bin/aclocal" CC=$CC CXX=$CXX make -j$(nproc)
-sudo env PATH="$PATH" aclocal="$BUILDROOT_SDK/bin/aclocal" CC=$CC CXX=$CXX make install
+ env PATH="$PATH" aclocal="$BUILDROOT_SDK/bin/aclocal" CC=$CC CXX=$CXX make -j$(nproc)
+ env PATH="$PATH" aclocal="$BUILDROOT_SDK/bin/aclocal" CC=$CC CXX=$CXX make install
 popd
 
 pushd ./orkaudio
-sudo make distclean
+ make distclean
 export CFLAGS="--sysroot=$SYSROOT"
 export LIBTOOL=$LIBTOOL
 export ACLOCAL_PATH="/home/"$VARIABLE"/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/bin/aclocal-1.15:$ACLOCAL_PATH"
@@ -171,16 +171,16 @@ automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4t
 automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 $BUILDROOT_SDK/bin/automake --add-missing
 automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=$BUILDROOT_SDK/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL $BUILDROOT_SDK/bin/autoreconf -fvi
 
-sudo env PATH="$PATH" ACLOCAL_PATH=$ACLOCAL_PATH PERL5LIB=$PERL5LIB autom4te=$autom4te LDFLAGS="-L$SYSROOT/usr/lib  --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT"  CC=$CC CXX=$CXX autom4te=$autom4te m4="$BUILDROOT_SDK/bin/m4" LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
+ env PATH="$PATH" ACLOCAL_PATH=$ACLOCAL_PATH PERL5LIB=$PERL5LIB autom4te=$autom4te LDFLAGS="-L$SYSROOT/usr/lib  --sysroot=$SYSROOT" CXXFLAGS=$CXXFLAGS CFLAGS="--sysroot=$SYSROOT"  CC=$CC CXX=$CXX autom4te=$autom4te m4="$BUILDROOT_SDK/bin/m4" LIBTOOL=$LIBTOOL ./configure SYSROOT="$SYSROOT" \
     --host=arm-buildroot-linux-gnueabihf \
     --build=x86_64-linux-gnu \
     --prefix="$SYSROOT" \
     --libdir="$SYSROOT/usr/lib" \
     --bindir="$SYSROOT/usr/bin"
 
-sudo env PATH="$PATH" autom4te=$autom4te ACLOCAL_PATH=$ACLOCAL_PATH PERL5LIB=$PERL5LIB m4="$BUILDROOT_SDK/bin/m4" make -j$(nproc)
-sudo CC=$CC CXX=$CXX env PATH="$PATH" make install
+ env PATH="$PATH" autom4te=$autom4te ACLOCAL_PATH=$ACLOCAL_PATH PERL5LIB=$PERL5LIB m4="$BUILDROOT_SDK/bin/m4" make -j$(nproc)
+ CC=$CC CXX=$CXX env PATH="$PATH" make install
 
-sudo setcap cap_net_raw,cap_net_admin+ep /usr/sbin/orkaudio
+ setcap cap_net_raw,cap_net_admin+ep /usr/sbin/orkaudio
 popd
 

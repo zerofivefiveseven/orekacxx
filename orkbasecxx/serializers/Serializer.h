@@ -32,7 +32,7 @@ typedef oreka::shared_ptr<Object> ObjectRef;
 
 /** Base class for serializing Objects.
 */
-class DLL_IMPORT_EXPORT_ORKBASE Serializer
+class Serializer
 {
 public:
 	Serializer(Object* object);
