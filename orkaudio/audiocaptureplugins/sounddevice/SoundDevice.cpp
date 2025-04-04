@@ -16,10 +16,10 @@
 #include "ace/OS_NS_unistd.h"
 #include "ace/Singleton.h"
 #include "ace/Min_Max.h"
-#include "/home/revyakin/oreka/AudioCapturePlugin.h"
-#include "AudioCapturePluginCommon.h"
-#include "/home/revyakin/oreka/portaudio.h"
-#include "/home/revyakin/oreka/Utils.h"
+#include "../../../orkbasecxx/AudioCapturePlugin.h"
+#include "../common/AudioCapturePluginCommon.h"
+#include "portaudio.h"
+#include "../../../orkbasecxx/Utils.h"
 #include "SoundDeviceConfig.h"
 
 extern AudioChunkCallBackFunction g_audioChunkCallBack;
@@ -250,12 +250,12 @@ void SoundDevice::StopCapture(CStdString& port)
 	g_captureEventCallBack(stopEvent, port);
 }
 
-void __CDECL__ Initialize()
+void Initialize()
 {
 	SoundDeviceSingleton::instance()->Initialize();
 }
 
-void __CDECL__ Run()
+void Run()
 {
 	SoundDeviceSingleton::instance()->Run();
 	for(;;)
@@ -265,32 +265,32 @@ void __CDECL__ Run()
 	}
 }
 
-void __CDECL__ Shutdown()
+void Shutdown()
 {
 	;
 }
 
-void __CDECL__ PauseCapture(CStdString& capturePort, CStdString& orkuid, CStdString& nativecallid)
+void PauseCapture(CStdString& capturePort, CStdString& orkuid, CStdString& nativecallid)
 {
 	;
 }
 
-void __CDECL__ SetOnHold(CStdString& port, CStdString& orkuid)
+void SetOnHold(CStdString& port, CStdString& orkuid)
 {
 	;
 }
 
-void __CDECL__ SetOffHold(CStdString& port, CStdString& orkuid)
+void SetOffHold(CStdString& port, CStdString& orkuid)
 {
 	;
 }
 
-void __CDECL__ StartCapture(CStdString& capturePort, CStdString& orkuid, CStdString& nativecallid)
+void StartCapture(CStdString& capturePort, CStdString& orkuid, CStdString& nativecallid)
 {
 	SoundDeviceSingleton::instance()->StartCapture(capturePort);
 }
 
-void __CDECL__ StopCapture(CStdString& capturePort, CStdString& orkuid, CStdString& nativecallid)
+void StopCapture(CStdString& capturePort, CStdString& orkuid, CStdString& nativecallid)
 {
 	SoundDeviceSingleton::instance()->StopCapture(capturePort);
 }
