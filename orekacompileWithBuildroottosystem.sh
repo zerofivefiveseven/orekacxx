@@ -1,5 +1,7 @@
 #!/bin/bash
-sudo apt-get install -y libspeex-dev build-essential libtool automake git cmake  libpcap-dev libapr1-dev libopus-dev  libdw-dev libunwind-dev libssl-dev libsndfile1-dev libxerces-c3-dev libssl-dev libapr1 libapr1-dev
+#sudo apt-get reinstall -y libspeex-dev build-essential libtool automake git cmake  libpcap-dev libapr1-dev libopus-dev  libdw-dev libunwind-dev libssl-dev libsndfile1-dev libxerces-c3-dev libssl-dev libapr1 libapr1-dev
+#sudo apt-get install portaudio19-dev python3-pyaudio
+
 unset BUILDROOT_SDK PERL5LIB ACLOCAL_PATH CXXFLAGS CFLAGS
 unset BUILDROOT_SDK SYSROOT PATH PKG_CONFIG_PATH LDFLAGS LIBTOOL pkgconf PATH CC CXX AR LD PATH automake AUTOMAKE autom4te m4 LIBTOOLIZE PATH PKG_CONFIG_PATH
 #if [ ! -d ./arm-buildroot-linux-gnueabihf_sdk-buildroot ]; then
@@ -141,6 +143,7 @@ popd
 popd
 
 pushd ./orkbasecxx
+unset BUILDROOT_SDK
 export SYSROOT=""
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export CC="/usr/bin/gcc"
