@@ -17,7 +17,7 @@
 #include "Filter.h"
 #include "opus.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE OpusCodecDecoder : public Filter
+class OpusCodecDecoder : public Filter
 {
 public:
 	OpusCodecDecoder();
@@ -67,7 +67,7 @@ private:
 #include "Filter.h"
 #include "opus.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE OpusCodecDecoder : public Filter
+class OpusCodecDecoder : public Filter
 {
 public:
 	OpusCodecDecoder();

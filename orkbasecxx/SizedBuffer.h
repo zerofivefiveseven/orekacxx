@@ -18,7 +18,7 @@
 #include <stdexcept>
 #include "OrkBase.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE SizedBuffer {
+class SizedBuffer {
 	public:
 		SizedBuffer(size_t len);
 		SizedBuffer(unsigned char* buf,size_t len);

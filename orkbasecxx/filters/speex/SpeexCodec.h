@@ -5,7 +5,7 @@
 #include "Filter.h"
 #include "speex/speex.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE SpeexDecoder : public Filter
+class SpeexDecoder : public Filter
 {
 public:
 	SpeexDecoder();

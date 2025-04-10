@@ -35,7 +35,7 @@ public:
 };
 typedef oreka::shared_ptr<AudioDirectionMarks> AudioDirectionMarksRef;
 
-class DLL_IMPORT_EXPORT_ORKBASE MediaType
+class MediaType
 {
 public:
 #define UNKNOWN_TYPE "unknown"
@@ -54,7 +54,7 @@ public:
 	static CStdString MediaTypeToString(int mediaType);
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE AudioTapeDescription : public Object
+class AudioTapeDescription : public Object
 {
 public:
 	AudioTapeDescription();
@@ -79,10 +79,10 @@ public:
 	CStdString m_remoteIp;
 	CStdString m_filename;
 	CStdString m_nativeCallId;
-	bool m_onDemand;
+	bool m_onDemand{};
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE AudioTape
+class AudioTape
 {
 public:
 	typedef enum 
@@ -98,7 +98,7 @@ public:
 	AudioTape(CStdString& portId);
 	AudioTape(CStdString& portId, CStdString& file);
 
-	void AddAudioChunk(AudioChunkRef chunkRef);
+	void AddAudioChunk(const AudioChunkRef& chunkRef);
 	void Write();
 	void SetShouldStop();
 	bool IsStoppedAndValid();
@@ -202,7 +202,7 @@ typedef oreka::shared_ptr<AudioTape> AudioTapeRef;
 
 //==========================================================
 
-class DLL_IMPORT_EXPORT_ORKBASE TapeAttributes
+class TapeAttributes
 {
 public:
 #define TA_NATIVECALLID "[nativecallid]"

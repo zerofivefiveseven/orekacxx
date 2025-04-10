@@ -26,7 +26,7 @@
 
 //==========================================================
 
-class DLL_IMPORT_EXPORT_ORKBASE EventStreamingSession
+class EventStreamingSession
 {
 public:
 	EventStreamingSession();
@@ -44,7 +44,7 @@ typedef oreka::shared_ptr<EventStreamingSession> EventStreamingSessionRef;
 
 //==========================================================
 
-class DLL_IMPORT_EXPORT_ORKBASE EventStreaming: public OrkSingleton<EventStreaming>
+class EventStreaming: public OrkSingleton<EventStreaming>
 {
 public:
 	EventStreaming();

@@ -16,7 +16,7 @@
 
 #include "messages/SyncMessage.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE DeleteTapeMsg : public SyncMessage
+class DeleteTapeMsg : public SyncMessage
 {
 public:
 	void Define(Serializer* s);

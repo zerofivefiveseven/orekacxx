@@ -1,6 +1,6 @@
 #!/bin/bash
-#sudo apt-get reinstall -y libspeex-dev build-essential libtool automake git cmake  libpcap-dev libapr1-dev libopus-dev  libdw-dev libunwind-dev libssl-dev libsndfile1-dev libxerces-c3-dev libssl-dev libapr1 libapr1-dev
-#sudo apt-get install portaudio19-dev python3-pyaudio
+sudo apt-get reinstall -y libspeex-dev build-essential libtool automake git cmake  libpcap-dev libapr1-dev libopus-dev  libdw-dev libunwind-dev libssl-dev libsndfile1-dev libxerces-c3-dev libssl-dev libapr1 libapr1-dev
+sudo apt-get install portaudio19-dev python3-pyaudio
 
 unset BUILDROOT_SDK PERL5LIB ACLOCAL_PATH CXXFLAGS CFLAGS
 unset BUILDROOT_SDK SYSROOT PATH PKG_CONFIG_PATH LDFLAGS LIBTOOL pkgconf PATH CC CXX AR LD PATH automake AUTOMAKE autom4te m4 LIBTOOLIZE PATH PKG_CONFIG_PATH
@@ -8,6 +8,7 @@ unset BUILDROOT_SDK SYSROOT PATH PKG_CONFIG_PATH LDFLAGS LIBTOOL pkgconf PATH CC
 #    echo "C++ toolchain not found"
 #    exit 1
 #fi
+chmod -R 777 ./
 mkdir ./dependencies
 pushd ./dependencies
 echo "user directory $(../whoami.sh)"
@@ -54,10 +55,10 @@ echo "LIBRARY_PATH: $LIBRARY_PATH"
 #    echo "C++ compiler not found at $CXX"
 #    exit 1
 #fi
-rm -rf ./bcg729
+sudo rm -rf ./bcg729
 git clone --depth 1 https://github.com/BelledonneCommunications/bcg729.git ./bcg729
 pushd ./bcg729
-CXXFLAGS=" -D_GLIBCXX_USE_CXX11_ABI=1" cmake . \
+CXXFLAGS=" -D_GLIBCXX_USE_CXX11_ABI=1" cmake . -DCMAKE_INSTALL_PREFIX="/usr" \
                                                                                                -DCMAKE_C_COMPILER=$CC \
                                                                                                -DCMAKE_CXX_COMPILER=$CXX \
                                                                                                -DCMAKE_C_FLAGS="--sysroot=$SYSROOT -fPIC"
@@ -66,29 +67,30 @@ sudo make install
 
 popd
 
-rm -rf ./silk
+sudo rm -rf ./silk
 mkdir -p silk
 git clone --depth 1 https://github.com/gaozehua/SILKCodec.git ./silk
-pushd ./silk/SILK_SDK_SRC_ARM/
- make clean
+pushd ./silk/SILK_SDK_SRC_FIX/
+make clean
 export CXXFLAGS=" -std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1 -g -O0 -fPIC"
-TOOLCHAIN_PREFIX=/bin/arm-buildroot-linux-gnueabihf- CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS CFLAGS=" -fPIC -I/usr/include/ -fPIC -g -O0" make all TARGRT_CPU=armv7l
-cp libSKP_SILK_SDK.a "$SYSROOT"/usr/lib
-cp encoder "$SYSROOT"/usr/lib
-cp decoder "$SYSROOT"/usr/lib
+CC=$CC CXX=$CXX CXXFLAGS=$CXXFLAGS CFLAGS=" -fPIC -I/usr/include/ -fPIC -g -O0" make all
+sudo cp libSKP_SILK_SDK.a /usr/lib
+# sudo cp ./interface/* /usr/include
+sudo cp encoder /usr/lib
+sudo cp decoder /usr/lib
 popd
-rm -rf ./opus-1.2.1
+sudo rm -rf ./opus-1.2.1
+sudo rm -rf ./dependencies 
 git clone https://github.com/OrecX/dependencies.git
- tar -xf dependencies/opus-1.2.1.tar.gz
+sudo tar -xf ./dependencies/opus-1.2.1.tar.gz
 pushd opus-1.2.1
  ./autogen.sh
-  CC=$CC CXX=$CXX ./configure LDFLAGS="-L/usr/lib" --build=x86_64-linux-gnu --host=x86_64-linux-gnu --enable-shared --with-pic --enable-static
+  CC=$CC CXX=$CXX ./configure --prefix=/usr LDFLAGS="-L/usr/lib" --build=x86_64-linux-gnu --host=x86_64-linux-gnu --enable-shared --with-pic --enable-static
   CC=$CC CXX=$CXX make -j$(nproc) CFLAGS="-fPIC"
 sudo  CC=$CC CXX=$CXX make install
- cp "$SYSROOT"/usr/lib/libopus.a "$SYSROOT"/usr/lib/libopusstatic.a
- cp "$SYSROOT"/usr/lib/opus/lib/libopus.a "$SYSROOT"/usr/lib/opus/lib/libopusstatic.a
+sudo mv /usr/lib/libopus.a /usr/lib/libopusstatic.a
 popd
-readelf -h "$SYSROOT"/usr/lib/libopusstatic.a  | grep 'Class\|File\|Machine'
+readelf -h /usr/lib/libopusstatic.a  | grep 'Class\|File\|Machine'
 
 
 # backward-cpp HEADER ONLY
@@ -100,7 +102,7 @@ mkdir -p "$SYSROOT"/usr/include/httplib
 git clone --depth 1 --branch v0.12.3 https://github.com/yhirose/cpp-httplib.git
  cp ./cpp-httplib/httplib.h /usr/include/httplib/
 
-rm -rf ./json
+sudo rm -rf ./json
 git clone --depth 1 https://github.com/nlohmann/json.git
 pushd ./json
  make distclean
@@ -110,26 +112,31 @@ pushd ./json
 popd
 
 # srs-librtmp
-rm -rf ./srs
- git clone --depth 1 --branch 3.0release https://github.com/ossrs/srs.git
+sudo rm -rf ./srs
+git clone --depth 1 --branch 3.0release https://github.com/ossrs/srs.git
 pushd ./srs/trunk
- rm -f ./srs-librtmp/objs/lib/srs_librtmp.a
- rm -rf ./srs-librtmp
- rm -f "$SYSROOT"/usr/lib/libsrs_librtmp.a
+sudo rm -f ./srs-librtmp/objs/lib/srs_librtmp.a
+sudo rm -rf ./srs-librtmp
+sudo rm -f "$SYSROOT"/usr/lib/libsrs_librtmp.a
 
 
- CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" CXXFLAGS="--sysroot="$SYSROOT" -I"$SYSROOT"/usr/include -fPIC" ./configure LDFLAGS="-L/usr/lib" --build=x86_64-linux-gnu --host=x86_64-linux-gnu \
+ CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" CXXFLAGS="--sysroot="$SYSROOT" -I"$SYSROOT"/usr/include -fPIC" ./configure \
                                                                                                 --with-librtmp \
                                                                                                 --without-ssl \
                                                                                                 --export-librtmp-project=./srs-librtmp \
                                                                                                 --cc=$CC \
                                                                                                 --cxx=$CXX
-
+cd ./srs-librtmp
+sed -i '/Building the srs-librtmp example/,+1d' Makefile
+make 
+sudo mv ./objs/lib/srs_librtmp.a ./objs/lib/libsrs_librtmp.a
+sudo cp ./objs/lib/libsrs_librtmp.a /usr/lib
+sudo cp ./objs/include/* /usr/include/
 popd
 
 pushd ./srs/trunk/srs-librtmp
  sed -i '/Building the srs-librtmp example/,+1d' Makefile
- CC=$CC CXX=$CXX AR=$AR RANLIB=$RANLIB CFLAGS="$CFLAGS" make
+ CC=$CC CXX=$CXX CFLAGS="$CFLAGS" make
  cp ./objs/lib/srs_librtmp.a "$SYSROOT"/usr/lib
  cp -r ./objs/include/* "$SYSROOT"/usr/include
 pushd "$SYSROOT"/usr/lib
@@ -143,6 +150,7 @@ popd
 popd
 
 pushd ./orkbasecxx
+find . -name "*.la" -type f -delete
 unset BUILDROOT_SDK
 export SYSROOT=""
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -154,18 +162,20 @@ export LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:/usr/lib"
 export LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu"
 
  make distclean
- cp "$SYSROOT"/usr/lib/libopus.a "$SYSROOT"/usr/lib/libopusstatic.a
+sudo cp "$SYSROOT"/usr/lib/libopus.a "$SYSROOT"/usr/lib/libopusstatic.a
 export CXXFLAGS="-std=c++17 -D_GLIBCXX_USE_CXX11_ABI=1"
- autoconf=/bin/autoconf aclocal="/bin/aclocal" automake=/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL /bin/autoupdate
- automake=/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 /bin/automake --add-missing
- aclocal="/bin/aclocal" LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS=$CXXFLAGS CFLAGS="" CC=$CC CXX=$CXX autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL ././configure LDFLAGS="-L/usr/lib" SYSROOT="" --build=x86_64-linux-gnu --host=x86_64-linux-gnu
- aclocal="/bin/aclocal" CC=$CC CXX=$CXX make -j$(nproc)
+ autoupdate
+ automake --add-missing
+ autoreconf -fvi
+ LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS=$CXXFLAGS CFLAGS="" CC=$CC CXX=$CXX ././configure LDFLAGS="-L/usr/lib" --build=x86_64-linux-gnu --host=x86_64-linux-gnu
+ CC=$CC CXX=$CXX make -j$(nproc)
 sudo env PATH="$PATH" aclocal="/bin/aclocal" CC=$CC CXX=$CXX make install
 popd
 
 pushd ./orkaudio
-
- make distclean
+find . -name "*.la" -type f -delete
+make clean
+make distclean
 export SYSROOT=""
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export CC="/usr/bin/gcc"
@@ -176,23 +186,20 @@ export LIBRARY_PATH="/usr/lib/x86_64-linux-gnu:/usr/lib"
 export LD_LIBRARY_PATH="/usr/lib/x86_64-linux-gnu"
 unset BUILDROOT_SDK PERL5LIB ACLOCAL_PATH
 
-mkdir -p /home/"$VARIABLE"/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/share/automake-1.15/Automake
-cp /home/"$VARIABLE"/Documents/arm-buildroot-linux-gnueabihf_sdk-buildroot-STABLE/share/automake-1.15/Automake/Config.pm    /home/"$VARIABLE"/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/share/automake-1.15/Automake/
-export PERL5LIB="/home/$VARIABLE/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/share/autoconf:$PERL5LIB"sed -i 's/AM_PROG_LIBTOOL/LT_INIT/g' configure.ac
+# export PERL5LIB="/home/$VARIABLE/orekacxx/arm-buildroot-linux-gnueabihf_sdk-buildroot/share/autoconf:$PERL5LIB"sed -i 's/AM_PROG_LIBTOOL/LT_INIT/g' configure.ac
 export CXXFLAGS="-I/usr/include -std=c++17"
+libtoolize --force --copy --automake
 
-autoconf=/bin/autoconf PERL5LIB=$PERL5LIB automake=/bin/automake autom4te=$autom4te m4=$m4 LIBTOOL=$LIBTOOL /bin/autoupdate
-automake=/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 /bin/libtoolize --force --copy --automake
-automake=/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 /bin/aclocal -I m4 -I /usr/share/aclocal -I "/share/aclocal/"
-automake=/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 /bin/autoconf
-automake=/bin/automake PERL5LIB=$PERL5LIB LIBTOOL=$LIBTOOL autom4te=$autom4te m4=$m4 /bin/automake --add-missing
-automake=/bin/automake PERL5LIB=$PERL5LIB CC=$CC CXX=$CXX autom4te=$autom4te LIBTOOLIZE=/bin/libtoolize m4=$m4 LIBTOOL=$LIBTOOL /bin/autoreconf -fvi
+autoupdate
+aclocal -I m4 -I /usr/share/aclocal -I "/share/aclocal/"
+autoconf
+automake --add-missing
+autoreconf -fvi
 
- ACLOCAL_PATH=$ACLOCAL_PATH PERL5LIB=$PERL5LIB autom4te=$autom4te LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS=$CXXFLAGS CFLAGS=""  CC=$CC CXX=$CXX autom4te=$autom4te m4="/bin/m4" LIBTOOL=$LIBTOOL ./configure LDFLAGS="-L/usr/lib"  SYSROOT="" --build=x86_64-linux-gnu --host=x86_64-linux-gnu
+LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS=$CXXFLAGS CFLAGS=""  CC=$CC CXX=$CXX ./configure LDFLAGS="-L/usr/lib"  SYSROOT="" --build=x86_64-linux-gnu --host=x86_64-linux-gnu
+make -j$(nproc)
+sudo CC=$CC CXX=$CXX env PATH="$PATH" make install
 
- autom4te=$autom4te ACLOCAL_PATH=$ACLOCAL_PATH PERL5LIB=$PERL5LIB m4="/bin/m4" make -j$(nproc)
- sudo CC=$CC CXX=$CXX env PATH="$PATH" make install
-
- setcap cap_net_raw,cap_net_admin+ep /usr/sbin/orkaudio
+setcap cap_net_raw,cap_net_admin+ep /usr/sbin/orkaudio
 popd
 

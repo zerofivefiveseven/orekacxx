@@ -22,7 +22,7 @@ extern "C"
 	#include "g72x.h"
 }
 #endif
-class DLL_IMPORT_EXPORT_ORKBASE G721CodecDecoder : public Filter
+class G721CodecDecoder : public Filter
 {
 public:
 	G721CodecDecoder();

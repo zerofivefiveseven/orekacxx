@@ -25,7 +25,7 @@ typedef oreka::shared_ptr<CommandProcessing> CommandProcessingRef;
 /**
  * This tape processor handles the audio transcoding
  */
-class DLL_IMPORT_EXPORT_ORKBASE CommandProcessing : public TapeProcessor
+class CommandProcessing : public TapeProcessor
 {
 public:
 	static void Initialize();

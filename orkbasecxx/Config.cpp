@@ -17,6 +17,8 @@
 #include "serializers/Serializer.h"
 #include "Config.h"
 
+#include <AudioCapture.h>
+
 Config::Config()
 {
 	m_log = log4cxx::Logger::getLogger("config");
@@ -87,7 +89,7 @@ Config::Config()
 	m_commandProcessingCommand = "";
 	m_directionForceOutgoingForRemotePartyPrefix = "";
 	m_directionForceOutgoingForRemotePartyMinLength = DIRECTION_FORCE_OUTGOING_FOR_REMOTE_PARTY_MIN_LENGTH_DEFAULT;
-	m_pauseRecordingOnRejectedStart = PAUSE_RECORDING_ON_REJECTED_START_DEFAULT; 
+	m_pauseRecordingOnRejectedStart = PAUSE_RECORDING_ON_REJECTED_START_DEFAULT;
 	m_directionLookBack = DIRECTION_LOOKBACK_DEFAULT;
 	m_remotePartyMaxDigits = 0;
 	m_dtmfReportingDetailed = DTMF_REPORTING_DETAILED;
@@ -122,7 +124,7 @@ void Config::Define(Serializer* s)
 	s->StringValue(CAPTURE_PLUGIN_PARAM, m_capturePlugin);
 	s->StringValue(CAPTURE_PLUGIN_PATH_PARAM, m_capturePluginPath);
 	s->StringValue(PLUGINS_DIRECTORY_PARAM, m_pluginsDirectory);
-	s->EnumValue(STORAGE_AUDIO_FORMAT_PARAM, (int&)m_storageAudioFormat, FileFormatToEnum, FileFormatToString);
+	s->EnumValue(STORAGE_AUDIO_FORMAT_PARAM, reinterpret_cast<int&>(m_storageAudioFormat), reinterpret_cast<StringToEnumFunction>(FileFormatToEnum), FileFormatToString);
 	s->IntValue(NUM_BATCH_THREADS_PARAM, m_numBatchThreads);
 	s->IntValue(NUM_DIRECTIONSELECTOR_THREADS_PARAM, m_numDirectionSelectorThreads);
 	s->IntValue(NUM_COMMAND_THREADS_PARAM, m_numCommandThreads);

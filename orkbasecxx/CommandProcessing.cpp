@@ -36,7 +36,7 @@ TapeProcessorRef CommandProcessing::m_singleton;
 
 void CommandProcessing::Initialize()
 {
-	if(m_singleton.get() == NULL)
+	if(m_singleton.get() == nullptr)
 	{
 		m_singleton.reset(new CommandProcessing());
 		TapeProcessorRegistry::instance()->RegisterTapeProcessor(m_singleton);
@@ -87,7 +87,7 @@ void CommandProcessing::ThreadHandler()
 	apr_status_t ret;
 	
 	TapeProcessorRef commandProcessing = TapeProcessorRegistry::instance()->GetNewTapeProcessor(processorName);
-	if(commandProcessing.get() == NULL)
+	if(commandProcessing.get() == nullptr)
 	{
 		LOG4CXX_ERROR(LOG.batchProcessingLog, "Could not instanciate CommandProcessing");
 		return;
@@ -116,7 +116,7 @@ void CommandProcessing::ThreadHandler()
 		try
 		{
 			audioTapeRef = pCommandProcessing->m_audioTapeQueue.pop();
-			if(audioTapeRef.get() == NULL)
+			if(audioTapeRef.get() == nullptr)
 			{
 				if(Daemon::Singleton()->IsStopping())
 				{

@@ -28,11 +28,11 @@ extern "C"
 }
 
 #ifdef WIN32
-#undef DLL_IMPORT_EXPORT_ORKBASE 
-#define DLL_IMPORT_EXPORT_ORKBASE
+#undef 
+#define
 #endif
 
-class DLL_IMPORT_EXPORT_ORKBASE SilkCodecDecoder : public Filter
+class SilkCodecDecoder : public Filter
 {
 public:
 	SilkCodecDecoder();

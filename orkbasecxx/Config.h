@@ -183,7 +183,7 @@
 #define TLS_CLIENT_CERTCHECK_IGNORE_EXPIRY_DEFAULT true
 #endif
 
-class DLL_IMPORT_EXPORT_ORKBASE Config : public Object
+class Config : public Object
 {
 public:
 	Config();	

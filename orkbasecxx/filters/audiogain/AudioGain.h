@@ -14,7 +14,7 @@
 #include "Filter.h"
 #include <math.h>
 
-class DLL_IMPORT_EXPORT_ORKBASE AudioGainFilter : public Filter
+class AudioGainFilter : public Filter
 {
 public:
 	AudioGainFilter();

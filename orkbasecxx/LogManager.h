@@ -23,7 +23,7 @@
 using namespace log4cxx;
 
 
-class DLL_IMPORT_EXPORT_ORKBASE OrkLogManager
+class OrkLogManager
 {
 public:
 	static OrkLogManager* Instance();

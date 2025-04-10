@@ -17,7 +17,7 @@
 #include "messages/SyncMessage.h"
 #include "AudioCapture.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE RecordMsg : public SyncMessage
+class RecordMsg : public SyncMessage
 {
 public:
 	void Define(Serializer* s);
@@ -34,7 +34,7 @@ public:
 	CStdString m_side;
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE PauseMsg : public SyncMessage
+class PauseMsg : public SyncMessage
 {
 public:
 	void Define(Serializer* s);
@@ -49,7 +49,7 @@ public:
 	CStdString m_nativecallid;
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE StopMsg : public SyncMessage
+class StopMsg : public SyncMessage
 {
 public:
 	void Define(Serializer* s);

@@ -66,10 +66,10 @@ void Reporting::Initialize()
 		m_singleton.reset(new Reporting());
 
 		for (std::vector<OrkTrack>::const_iterator it = OrkTrack::getTrackers().begin(); it != OrkTrack::getTrackers().end(); it++) {
-			ReportingThreadInfo *rtInfo = new ReportingThreadInfo();
+			auto *rtInfo = new ReportingThreadInfo();
 			rtInfo->m_tracker = *it;
 			try{
-				std::thread reportingThread(ReportingThreadEntryPoint, (void *)rtInfo);
+				std::thread reportingThread(ReportingThreadEntryPoint, static_cast<void *>(rtInfo));
 				reportingThread.detach();
 			} catch(const std::exception &ex){
 				FLOG_ERROR(LOG.reporting,"[%s] failed to start reporting thread reason:%s", rtInfo->m_tracker.ToString(), ex.what());
@@ -84,7 +84,7 @@ void Reporting::Initialize()
 void Reporting::ReportingThreadEntryPoint(void *args)
 {
 
-	ReportingThreadInfo *rtInfo = (ReportingThreadInfo *)args;
+	ReportingThreadInfo *rtInfo = static_cast<ReportingThreadInfo *>(args);
 
 	ReportingThreadInfoRef rtInfoRef(new ReportingThreadInfo());
 	rtInfoRef->m_tracker = rtInfo->m_tracker;
@@ -159,8 +159,8 @@ void __CDECL__ Reporting::SkipTapes(int number, CStdString trackingServer)
 	pair = s_reportingThreads.find(trackingServer);
 	if(pair != s_reportingThreads.end())
 	{
-		ReportingThreadInfoRef reportingThread = pair->second;
 		{
+			ReportingThreadInfoRef reportingThread = pair->second;
 			MutexSentinel sentinel(reportingThread->m_mutex);
 			reportingThread->m_numTapesToSkip += number;
 		}
@@ -318,9 +318,9 @@ void ReportingThread::Run()
 							  m_tracker.m_https);
 
 		if (!response.m_success) {
-			if (time(NULL) - reportErrorLastTime > 60) {
+			if (time(nullptr) - reportErrorLastTime > 60) {
 				FLOG_WARN(LOG.reporting,"[%s] init connection:%s success:false comment:%s ", m_tracker.ToString(), conn?"true":"false", response.m_comment);
-				reportErrorLastTime = time(NULL);
+				reportErrorLastTime = time(nullptr);
 			}
 			OrkSleepSec(CONFIG.m_clientTimeout + 10);
 		}
@@ -328,13 +328,13 @@ void ReportingThread::Run()
 
 	FLOG_INFO(LOG.reporting,"[%s] init success:true comment:%s", m_tracker.ToString(),  response.m_comment);
 
-	for(;stop == false;)
+	while(stop == false)
 	{
 		try
 		{
 			MessageRef msgRef = m_myInfo->m_messageQueue.pop();
 
-			if(msgRef.get() == NULL)
+			if(msgRef.get() == nullptr)
 			{
 				if(Daemon::Singleton()->IsStopping())
 				{

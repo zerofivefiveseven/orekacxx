@@ -18,7 +18,7 @@
 #include "messages/AsyncMessage.h"
 
 
-class DLL_IMPORT_EXPORT_ORKBASE ReadLoggingPropertiesMsg : public SyncMessage
+class ReadLoggingPropertiesMsg : public SyncMessage
 {
 public:
 	void Define(Serializer* s);
@@ -29,7 +29,7 @@ public:
 	ObjectRef Process();
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE ListLoggingPropertiesMsg : public SyncMessage
+class ListLoggingPropertiesMsg : public SyncMessage
 {
 public:
 	void Define(Serializer* s);
@@ -40,7 +40,7 @@ public:
 	ObjectRef Process();
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE ListLoggingPropertiesResponseMsg : public SimpleResponseMsg
+class ListLoggingPropertiesResponseMsg : public SimpleResponseMsg
 {
 public:
 	void Define(Serializer* s);

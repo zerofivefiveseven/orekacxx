@@ -18,7 +18,7 @@
 #include "AudioCapturePlugin.h"
 #include "Utils.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE CapturePluginProxy
+class CapturePluginProxy
 {
 public:
 	static bool Initialize();

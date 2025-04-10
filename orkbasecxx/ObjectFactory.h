@@ -24,13 +24,13 @@
 */
 class ObjectFactory;
 
-class DLL_IMPORT_EXPORT_ORKBASE ObjectFactory
+class ObjectFactory
 {
 public:
 	static void Initialize();
 	static ObjectFactory* GetSingleton();
 
-	ObjectRef NewInstance(CStdString& className);
+	ObjectRef NewInstance(const CStdString& className);
 
 	void RegisterObject(ObjectRef&);
 private:

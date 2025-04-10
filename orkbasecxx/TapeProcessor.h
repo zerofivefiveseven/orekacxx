@@ -20,7 +20,7 @@
 #include "OrkBase.h"
 
 
-class DLL_IMPORT_EXPORT_ORKBASE TapeProcessor;
+class TapeProcessor;
 
 typedef oreka::shared_ptr<TapeProcessor> TapeProcessorRef;
 
@@ -28,16 +28,18 @@ typedef oreka::shared_ptr<TapeProcessor> TapeProcessorRef;
  *  a Tape Processor is a black box that takes Audio Tapes as an input and 
  *  processes them.
  */
-class DLL_IMPORT_EXPORT_ORKBASE TapeProcessor
+class TapeProcessor
 {
 public:
+	virtual ~TapeProcessor() = default;
+
 	TapeProcessor();
 
 	virtual CStdString __CDECL__ GetName() = 0;
 	virtual TapeProcessorRef __CDECL__ Instanciate() = 0;
 	virtual void __CDECL__ AddAudioTape(AudioTapeRef&) = 0;
 
-	void SetNextProcessor(TapeProcessorRef& nextProcessor);
+	void SetNextProcessor(const TapeProcessorRef& nextProcessor);
 	void RunNextProcessor(AudioTapeRef&);
 
 protected:
@@ -47,7 +49,7 @@ protected:
 //===================================================================
 /** TapeProcessor Registry
 */
-class DLL_IMPORT_EXPORT_ORKBASE TapeProcessorRegistry
+class TapeProcessorRegistry
 {
 public:
 	static TapeProcessorRegistry* instance();

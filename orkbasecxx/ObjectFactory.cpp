@@ -17,7 +17,7 @@
 #include "Utils.h"
 #include "ObjectFactory.h"
 
-ObjectFactory* ObjectFactory::m_singleton = NULL;
+ObjectFactory* ObjectFactory::m_singleton = nullptr;
 
 ObjectFactory::ObjectFactory()
 {
@@ -34,7 +34,7 @@ ObjectFactory* ObjectFactory::GetSingleton()
 }
 
 
-ObjectRef ObjectFactory::NewInstance(CStdString& className)
+ObjectRef ObjectFactory::NewInstance(const CStdString& className)
 {
 	MutexSentinel mutexSentinel(m_mutex);
 	std::map<CStdString, ObjectRef>::iterator pair;

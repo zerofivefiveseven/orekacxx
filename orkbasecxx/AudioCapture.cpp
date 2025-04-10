@@ -207,7 +207,7 @@ int AudioChunk::GetNumSamples()
 
 double AudioChunk::GetDurationSec()
 {
-	return ((double)GetNumSamples())/((double)m_details.m_sampleRate);
+	return static_cast<double>(GetNumSamples())/static_cast<double>(m_details.m_sampleRate);
 }
 
 
@@ -218,7 +218,7 @@ double AudioChunk::ComputeRms()
 	{
 		for(int i=0; i<GetNumSamples(); i++)
 		{
-			rmsValue += ((short *)m_pBuffer)[i] * ((short *)m_pBuffer)[i];
+			rmsValue += static_cast<short *>(m_pBuffer)[i] * static_cast<short *>(m_pBuffer)[i];
 		}
 		rmsValue = sqrt(rmsValue/GetNumSamples());
 	}
@@ -235,12 +235,12 @@ double AudioChunk::ComputeRmsDb()
 	return rmsDbValue;
 }
 
-AudioEncodingEnum AudioChunk::GetEncoding()
+AudioEncodingEnum AudioChunk::GetEncoding() const
 {
 	return m_details.m_encoding;
 }
 
-int AudioChunk::GetSampleRate()
+int AudioChunk::GetSampleRate() const
 {
 	return m_details.m_sampleRate;
 }
@@ -256,7 +256,7 @@ void AudioChunk::SetDetails(AudioChunkDetails* details)
 }
 
 
-int AudioChunk::GetNumBytes()
+int AudioChunk::GetNumBytes() const
 {
 	return m_details.m_numBytes;
 }
@@ -343,7 +343,7 @@ CStdString CaptureEvent::LocalSideToString(int localSideEnum)
 	return LOCALSIDE_INVALID;
 }
 
-int CaptureEvent::LocalSideToEnum(CStdString& localSideString)
+int CaptureEvent::LocalSideToEnum(const CStdString& localSideString)
 {
 	if(localSideString.CompareNoCase(LOCALSIDE_UNKN) == 0)
 	{
@@ -364,7 +364,7 @@ int CaptureEvent::LocalSideToEnum(CStdString& localSideString)
 	return LocalSideInvalid;
 }
 
-CStdString CaptureEvent::AudioKeepDirectionToString(int audioKeepDirectionEnum)
+CStdString CaptureEvent::AudioKeepDirectionToString(const int audioKeepDirectionEnum)
 {
 	switch(audioKeepDirectionEnum)
 	{
@@ -380,7 +380,7 @@ CStdString CaptureEvent::AudioKeepDirectionToString(int audioKeepDirectionEnum)
 	return AUDIOKEEPDIRECTION_INVALID;
 }
 
-int CaptureEvent::AudioKeepDirectionToEnum(CStdString& audioKeepDirectionString)
+int CaptureEvent::AudioKeepDirectionToEnum(const CStdString& audioKeepDirectionString)
 {
 	if(audioKeepDirectionString.CompareNoCase(AUDIOKEEPDIRECTION_BOTH) == 0)
 	{
@@ -401,7 +401,7 @@ int CaptureEvent::AudioKeepDirectionToEnum(CStdString& audioKeepDirectionString)
 	return AudioKeepDirectionInvalid;
 }
 
-bool CaptureEvent::AudioKeepDirectionIsDefault(CStdString& audioKeepDirectionString)
+bool CaptureEvent::AudioKeepDirectionIsDefault(const CStdString& audioKeepDirectionString)
 {
 	bool result = false;
 
@@ -413,7 +413,7 @@ bool CaptureEvent::AudioKeepDirectionIsDefault(CStdString& audioKeepDirectionStr
 	return result;
 }
 
-CStdString CaptureEvent::EventTypeToString(int eventTypeEnum)
+CStdString CaptureEvent::EventTypeToString(const int eventTypeEnum)
 {
 	switch(eventTypeEnum)
 	{
@@ -459,11 +459,11 @@ CStdString CaptureEvent::EventTypeToString(int eventTypeEnum)
 		return ET_LOCALSIDE;
 	case	EtAudioKeepDirection:
 		return ET_AUDIOKEEPDIRECTION;
+	default: return ET_INVALID;
 	}
-	return ET_INVALID;
 }
 
-int CaptureEvent::EventTypeToEnum(CStdString& eventTypeString)
+int CaptureEvent::EventTypeToEnum(const CStdString& eventTypeString)
 {
 	int eventTypeEnum = EtUnknown;
 	if(eventTypeString.CompareNoCase(ET_START) == 0)
@@ -582,7 +582,7 @@ int FileFormatToEnum(CStdString& format)
 	return formatEnum;
 }
 
-CStdString FileFormatToString(int formatEnum)
+CStdString FileFormatToString(const int formatEnum)
 {
 	CStdString formatString;
 	switch (formatEnum)
@@ -611,7 +611,7 @@ CStdString FileFormatToString(int formatEnum)
 	return formatString;
 }
 
-CStdString FileFormatGetExtension(FileFormatEnum formatEnum)
+CStdString FileFormatGetExtension(const FileFormatEnum formatEnum)
 {
 	CStdString extension;
 	switch (formatEnum)
@@ -626,7 +626,7 @@ CStdString FileFormatGetExtension(FileFormatEnum formatEnum)
 		extension = ".opus";
 		break;
 	default:
-		CStdString formatEnumString = IntToString(formatEnum);
+		const CStdString formatEnumString = IntToString(formatEnum);
 		throw (CStdString("AudioTape::GetFileFormatExtension: unknown file format:") + formatEnumString);
 	}
 	return extension;

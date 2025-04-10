@@ -37,7 +37,7 @@
 //#define LOCALSIDE_PARAM "localside"
 #define AUDIOKEEPDIRECTION_PARAM "side"
 
-class DLL_IMPORT_EXPORT_ORKBASE TapeMsg :  public SyncMessage, public IReportable
+class TapeMsg :  public SyncMessage, public IReportable
 {
 public:
 	TapeMsg();
@@ -84,7 +84,7 @@ typedef oreka::shared_ptr<TapeMsg> TapeMsgRef;
 
 /** A TapeResponse is a response to TapeMsg 
 */
-class DLL_IMPORT_EXPORT_ORKBASE TapeResponse : public SimpleResponseMsg
+class TapeResponse : public SimpleResponseMsg
 {
 public:
 	TapeResponse();
@@ -100,7 +100,7 @@ public:
 
 typedef oreka::shared_ptr<TapeResponse> TapeResponseRef;
 
-//class DLL_IMPORT_EXPORT_ORKBASE TapeResponseFwd : public TapeResponse
+//class TapeResponseFwd : public TapeResponse
 //{
 //public:
 //	TapeResponseFwd();
@@ -112,7 +112,7 @@ typedef oreka::shared_ptr<TapeResponse> TapeResponseRef;
 //};
 
 
-//class DLL_IMPORT_EXPORT_ORKBASE TapeTagMsg : public SyncMessage
+//class TapeTagMsg : public SyncMessage
 //{
 //public:
 	//TapeTagMsg();

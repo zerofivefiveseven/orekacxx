@@ -214,7 +214,7 @@ void BatchProcessing::ThreadHandler()
 
 	CStdString processorName("BatchProcessing");
 	TapeProcessorRef batchProcessing = TapeProcessorRegistry::instance()->GetNewTapeProcessor(processorName);
-	if(batchProcessing.get() == NULL)
+	if(batchProcessing.get() == nullptr)
 	{
 		LOG4CXX_ERROR(LOG.batchProcessingLog, "Could not instanciate BatchProcessing");
 		return;
@@ -244,7 +244,7 @@ void BatchProcessing::ThreadHandler()
 		try
 		{
 			audioTapeRef = pBatchProcessing->m_audioTapeQueue.pop();
-			if(audioTapeRef.get() == NULL)
+			if(audioTapeRef.get() == nullptr)
 			{
 				if(Daemon::Singleton()->IsStopping())
 				{
@@ -406,7 +406,7 @@ void BatchProcessing::ThreadHandler()
 						bool ptAlreadySeen = seenRtpPayloadTypes.test(details.m_rtpPayloadType);
 						seenRtpPayloadTypes.set(details.m_rtpPayloadType);
 
-						if(decoder.get() == NULL)
+						if(decoder.get() == nullptr)
 						{
 							//if(ptAlreadySeen == false && details.m_rtpPayloadType != pt_Telephone_event)
 							if(ptAlreadySeen == false)
@@ -474,6 +474,7 @@ void BatchProcessing::ThreadHandler()
 						FileRecursiveMkdir(path, CONFIG.m_audioFilePermissions, CONFIG.m_audioFileOwner, CONFIG.m_audioFileGroup, audioTapeRef->m_audioOutputPath);
 
 						CStdString file = path + "/" + audioTapeRef->GetIdentifier();
+						//тут открываем пайп
 						outFileRef->Open(file, AudioFile::WRITE, false, fileRef->GetSampleRate());
 
 						if(CONFIG.m_audioOutputPathSecondary.length() > 3)

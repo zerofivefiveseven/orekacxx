@@ -44,6 +44,7 @@
 #include "CommandProcessing.h"
 #include "TapeFileNaming.h"
 #include "DirectionSelector.h"
+#include "RecorderSender.h"
 #include "ConfigManager.h"
 #include "Daemon.h"
 #include "ObjectFactory.h"
@@ -268,15 +269,6 @@ void Transcode(CStdString &file)
 	AudioTapeRef tape(new AudioTape(portName, file));
 	bp->AddAudioTape(tape);
 
-	// Make sure it stops after processing
-	tape.reset();
-	bp->AddAudioTape(tape);
-
-	// Wait for completion
-	while(!Daemon::Singleton()->IsStopping())
-	{
-		OrkSleepSec(1);
-	}
 }
 
 void MainThread()
@@ -366,6 +358,7 @@ void MainThread()
 	Reporting::Initialize();
 	TapeFileNaming::Initialize();
 	DirectionSelector::Initialize();
+	RecorderSender::Initialize();
 	TapeProcessorRegistry::instance()->CreateProcessingChain();
 
 	try{

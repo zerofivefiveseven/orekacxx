@@ -18,7 +18,7 @@
 #include "messages/AsyncMessage.h"
 
 
-class DLL_IMPORT_EXPORT_ORKBASE OrkaudioVersionMsg : public SyncMessage
+class OrkaudioVersionMsg : public SyncMessage
 {
 public:
 	void Define(Serializer* s);
@@ -29,7 +29,7 @@ public:
 	ObjectRef Process();
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE OrkaudioVersionResponseMsg : public SimpleResponseMsg
+class OrkaudioVersionResponseMsg : public SimpleResponseMsg
 {
 public:
 	void Define(Serializer* s);
@@ -42,6 +42,6 @@ public:
 	CStdString m_version;
 };
 
-void DLL_IMPORT_EXPORT_ORKBASE RegisterOrkaudioVersion(const char *ver);
+void RegisterOrkaudioVersion(const char *ver);
 #endif
 

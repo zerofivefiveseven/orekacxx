@@ -20,7 +20,7 @@
 
 
 /** Abstract base class for all clients. */
-class DLL_IMPORT_EXPORT_ORKBASE OrkClient
+class OrkClient
 {
 public:
 	OrkClient();
@@ -33,7 +33,7 @@ protected:
 };
 
 /** Abstract base class for all clients based on http. */
-class DLL_IMPORT_EXPORT_ORKBASE OrkHttpClient : public OrkClient
+class OrkHttpClient : public OrkClient
 {
 public:
 	bool ExecuteUrl(const CStdString& request, CStdString& response, const CStdString& hostname, const int tcpPort, int timeout = 5);
@@ -54,7 +54,7 @@ private:
 };
 
 /** Client that uses a HTTP URL request and receives the response back in the SingleLine format. */
-class DLL_IMPORT_EXPORT_ORKBASE OrkHttpSingleLineClient : public OrkHttpClient
+class OrkHttpSingleLineClient : public OrkHttpClient
 {
 public:
 	bool Execute(SyncMessage& request, AsyncMessage& response, const CStdString& hostname, const int tcpPort, const CStdString& serviceName, int timeout = 5, bool useHttps = false);

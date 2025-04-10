@@ -17,7 +17,7 @@
 #include "messages/SyncMessage.h"
 #include "messages/AsyncMessage.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE AddTagMsg : public SyncMessage, public IReportable
+class AddTagMsg : public SyncMessage, public IReportable
 {
 public:
 	AddTagMsg();

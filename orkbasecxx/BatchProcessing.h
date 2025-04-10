@@ -19,6 +19,7 @@
 #include "AudioTape.h"
 #include <map>
 #include <mutex>
+#include <memory>
 
 class  BatchProcessing;
 typedef oreka::shared_ptr<BatchProcessing> BatchProcessingRef;
@@ -26,7 +27,7 @@ typedef oreka::shared_ptr<BatchProcessing> BatchProcessingRef;
 /**
  * This tape processor handles the audio transcoding
  */
-class DLL_IMPORT_EXPORT_ORKBASE BatchProcessing : public TapeProcessor
+class BatchProcessing : public TapeProcessor
 {
 public:
 	static void Initialize();

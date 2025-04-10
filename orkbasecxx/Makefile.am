@@ -17,7 +17,7 @@ liborkbase_la_SOURCES = Filter.cpp g711.c \
 			PartyFilter.cpp EventStreaming.cpp \
 			OrkTrack.cpp SocketStreamer.cpp	\
 			SizedBuffer.cpp DirectionSelector.cpp \
-			SslUtils.cpp
+			SslUtils.cpp RecorderSender.cpp
 #INCLUDES = -I/projects/ext/xmlrpc++/xmlrpc++0.7/src
 INCLUDES = -I@SYSROOT@/usr/include/opus -I@SYSROOT@/usr/include/apr-1/ -I@SYSROOT@/usr/include/apr-1.0/
 SUBDIRS = messages serializers audiofile filters

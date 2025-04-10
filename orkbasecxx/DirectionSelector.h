@@ -28,7 +28,7 @@ typedef oreka::shared_ptr<DirectionSelector> DirectionSelectorRef;
 /**
  * This tape processor handles the audio filtering
  */
-class DLL_IMPORT_EXPORT_ORKBASE DirectionSelector : public TapeProcessor
+class DirectionSelector : public TapeProcessor
 {
 public:
 	static void Initialize();

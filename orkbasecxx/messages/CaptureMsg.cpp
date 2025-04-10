@@ -44,7 +44,7 @@ void CaptureMsg::Define(Serializer* s)
 	CStdString captureClass(CAPTURE_CLASS);
 	s->StringValue(OBJECT_TYPE_TAG, captureClass, true);
 	s->StringValue(CAPTURE_PORT_PARAM, m_capturePort, true);
-	s->EnumValue(CAPTURE_STATE_PARAM, (int&)m_eventType, CaptureEvent::EventTypeToEnum, CaptureEvent::EventTypeToString, true);
+	s->EnumValue(CAPTURE_STATE_PARAM, reinterpret_cast<int &>(m_eventType), reinterpret_cast<StringToEnumFunction>(CaptureEvent::EventTypeToEnum), CaptureEvent::EventTypeToString, true);
 }
 
 

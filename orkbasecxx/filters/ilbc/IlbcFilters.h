@@ -18,7 +18,7 @@ extern "C"
 #include "iLBC_decode.h"
 }
 
-class DLL_IMPORT_EXPORT_ORKBASE IlbcToPcmFilter : public Filter
+class IlbcToPcmFilter : public Filter
 {
 public:
 	IlbcToPcmFilter();

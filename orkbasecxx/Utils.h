@@ -99,7 +99,7 @@ template<class T> std::mutex OrkSingleton<T>::m_singleLock;
 template<class T> std::atomic<T*> OrkSingleton<T>::m_instance(NULL);
 
 //============================================
-class DLL_IMPORT_EXPORT_ORKBASE OrkSemaphore {
+class OrkSemaphore {
 public:
     OrkSemaphore() : m_count(1){}
 	OrkSemaphore(int count) : m_count(count){}
@@ -133,7 +133,7 @@ private:
 
 //OrkAprSingleton and OrkOpenSslSingleton need to Initialize() in main thread's main()
 //============================================
-class DLL_IMPORT_EXPORT_ORKBASE OrkAprSingleton
+class OrkAprSingleton
 {
 public:
 	static void Initialize();
@@ -175,7 +175,7 @@ private:
 
 #ifdef SUPPORT_TLS_SERVER
 //==========================================================
-class DLL_IMPORT_EXPORT_ORKBASE OrkOpenSslSingleton : public OrkSingleton<OrkOpenSslSingleton>
+class OrkOpenSslSingleton : public OrkSingleton<OrkOpenSslSingleton>
 {
 public:
 	OrkOpenSslSingleton();
@@ -189,7 +189,7 @@ private:
 	log4cxx::LoggerPtr s_log;
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE OrkSslStructure
+class OrkSslStructure
 {
 public:
 	OrkSslStructure(SSL_CTX* ctx) { ssl = SSL_new(ctx); };
@@ -208,8 +208,8 @@ private:
 
 #endif
 
-DLL_IMPORT_EXPORT_ORKBASE const char* inet_ntopV4(int inet, void *srcAddr, char *dst, size_t size);  //AF_INET
-int DLL_IMPORT_EXPORT_ORKBASE inet_pton4(const char *src, struct in_addr* dstAddr);
+ const char* inet_ntopV4(int inet, void *srcAddr, char *dst, size_t size);  //AF_INET
+int inet_pton4(const char *src, struct in_addr* dstAddr);
 //============================================
 // String related stuff
 #if defined (WIN32) || defined(WIN64)
@@ -258,39 +258,39 @@ inline CStdString IpToString(const struct in_addr& ip) {
 	return CStdString(s);
 }
 
-bool DLL_IMPORT_EXPORT_ORKBASE StringIsDigit(CStdString& string);
-bool DLL_IMPORT_EXPORT_ORKBASE StringIsPhoneNumber(CStdString& string);
-bool DLL_IMPORT_EXPORT_ORKBASE MatchesStringList(CStdString& string, std::list<CStdString>& stringList);
-CStdString DLL_IMPORT_EXPORT_ORKBASE FormatDataSize(unsigned long int size);
-CStdString DLL_IMPORT_EXPORT_ORKBASE HexToString(const CStdString& hexInput);		//Only return digits
-CStdString DLL_IMPORT_EXPORT_ORKBASE IntUnixTsToString(int ts);
-void DLL_IMPORT_EXPORT_ORKBASE StringTokenizeToList(CStdString input, std::list<CStdString>& output);
-bool DLL_IMPORT_EXPORT_ORKBASE ChopToken(CStdString &token, CStdString separator, CStdString &s);
-CStdString DLL_IMPORT_EXPORT_ORKBASE ReplaceRegexBy(CStdString input, CStdString pattern, CStdString replacedBy);
-void DLL_IMPORT_EXPORT_ORKBASE OrkSleepSec(unsigned int sec);
-void DLL_IMPORT_EXPORT_ORKBASE OrkSleepMs(unsigned int msec);
-void DLL_IMPORT_EXPORT_ORKBASE OrkSleepMicrSec(unsigned int microsec);
-void DLL_IMPORT_EXPORT_ORKBASE OrkSleepNs(unsigned int nsec);
-int DLL_IMPORT_EXPORT_ORKBASE ork_vsnprintf(char *buf, apr_size_t len, const char *format, ...);
-CStdString DLL_IMPORT_EXPORT_ORKBASE AprGetErrorMsg(apr_status_t ret);
-CStdString DLL_IMPORT_EXPORT_ORKBASE GetRevertedNormalizedPhoneNumber(CStdString input);
-bool DLL_IMPORT_EXPORT_ORKBASE CompareNormalizedPhoneNumbers(CStdString input1, CStdString input2);
+bool StringIsDigit(CStdString& string);
+bool StringIsPhoneNumber(CStdString& string);
+bool MatchesStringList(CStdString& string, std::list<CStdString>& stringList);
+CStdString FormatDataSize(unsigned long int size);
+CStdString HexToString(const CStdString& hexInput);		//Only return digits
+CStdString IntUnixTsToString(int ts);
+void StringTokenizeToList(CStdString input, std::list<CStdString>& output);
+bool ChopToken(CStdString &token, CStdString separator, CStdString &s);
+CStdString ReplaceRegexBy(CStdString input, CStdString pattern, CStdString replacedBy);
+void OrkSleepSec(unsigned int sec);
+void OrkSleepMs(unsigned int msec);
+void OrkSleepMicrSec(unsigned int microsec);
+void OrkSleepNs(unsigned int nsec);
+int ork_vsnprintf(char *buf, apr_size_t len, const char *format, ...);
+CStdString AprGetErrorMsg(apr_status_t ret);
+CStdString GetRevertedNormalizedPhoneNumber(CStdString input);
+bool CompareNormalizedPhoneNumbers(CStdString input1, CStdString input2);
 //========================================================
 // file related stuff
 
-CStdString DLL_IMPORT_EXPORT_ORKBASE FileBaseName(CStdString& path);
-CStdString DLL_IMPORT_EXPORT_ORKBASE FilePath(CStdString& path);
-CStdString DLL_IMPORT_EXPORT_ORKBASE FileStripExtension(CStdString& filename);
-bool DLL_IMPORT_EXPORT_ORKBASE FileCanOpen(CStdString& path);
-void DLL_IMPORT_EXPORT_ORKBASE FileRecursiveMkdir(CStdString& path, int permissions, CStdString owner, CStdString group, CStdString rootDirectory);
-int DLL_IMPORT_EXPORT_ORKBASE FileSetPermissions(CStdString filename, int permissions);
-int DLL_IMPORT_EXPORT_ORKBASE FileSetOwnership(CStdString filename, CStdString owner, CStdString group);
-void DLL_IMPORT_EXPORT_ORKBASE FileEscapeName(CStdString& in, CStdString& out);
-bool DLL_IMPORT_EXPORT_ORKBASE FileIsExist(CStdString fileName);
-int DLL_IMPORT_EXPORT_ORKBASE FileSizeInKb(CStdString fileName);	//return file's size in Kb
+CStdString FileBaseName(CStdString& path);
+CStdString FilePath(CStdString& path);
+CStdString FileStripExtension(CStdString& filename);
+bool FileCanOpen(CStdString& path);
+void FileRecursiveMkdir(CStdString& path, int permissions, CStdString owner, CStdString group, CStdString rootDirectory);
+int FileSetPermissions(CStdString filename, int permissions);
+int FileSetOwnership(CStdString filename, CStdString owner, CStdString group);
+void FileEscapeName(CStdString& in, CStdString& out);
+bool FileIsExist(CStdString fileName);
+int FileSizeInKb(CStdString fileName);	//return file's size in Kb
 
 //===========================================================
-int DLL_IMPORT_EXPORT_ORKBASE GetOrekaRtpPayloadTypeForSdpRtpMap(CStdString sdp);
+int GetOrekaRtpPayloadTypeForSdpRtpMap(CStdString sdp);
 
 // threading related stuff
 typedef std::lock_guard<std::mutex> MutexSentinel;
@@ -301,19 +301,19 @@ typedef std::lock_guard<std::mutex> MutexSentinel;
 //We should set the apr_socket_t timeout to minimum, i.e 100ms before using OrkRecv_n or OrkSend_n
 //The small socket timeout will minimize the delay of Ork's timeout, i.e max at timeoutMs + 100ms
 
-int DLL_IMPORT_EXPORT_ORKBASE OrkAprSocketWait(apr_socket_t *sock, int direction); 	//1:read 0:write
-int DLL_IMPORT_EXPORT_ORKBASE OrkRecv_n(apr_socket_t* socket, char* buf, int len, int64_t timeoutMs, int &lenRead);
-int DLL_IMPORT_EXPORT_ORKBASE OrkSend_n(apr_socket_t* socket, const char* buf, int len, int64_t timeoutMs, int &lenSent);
+int OrkAprSocketWait(apr_socket_t *sock, int direction); 	//1:read 0:write
+int OrkRecv_n(apr_socket_t* socket, char* buf, int len, int64_t timeoutMs, int &lenRead);
+int OrkSend_n(apr_socket_t* socket, const char* buf, int len, int64_t timeoutMs, int &lenSent);
 #ifndef CENTOS_6
-int DLL_IMPORT_EXPORT_ORKBASE SSL_writev (SSL *ssl, const struct iovec *vector, int count);
-int DLL_IMPORT_EXPORT_ORKBASE OrkSsl_Accept(SSL* ssl, int timeoutMs, CStdString &errstr);
-int DLL_IMPORT_EXPORT_ORKBASE OrkSsl_Connect(SSL* ssl, int timeoutMs, CStdString &errstr);
-int DLL_IMPORT_EXPORT_ORKBASE OrkSslRead(apr_socket_t* sock, SSL* ssl, char* buf, int len);
-void DLL_IMPORT_EXPORT_ORKBASE OrkSslRead_n(apr_socket_t* sock, SSL* ssl, char* buf, int len, int64_t timeoutMs, int &lenRead);
-int DLL_IMPORT_EXPORT_ORKBASE OrkSslWrite(apr_socket_t* sock, SSL* ssl, const char* buf, int len);
-void DLL_IMPORT_EXPORT_ORKBASE OrkSslWrite_n(apr_socket_t* sock, SSL* ssl, const char* buf, int len, int64_t timeoutMs, int &lenWritten);
+int SSL_writev (SSL *ssl, const struct iovec *vector, int count);
+int OrkSsl_Accept(SSL* ssl, int timeoutMs, CStdString &errstr);
+int OrkSsl_Connect(SSL* ssl, int timeoutMs, CStdString &errstr);
+int OrkSslRead(apr_socket_t* sock, SSL* ssl, char* buf, int len);
+void OrkSslRead_n(apr_socket_t* sock, SSL* ssl, char* buf, int len, int64_t timeoutMs, int &lenRead);
+int OrkSslWrite(apr_socket_t* sock, SSL* ssl, const char* buf, int len);
+void OrkSslWrite_n(apr_socket_t* sock, SSL* ssl, const char* buf, int len, int64_t timeoutMs, int &lenWritten);
 #endif
-int DLL_IMPORT_EXPORT_ORKBASE OrkGetHostname(char *name, int len);
+int OrkGetHostname(char *name, int len);
 #define ORKMAXHOSTLEN 256
 typedef struct 
 {
@@ -323,7 +323,7 @@ typedef struct
 	unsigned short port;
 } TcpAddress;
 
-class DLL_IMPORT_EXPORT_ORKBASE TcpAddressList
+class TcpAddressList
 {
 public:
 	void AddAddress(struct in_addr ip, unsigned short port);
@@ -333,7 +333,7 @@ private:
 	std::list<TcpAddress> m_addresses;
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE IpRanges
+class IpRanges
 {
 public:
 	bool Matches(struct in_addr ip);
@@ -346,7 +346,7 @@ private:
 	std::list<unsigned int> m_ipRangeBitWidths;
 };
 
-void DLL_IMPORT_EXPORT_ORKBASE GetHostFqdn(CStdString& fqdn, int size);
+void GetHostFqdn(CStdString& fqdn, int size);
 
 //=====================================================
 // Miscellanous stuff
@@ -418,7 +418,7 @@ inline void SetThreadName(const char *name)
 	pthread_setname_np(pthread_self(),threadname);
 }
 #endif
-class DLL_IMPORT_EXPORT_ORKBASE OrkTimeValue
+class OrkTimeValue
 {
 public:
 	OrkTimeValue(){
@@ -487,7 +487,7 @@ private:
 
 };
 
-void DLL_IMPORT_EXPORT_ORKBASE set_socket_buffer_size(log4cxx::LoggerPtr log, const char *msg, apr_socket_t *sock, int size);
+void set_socket_buffer_size(log4cxx::LoggerPtr log, const char *msg, apr_socket_t *sock, int size);
 
 
 
@@ -512,12 +512,12 @@ typedef enum
 } RtpPayloadType;
 
 CStdString RtpPayloadTypeEnumToString(char pt);
-size_t DLL_IMPORT_EXPORT_ORKBASE ciFind(const std::string &Haystack, const std::string &Needle);
+size_t ciFind(const std::string &Haystack, const std::string &Needle);
 #ifdef SUPPORT_TLS_SERVER
-CStdString DLL_IMPORT_EXPORT_ORKBASE SSLErrorQ();
+CStdString SSLErrorQ();
 #endif
 
 #ifndef WIN32
-void DLL_IMPORT_EXPORT_ORKBASE check_pcap_capabilities(log4cxx::LoggerPtr log);
+void check_pcap_capabilities(log4cxx::LoggerPtr log);
 #endif
 #endif

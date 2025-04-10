@@ -27,7 +27,7 @@
 #define PASSWORD_PARAM "password"
 #define SSH_PORT_PARAM "sshport"
 
-class DLL_IMPORT_EXPORT_ORKBASE InitMsg : public SyncMessage
+class InitMsg : public SyncMessage
 {
 public:
 	InitMsg();

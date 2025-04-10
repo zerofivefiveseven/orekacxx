@@ -48,7 +48,7 @@ typedef enum
 
 #define RTP_PAYLOAD_TYPE_MAX 127
 
-class DLL_IMPORT_EXPORT_ORKBASE AudioChunkDetails
+class AudioChunkDetails
 {
 public:
 	AudioChunkDetails();
@@ -69,7 +69,7 @@ public:
 /**
  * This class represents a piece of audio.
  */
-class DLL_IMPORT_EXPORT_ORKBASE AudioChunk
+class AudioChunk
 {
 public:
 	AudioChunk();
@@ -99,10 +99,10 @@ public:
 	void FreeAll();
 
 	int GetNumSamples();
-	int GetNumBytes();
-	int GetSampleRate();
+	int GetNumBytes() const;
+	int GetSampleRate() const;
 	double GetDurationSec();
-	AudioEncodingEnum GetEncoding();
+	AudioEncodingEnum GetEncoding() const;
 	AudioChunkDetails* GetDetails();
 	void SetDetails(AudioChunkDetails* details);
 
@@ -123,7 +123,7 @@ typedef oreka::shared_ptr<AudioChunk> AudioChunkRef;
 
 //==========================================================
 
-class DLL_IMPORT_EXPORT_ORKBASE CaptureEvent
+class CaptureEvent
 {
 public:
 	CaptureEvent();
@@ -141,7 +141,7 @@ public:
 		LocalSideInvalid = 4
 	} LocalSideEnum;
 	static CStdString LocalSideToString(int);
-	static int LocalSideToEnum(CStdString& localSideString);
+	static int LocalSideToEnum(const CStdString& localSideString);
 
 #define AUDIOKEEPDIRECTION_BOTH "both"
 #define AUDIOKEEPDIRECTION_LOCAL "local"
@@ -156,8 +156,8 @@ public:
 		AudioKeepDirectionInvalid = 4
 	} AudioKeepDirectionEnum;
 	static CStdString AudioKeepDirectionToString(int);
-	static int AudioKeepDirectionToEnum(CStdString& audioKeepDirectionString);
-	static bool AudioKeepDirectionIsDefault(CStdString& audioKeepDirectionString);
+	static int AudioKeepDirectionToEnum(const CStdString& audioKeepDirectionString);
+	static bool AudioKeepDirectionIsDefault(const CStdString& audioKeepDirectionString);
 
 #define DIR_IN "in"
 #define DIR_OUT "out"
@@ -222,7 +222,7 @@ public:
 		EtInvalid = 21
 	} EventTypeEnum;
 	static CStdString EventTypeToString(int eventTypeEnum);
-	static int EventTypeToEnum(CStdString&);
+	static int EventTypeToEnum(const CStdString&);
 
 	time_t m_timestamp;
 	int m_offsetMs;
@@ -254,8 +254,8 @@ typedef oreka::shared_ptr<CaptureEvent> CaptureEventRef;
 		FfInvalid = 7
 	} FileFormatEnum;
 
-int DLL_IMPORT_EXPORT_ORKBASE FileFormatToEnum(CStdString& format);
-CStdString DLL_IMPORT_EXPORT_ORKBASE FileFormatToString(int formatEnum);
-CStdString DLL_IMPORT_EXPORT_ORKBASE FileFormatGetExtension(FileFormatEnum);
+int FileFormatToEnum(const CStdString& format);
+CStdString FileFormatToString(int formatEnum);
+CStdString FileFormatGetExtension(FileFormatEnum);
 
 #endif

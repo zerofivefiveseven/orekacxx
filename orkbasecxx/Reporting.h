@@ -19,14 +19,14 @@
 #include "AudioTape.h"
 #include <mutex>
 
-class DLL_IMPORT_EXPORT_ORKBASE Reporting : public TapeProcessor
+class Reporting : public TapeProcessor
 {
 public:
 	static void Initialize();
 	static Reporting* Instance();
 
 	CStdString  GetName();
-	TapeProcessorRef  Instanciate();
+	TapeProcessorRef  Instanciate() override;
 	void  AddAudioTape(AudioTapeRef& audioTapeRef);
 	bool  AddMessage(MessageRef messageRef);
 	void  SkipTapes(int number, CStdString trackingServer="");
@@ -49,7 +49,7 @@ private:
 	//ACE_Thread_Mutex m_mutex;
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE ReportingSkipTapeMsg : public SyncMessage
+class ReportingSkipTapeMsg : public SyncMessage
 {
 public:
 	ReportingSkipTapeMsg();

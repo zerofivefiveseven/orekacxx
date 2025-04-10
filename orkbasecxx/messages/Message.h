@@ -38,7 +38,7 @@
 
 /** A Message is an Object that is meant to be sent to a remote server.
 */
-class DLL_IMPORT_EXPORT_ORKBASE Message : public Object
+class Message : public Object
 {
 public:
 	Message();

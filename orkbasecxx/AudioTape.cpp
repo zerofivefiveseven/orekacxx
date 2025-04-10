@@ -33,15 +33,18 @@ AudioTapeDescription::AudioTapeDescription()
 
 	if(CaptureEvent::AudioKeepDirectionIsDefault(CONFIG.m_audioKeepDirectionIncomingDefault) == false)
 	{
-		m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(CONFIG.m_audioKeepDirectionIncomingDefault);
+		m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(CaptureEvent::AudioKeepDirectionToEnum(
+			CONFIG.m_audioKeepDirectionIncomingDefault));
 	}
 	else if(CaptureEvent::AudioKeepDirectionIsDefault(CONFIG.m_audioKeepDirectionOutgoingDefault) == false)
 	{
-		m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(CONFIG.m_audioKeepDirectionOutgoingDefault);
+		m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(CaptureEvent::AudioKeepDirectionToEnum(
+			CONFIG.m_audioKeepDirectionOutgoingDefault));
 	}
 	else
 	{
-		m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(CONFIG.m_audioKeepDirectionDefault);
+		m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(CaptureEvent::AudioKeepDirectionToEnum(
+			CONFIG.m_audioKeepDirectionDefault));
 	}
 
 	m_duration = 0;
@@ -52,9 +55,9 @@ void AudioTapeDescription::Define(Serializer* s)
 {
 	s->DateValue("date", m_beginDate);
 	s->IntValue("duration", m_duration);
-	s->EnumValue("direction", (int&)m_direction, CaptureEvent::DirectionToEnum, CaptureEvent::DirectionToString);
-	s->EnumValue("localside", (int&)m_localSide, CaptureEvent::LocalSideToEnum, CaptureEvent::LocalSideToString);
-	s->EnumValue("audiokeepdirection", (int&)m_audioKeepDirectionEnum, CaptureEvent::AudioKeepDirectionToEnum, CaptureEvent::AudioKeepDirectionToString);
+	s->EnumValue("direction", reinterpret_cast<int &>(m_direction), CaptureEvent::DirectionToEnum, CaptureEvent::DirectionToString);
+	s->EnumValue("localside", reinterpret_cast<int &>(m_localSide), StringToEnumFunction(CaptureEvent::LocalSideToEnum), CaptureEvent::LocalSideToString);
+	s->EnumValue("audiokeepdirection", reinterpret_cast<int &>(m_audioKeepDirectionEnum), StringToEnumFunction(CaptureEvent::AudioKeepDirectionToEnum), CaptureEvent::AudioKeepDirectionToString);
 	s->StringValue("capturePort", m_capturePort);
 	s->StringValue("localParty", m_localParty);
 	s->StringValue("remoteParty", m_remoteParty);
@@ -105,15 +108,18 @@ AudioTape::AudioTape(CStdString &portId)
 
 	if(CaptureEvent::AudioKeepDirectionIsDefault(CONFIG.m_audioKeepDirectionIncomingDefault) == false)
 	{
-		m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(CONFIG.m_audioKeepDirectionIncomingDefault);
+		m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(CaptureEvent::AudioKeepDirectionToEnum(
+			CONFIG.m_audioKeepDirectionIncomingDefault));
 	}
 	else if(CaptureEvent::AudioKeepDirectionIsDefault(CONFIG.m_audioKeepDirectionOutgoingDefault) == false)
 	{
-		m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(CONFIG.m_audioKeepDirectionOutgoingDefault);
+		m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(CaptureEvent::AudioKeepDirectionToEnum(
+			CONFIG.m_audioKeepDirectionOutgoingDefault));
 	}
 	else
 	{
-		m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(CONFIG.m_audioKeepDirectionDefault);
+		m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(CaptureEvent::AudioKeepDirectionToEnum(
+			CONFIG.m_audioKeepDirectionDefault));
 	}
 
 	m_shouldStop = false;
@@ -150,15 +156,18 @@ AudioTape::AudioTape(CStdString &portId, CStdString& file)
 
 	if(CaptureEvent::AudioKeepDirectionIsDefault(CONFIG.m_audioKeepDirectionIncomingDefault) == false)
 	{
-		m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(CONFIG.m_audioKeepDirectionIncomingDefault);
+		m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(CaptureEvent::AudioKeepDirectionToEnum(
+			CONFIG.m_audioKeepDirectionIncomingDefault));
 	}
 	else if(CaptureEvent::AudioKeepDirectionIsDefault(CONFIG.m_audioKeepDirectionOutgoingDefault) == false)
 	{
-		m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(CONFIG.m_audioKeepDirectionOutgoingDefault);
+		m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(CaptureEvent::AudioKeepDirectionToEnum(
+			CONFIG.m_audioKeepDirectionOutgoingDefault));
 	}
 	else
 	{
-		m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(CONFIG.m_audioKeepDirectionDefault);
+		m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(CaptureEvent::AudioKeepDirectionToEnum(
+			CONFIG.m_audioKeepDirectionDefault));
 	}
 
 	m_chunkQueueDataSize = 0;
@@ -178,7 +187,7 @@ AudioTape::AudioTape(CStdString &portId, CStdString& file)
 	m_audioFileRef->SetFilename(file);
 }
 
-void AudioTape::AddAudioChunk(AudioChunkRef chunkRef)
+void AudioTape::AddAudioChunk(const AudioChunkRef& chunkRef)
 {
 	// Add the chunk to the local queue
 	if(m_state == StateCreated || m_state == StateActive)
@@ -234,12 +243,11 @@ void AudioTape::Write()
 		// Discard chunks
 		while(!done)
 		{
-			AudioChunkRef chunkRef;
 			{
 				MutexSentinel sentinel(m_mutex);
 				if(m_chunkQueue.size() > 0)
 				{
-					chunkRef = m_chunkQueue.front();
+					AudioChunkRef chunkRef = m_chunkQueue.front();
 					m_chunkQueue.pop();
 
 					m_popCount += 1;
@@ -320,7 +328,7 @@ void AudioTape::Write()
 				{
 					if((m_bytesWritten / 1024) > CONFIG.m_captureFileSizeLimitKb)
 					{
-						if((time(NULL) - m_lastLogWarning) > 3600)
+						if((time(nullptr) - m_lastLogWarning) > 3600)
 						{
 							CStdString logMsg;
 
@@ -438,10 +446,10 @@ void AudioTape::AddCaptureEvent(CaptureEventRef eventRef, bool send)
 		}
 		break;
 	case CaptureEvent::EtLocalSide:
-		m_localSide = (CaptureEvent::LocalSideEnum)CaptureEvent::LocalSideToEnum(eventRef->m_value);
+		m_localSide = static_cast<CaptureEvent::LocalSideEnum>(CaptureEvent::LocalSideToEnum(eventRef->m_value));
 		break;
 	case CaptureEvent::EtAudioKeepDirection:
-		m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(eventRef->m_value);
+		m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(CaptureEvent::AudioKeepDirectionToEnum(eventRef->m_value));
 
 		audioDirectionMarks.reset(new AudioDirectionMarks());
 		audioDirectionMarks->m_timestamp = time(NULL);
@@ -453,7 +461,7 @@ void AudioTape::AddCaptureEvent(CaptureEventRef eventRef, bool send)
 		m_audioDirectionMarks.push_back(audioDirectionMarks);		//now add to the map
 		break;
 	case CaptureEvent::EtDirection:
-		m_direction = (CaptureEvent::DirectionEnum)CaptureEvent::DirectionToEnum(eventRef->m_value);
+		m_direction = static_cast<CaptureEvent::DirectionEnum>(CaptureEvent::DirectionToEnum(eventRef->m_value));
 		break;
 	case CaptureEvent::EtRemoteParty:
 		{
@@ -571,7 +579,7 @@ void AudioTape::AddCaptureEvent(CaptureEventRef eventRef, bool send)
 			m_toSendEventQueue.push(eventRef);
 		}
 		// Store or update the tags
-		if(eventRef->m_type == CaptureEvent::EtKeyValue && eventRef->m_value.size() > 0 && eventRef->m_key.size() > 0)
+		if(eventRef->m_type == CaptureEvent::EtKeyValue && !eventRef->m_value.empty() && !eventRef->m_key.empty())
 		{
 			// dtmfdigit is considered a dynamic tag by default, even if it's not listed in <DynamicTags>
 			// <DtmfReportingDetailed> is OBSOLETE, use the DTagReporting CapturePortFilter instead
@@ -631,8 +639,8 @@ void AudioTape::GetMessage(MessageRef& msgRef)
 		}
 	}
 
-	msgRef.reset(new TapeMsg);
-	TapeMsg* pTapeMsg = (TapeMsg*)msgRef.get();
+	msgRef = std::make_shared<TapeMsg>();
+	TapeMsg* pTapeMsg = static_cast<TapeMsg *>(msgRef.get());
 	if(captureEventRef.get() == 0)
 	{
 		// No more events, the tape is ready

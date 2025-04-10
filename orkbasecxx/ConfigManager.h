@@ -21,7 +21,7 @@
 
 class ConfigManager;
 
-class DLL_IMPORT_EXPORT_ORKBASE ConfigManager
+class ConfigManager
 {
 public:
 	static ConfigManager* Instance();

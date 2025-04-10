@@ -17,7 +17,7 @@
 #include "ThreadSafeQueue.h"
 #include "AudioTape.h"
 #include <mutex>
-class DLL_IMPORT_EXPORT_ORKBASE ImmediateProcessing : public OrkSingleton<ImmediateProcessing>
+class ImmediateProcessing : public OrkSingleton<ImmediateProcessing>
 {
 public:
 	ImmediateProcessing();

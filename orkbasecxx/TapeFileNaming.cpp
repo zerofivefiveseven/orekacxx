@@ -27,7 +27,7 @@ TapeProcessorRef TapeFileNaming::m_singleton;
 
 void TapeFileNaming::Initialize()
 {
-	if(m_singleton.get() == NULL)
+	if(m_singleton.get() == nullptr)
 	{
 		m_singleton.reset(new TapeFileNaming());
 		TapeProcessorRegistry::instance()->RegisterTapeProcessor(m_singleton);

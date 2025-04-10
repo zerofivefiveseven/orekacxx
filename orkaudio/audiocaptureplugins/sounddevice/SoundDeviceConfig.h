@@ -14,9 +14,9 @@
 #ifndef __SOUNDDEVICECONFIG_H__
 #define __SOUNDDEVICECONFIG_H__
 
-#include "StdString.h"
-#include "Object.h"
-#include "shared_ptr.h"
+#include "../../../orkbasecxx/StdString.h"
+#include "../../../orkbasecxx/Object.h"
+#include "../../../orkbasecxx/shared_ptr.h"
  
 #define AUDIO_CHUNK_SIZE_PARAM "AudioChunkSize"
 #define AUDIO_CHUNK_SIZE_DEFAULT 8000

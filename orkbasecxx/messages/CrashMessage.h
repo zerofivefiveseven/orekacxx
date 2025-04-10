@@ -16,7 +16,7 @@
 
 #include "messages/SyncMessage.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE CrashMsg : public SyncMessage
+class CrashMsg : public SyncMessage
 {
 public:
 	void Define(Serializer* s);

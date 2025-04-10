@@ -17,7 +17,7 @@
 #include "Filter.h"
 #include "G722.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE G722ToPcmFilter : public Filter
+class G722ToPcmFilter : public Filter
 {
 public:
 	G722ToPcmFilter();

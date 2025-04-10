@@ -87,7 +87,7 @@ typedef oreka::shared_ptr<Serializer> SerializerRef;
 
 /** Base class for all Key-Value pair based serializers.
 */
-class DLL_IMPORT_EXPORT_ORKBASE KeyValueSerializer : public Serializer
+class KeyValueSerializer : public Serializer
 {
 public:
 	KeyValueSerializer(Object* object) : Serializer(object), m_numParams(0){};

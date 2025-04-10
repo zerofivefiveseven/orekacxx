@@ -69,7 +69,7 @@ typedef struct
 } oe_enc_opt;
 
 
-class DLL_IMPORT_EXPORT_ORKBASE OggOpusFile : public AudioFile
+class OggOpusFile : public AudioFile
 {
 public:
 	OggOpusFile();

@@ -21,7 +21,7 @@
 
 
 /** Base class for all file accessor classes. */
-class DLL_IMPORT_EXPORT_ORKBASE AudioFile
+class AudioFile
 {
 public:
 	AudioFile();

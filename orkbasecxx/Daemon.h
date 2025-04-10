@@ -17,7 +17,7 @@
 #include "StdString.h"
 typedef void (*DaemonHandler)(void);
 
-class DLL_IMPORT_EXPORT_ORKBASE Daemon
+class Daemon
 {
 public:
 	static void Initialize(CStdString serviceName, DaemonHandler runHandler, DaemonHandler stopHandler);
@@ -41,12 +41,12 @@ private:
 	static void Run();
 #endif
 
-	DaemonHandler m_runHandler;
-	DaemonHandler m_stopHandler;
+	DaemonHandler m_runHandler{};
+	DaemonHandler m_stopHandler{};
 	CStdString m_serviceName;
 
-	bool m_stopping;
-	bool m_shortLived;
+	bool m_stopping{};
+	bool m_shortLived{};
 };
 
 #endif

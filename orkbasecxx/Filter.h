@@ -35,7 +35,7 @@ typedef oreka::shared_ptr<Filter> FilterRef;
  *  a filter is a black box that takes media chunks as an input and produces media chunks as an output
  *  it can be translating between two encodings (codec) or just processing the signal
  */
-class DLL_IMPORT_EXPORT_ORKBASE Filter
+class Filter
 {
 public:
 	Filter();
@@ -60,7 +60,7 @@ protected:
 };
 //===================================================================
 
-class DLL_IMPORT_EXPORT_ORKBASE AlawToPcmFilter : public Filter
+class AlawToPcmFilter : public Filter
 {
 public:
 	FilterRef __CDECL__ Instanciate();
@@ -79,7 +79,7 @@ private:
 
 //===================================================================
 
-class DLL_IMPORT_EXPORT_ORKBASE UlawToPcmFilter : public Filter
+class UlawToPcmFilter : public Filter
 {
 public:
 	FilterRef __CDECL__ Instanciate();
@@ -99,7 +99,7 @@ private:
 //===================================================================
 /** Filter Registry
 */
-class DLL_IMPORT_EXPORT_ORKBASE FilterRegistry
+class FilterRegistry
 {
 public:
 	static FilterRegistry* instance();

@@ -287,7 +287,7 @@ void CapturePort::AddCaptureEvent(CaptureEventRef eventRef)
 {
 	FilterCaptureEvent(eventRef);
 
-	m_lastUpdated = time(NULL);
+	m_lastUpdated = time(nullptr);
 
 	AudioTapeRef audioTapeRef = m_audioTapeRef;
 

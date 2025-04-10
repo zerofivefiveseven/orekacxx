@@ -45,7 +45,7 @@ class CdrInfo {
 typedef oreka::shared_ptr<CdrInfo> CdrInfoRef;
 
 
-class DLL_IMPORT_EXPORT_ORKBASE SocketStreamer {
+class SocketStreamer {
 public:
 	static void Initialize(std::list<CStdString>& targetList, SocketStreamerFactory *factory=NULL);
 
@@ -77,7 +77,7 @@ private:
 	bool Spawn();
 };
 
-class DLL_IMPORT_EXPORT_ORKBASE SocketStreamerFactory
+class SocketStreamerFactory
 {
 protected:
 	SocketStreamerFactory() {}

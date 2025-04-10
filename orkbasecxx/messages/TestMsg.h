@@ -24,7 +24,7 @@
 #define DIRECTION_PARAM "direction"
 #define LOCALENTRYPOINT_PARAM "localentrypoint"
 
-class DLL_IMPORT_EXPORT_ORKBASE TestMsg : public SyncMessage
+class TestMsg : public SyncMessage
 {
 public:
 	TestMsg();

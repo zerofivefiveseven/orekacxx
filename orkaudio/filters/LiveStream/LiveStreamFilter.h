@@ -24,7 +24,7 @@
 #include "LiveStreamServer.h"
 #include "RingBuffer.h"
 
-class DLL_IMPORT_EXPORT_ORKBASE LiveStreamFilter : public Filter {
+class LiveStreamFilter : public Filter {
     public:
         LiveStreamFilter();
         ~LiveStreamFilter();

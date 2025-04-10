@@ -18,7 +18,7 @@ extern "C"
   #include "decoder.h"
 }
 
-class DLL_IMPORT_EXPORT_ORKBASE G729CodecDecoder : public Filter
+class G729CodecDecoder : public Filter
 {
   public:
     G729CodecDecoder();

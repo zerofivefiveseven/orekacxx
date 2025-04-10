@@ -13,7 +13,7 @@
 #ifndef __PARTYFILTER_H__
 #define __PARTYFILTER_H__ 1
 
-bool DLL_IMPORT_EXPORT_ORKBASE PartyFilterActive(void);
-bool DLL_IMPORT_EXPORT_ORKBASE PartyFilterMatches(CStdString& party);
+bool PartyFilterActive(void);
+bool PartyFilterMatches(CStdString& party);
 
 #endif

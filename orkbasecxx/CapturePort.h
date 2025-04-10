@@ -27,7 +27,7 @@
 
 #define HOSTNAME_BUF_LEN 255
 /** Base class for all types of capture ports. */ 
-class DLL_IMPORT_EXPORT_ORKBASE CapturePort
+class CapturePort
 {
 public:
 	CapturePort(CStdString& Id);
@@ -64,7 +64,7 @@ private:
 typedef oreka::shared_ptr<CapturePort> CapturePortRef;
 
 /** This singleton holds all dynamically created capture ports and allows convenient access. */
-class DLL_IMPORT_EXPORT_ORKBASE CapturePorts: public OrkSingleton<CapturePorts>
+class CapturePorts: public OrkSingleton<CapturePorts>
 {
 public:
 	CapturePorts();

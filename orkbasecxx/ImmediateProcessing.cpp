@@ -95,7 +95,7 @@ void ImmediateProcessing::ThreadHandler()
 		{
 			AudioTapeRef audioTapeRef = pImmediateProcessing->Pop(lastHandled);
 
-			if(audioTapeRef.get() == NULL)
+			if(audioTapeRef.get() == nullptr)
 			{
 				lastHandled = "NULL";
 				if(Daemon::Singleton()->IsStopping())

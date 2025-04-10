@@ -16,7 +16,7 @@ extern "C"
 #include "gsm.h"
 }
 
-class DLL_IMPORT_EXPORT_ORKBASE GsmToPcmFilter : public Filter
+class GsmToPcmFilter : public Filter
 {
 public:
 	GsmToPcmFilter();

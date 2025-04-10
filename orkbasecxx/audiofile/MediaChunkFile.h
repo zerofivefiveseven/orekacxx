@@ -19,7 +19,7 @@
 #include "Utils.h"
 #include <fstream>
 /** File class for saving audio chunks as-is */
-class DLL_IMPORT_EXPORT_ORKBASE MediaChunkFile : public AudioFile
+class MediaChunkFile : public AudioFile
 {
 public:
 	MediaChunkFile();

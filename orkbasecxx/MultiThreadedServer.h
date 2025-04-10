@@ -27,7 +27,7 @@
 	commands are accepted in "single line" format.
 	one thread per connection
 */
-class DLL_IMPORT_EXPORT_ORKBASE CommandLineServer
+class CommandLineServer
 {
 public:
 	CommandLineServer(int port);
@@ -49,7 +49,7 @@ private:
 	Example url:
 	http://localhost:23000/message=print&text=hello
 */
-class DLL_IMPORT_EXPORT_ORKBASE HttpServer
+class HttpServer
 {
 public:
 	HttpServer(int port);
@@ -71,7 +71,7 @@ private:
 #ifdef SUPPORT_TLS_SERVER
 typedef void FN_HandleSslHttpMessage(log4cxx::LoggerPtr s_log, apr_socket_t* sock);
 
-class DLL_IMPORT_EXPORT_ORKBASE HttpsServer
+class HttpsServer
 {
 public:
 	HttpsServer();
@@ -106,7 +106,7 @@ private:
     format of all events from a given port, one thread per connection e.g
 	http://localhost:23000/message=streamevents
 */
-class DLL_IMPORT_EXPORT_ORKBASE EventStreamingServer
+class EventStreamingServer
 {
 public:
 	EventStreamingServer(int port);
@@ -124,8 +124,8 @@ private:
 	static void StreamingSvc(apr_socket_t* sock, apr_pool_t* pool);
 };
 
-extern DLL_IMPORT_EXPORT_ORKBASE std::atomic<unsigned int> s_numHttpSessions;
-extern DLL_IMPORT_EXPORT_ORKBASE std::mutex s_HttpMutex;
+extern std::atomic<unsigned int> s_numHttpSessions;
+extern std::mutex s_HttpMutex;
 
 class HttpCounter
 {
