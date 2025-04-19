@@ -79,7 +79,7 @@ ObjectRef TapeMsg::NewInstance()
 
 ObjectRef TapeMsg::Process()
 {
-	return ObjectRef();
+	return {};
 }
 
 MessageRef TapeMsg::CreateResponse() {

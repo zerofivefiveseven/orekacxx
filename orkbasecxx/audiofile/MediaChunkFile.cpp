@@ -84,7 +84,7 @@ bool MediaChunkFile::FlushToDisk()
 
 void MediaChunkFile::WriteChunk(AudioChunkRef chunkRef)
 {
-	if(chunkRef.get() == NULL)
+	if(chunkRef.get() == nullptr)
 	{
 		return;
 	}
@@ -99,7 +99,7 @@ void MediaChunkFile::WriteChunk(AudioChunkRef chunkRef)
 	m_chunkQueueDataSize += pChunk->GetNumBytes();
 	m_chunkQueue.push(chunkRef);
 
-	if(m_chunkQueueDataSize > (unsigned int)(CONFIG.m_captureFileBatchSizeKByte*1024))
+	if(m_chunkQueueDataSize > static_cast<unsigned int>((CONFIG.m_captureFileBatchSizeKByte * 1024)))
 	{
 		if(m_stream.is_open())
 		{
@@ -125,7 +125,7 @@ int MediaChunkFile::ReadChunkMono(AudioChunkRef& chunkRef)
 		chunkRef.reset(new AudioChunk());
 		short temp[MAX_CHUNK_SIZE];
 		numRead = sizeof(AudioChunkDetails);
-		m_stream.read((char*)temp, numRead);
+		m_stream.read(reinterpret_cast<char *>(temp), numRead);
 		if(m_stream.eof()){
 			return 0;
 		}
@@ -141,16 +141,14 @@ int MediaChunkFile::ReadChunkMono(AudioChunkRef& chunkRef)
 			{
 				throw(CStdString("Chunk too big in file:")+ m_filename);
 			}
-			else
+
+			int numRead = details.m_numBytes;
+			m_stream.read(reinterpret_cast<char *>(temp), numRead);
+			if(m_stream.fail())
 			{
-				int numRead = details.m_numBytes;
-				m_stream.read((char*)temp, numRead);	
-				if(m_stream.fail())
-				{
-					throw(CStdString("Incomplete chunk in file:")+ m_filename);
-				}
-				chunkRef->SetBuffer(temp, details);
+				throw(CStdString("Incomplete chunk in file:")+ m_filename);
 			}
+			chunkRef->SetBuffer(temp, details);
 		}
 	}
 	else
@@ -208,3 +206,75 @@ void MediaChunkFile::SetNumOutputChannels(int numChan)
 
 }
 
+
+
+
+
+
+
+
+#include <iostream>
+#include <vector>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <unistd.h>
+#include <cstring>
+#include <cerrno>
+
+constexpr char SOCKET_PATH[] = "/tmp/buffer_transfer.sock";
+constexpr size_t BUFFER_SIZE = 1024; // Example buffer size
+
+bool send_buffer(int sockfd, const std::vector<char>& buffer) {
+    // First send the buffer size
+    size_t buffer_size = buffer.size();
+    if (write(sockfd, &buffer_size, sizeof(buffer_size)) != sizeof(buffer_size)) {
+        std::cerr << "Failed to send buffer size: " << strerror(errno) << std::endl;
+        return false;
+    }
+
+    // Then send the buffer contents
+    if (write(sockfd, buffer.data(), buffer_size) != static_cast<ssize_t>(buffer_size)) {
+        std::cerr << "Failed to send buffer data: " << strerror(errno) << std::endl;
+        return false;
+    }
+
+    return true;
+}
+
+int main() {
+    // Create a sample buffer with some data
+    std::vector<char> buffer(BUFFER_SIZE);
+    for (size_t i = 0; i < buffer.size(); ++i) {
+        buffer[i] = 'A' + (i % 26); // Fill with A-Z repeating
+    }
+
+    // Create UNIX domain socket
+    int sockfd = socket(AF_UNIX, SOCK_STREAM, 0);
+    if (sockfd == -1) {
+        std::cerr << "Socket creation failed: " << strerror(errno) << std::endl;
+        return 1;
+    }
+
+    // Connect to server
+    struct sockaddr_un server_addr;
+    memset(&server_addr, 0, sizeof(server_addr));
+    server_addr.sun_family = AF_UNIX;
+    strncpy(server_addr.sun_path, SOCKET_PATH, sizeof(server_addr.sun_path) - 1);
+
+    if (connect(sockfd, (struct sockaddr*)&server_addr, sizeof(server_addr)) == -1) {
+        std::cerr << "Connection failed: " << strerror(errno) << std::endl;
+        close(sockfd);
+        return 1;
+    }
+
+    std::cout << "Connected to server. Sending buffer of size " << buffer.size() << std::endl;
+
+    if (send_buffer(sockfd, buffer)) {
+        std::cout << "Buffer sent successfully!" << std::endl;
+    } else {
+        std::cerr << "Buffer transfer failed" << std::endl;
+    }
+
+    close(sockfd);
+    return 0;
+}

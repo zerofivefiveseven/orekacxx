@@ -42,8 +42,7 @@ void AudioFile::MoveOrig()
 	}
 }
 
-void AudioFile::Delete()
-{
+void AudioFile::Delete() {
 	std::remove((PCSTR)m_filename.c_str());
 }
 

@@ -64,10 +64,10 @@ void SocketStreamer::ThreadHandler(void *args)
 			connected = false;
 			continue;
 		}
-		else if(bytesRead == 0)
-        {
-            continue;
-        }
+		if(bytesRead == 0)
+		{
+			continue;
+		}
 
 		bytesSoFar += bytesRead;
 		if (time(NULL) - lastLogTime > 9 ) {
@@ -156,13 +156,13 @@ void SocketStreamer::Initialize(std::list<CStdString>& targetList, SocketStreame
 	CStdString logMsg;
 	SocketStreamerFactory ssf;
 
-	if (factory == NULL) {
+	if (factory == nullptr) {
 		factory = &ssf;
 	}
 
-	for (std::list<CStdString>::iterator it = targetList.begin(); it != targetList.end(); it++)
+	for (auto & it : targetList)
 	{
-		CStdString target=*it;
+		CStdString target=it;
 
 		CStdString protocol;
 		ChopToken(protocol,"://",target);
@@ -174,7 +174,7 @@ void SocketStreamer::Initialize(std::list<CStdString>& targetList, SocketStreame
 			ss->m_logMsg.Format("protocol:%s",protocol);
 
 			if (!ss->Parse(target) || !ss->Spawn()) {
-				FLOG_ERROR(ss->m_log,"Target:%s - %s", *it, ss->m_logMsg);
+				FLOG_ERROR(ss->m_log,"Target:%s - %s", it, ss->m_logMsg);
 				delete ss;
 			}
 		}

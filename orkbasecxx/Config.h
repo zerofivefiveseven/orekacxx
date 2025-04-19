@@ -31,7 +31,8 @@
 #define STORAGE_AUDIO_FORMAT_DEFAULT FfGsm
 #define NUM_BATCH_THREADS_PARAM "NumBatchThreads"
 #define NUM_COMMAND_THREADS_PARAM "NumCommandThreads"
-#define NUM_BATCH_THREADS_DEFAULT 2
+#define NUM_BATCH_THREADS_DEFAULT std::thread::hardware_concurrency()
+#define NUM_RECORDER_SENDER_THREADS_DEFAULT std::thread::hardware_concurrency()
 #define NUM_DIRECTIONSELECTOR_THREADS_PARAM "NumDirSelectorThreads"
 #define NUM_DIRECTIONSELECTOR_THREADS_DEFAULT 1
 #define NUM_COMMAND_THREADS_DEFAULT 1
@@ -201,6 +202,7 @@ public:
 	CStdString m_capturePluginPath;
 	CStdString m_pluginsDirectory;
 	int m_numBatchThreads;
+	int m_numRecorderSenderThreads;
 	int m_numDirectionSelectorThreads;
 	int m_numCommandThreads;
 	bool m_deleteNativeFile;
@@ -227,6 +229,7 @@ public:
 	int m_reportingQueueSize;
 	int m_immediateProcessingQueueSize;
 	int m_batchProcessingQueueSize;
+	int m_recorderSenderQueueSize;
 	int m_directionSelectorQueueSize;
 	bool m_batchProcessingEnhancePriority;
 	bool m_deleteFailedCaptureFile;

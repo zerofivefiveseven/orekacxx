@@ -14,6 +14,7 @@
 
 #define _WINSOCKAPI_		// prevents the inclusion of winsock.h
 
+#include <memory>
 #include <vector>
 #include <bitset>
 
@@ -34,7 +35,7 @@ TapeProcessorRef BatchProcessing::m_singleton;
 
 void BatchProcessing::Initialize()
 {
-	if(m_singleton.get() == NULL)
+	if(m_singleton.get() == nullptr)
 	{
 		m_singleton.reset(new BatchProcessing());
 		TapeProcessorRegistry::instance()->RegisterTapeProcessor(m_singleton);
@@ -219,7 +220,7 @@ void BatchProcessing::ThreadHandler()
 		LOG4CXX_ERROR(LOG.batchProcessingLog, "Could not instanciate BatchProcessing");
 		return;
 	}
-	BatchProcessing* pBatchProcessing = (BatchProcessing*)(batchProcessing->Instanciate().get());
+	auto pBatchProcessing = dynamic_cast<BatchProcessing *>(batchProcessing->Instanciate().get());
 
 	pBatchProcessing->SetQueueSize(CONFIG.m_batchProcessingQueueSize);
 
@@ -232,9 +233,7 @@ void BatchProcessing::ThreadHandler()
 	debug.Format("thread Th%s starting - queue size:%d", threadIdString, CONFIG.m_batchProcessingQueueSize);
 	LOG4CXX_INFO(LOG.batchProcessingLog, debug);
 
-	bool stop = false;
-
-	for(;stop == false;)
+	for(bool stop = false;stop == false;)
 	{
 		AudioFileRef fileRef;
 		AudioFileRef outFileRef, outFileSecondaryRef;
@@ -283,24 +282,25 @@ void BatchProcessing::ThreadHandler()
 				unsigned int frameSleepCounter;
 
 				frameSleepCounter = 0;
-
+				//Выключаем неиспользуемый нами функционал
 				switch(CONFIG.m_storageAudioFormat)
 				{
 				case FfUlaw:
-					outFileRef.reset(new LibSndFileFile(SF_FORMAT_ULAW | SF_FORMAT_WAV));
-					break;
+					// outFileRef.reset(new LibSndFileFile(SF_FORMAT_ULAW | SF_FORMAT_WAV));
+					// break;
 				case FfAlaw:
-					outFileRef.reset(new LibSndFileFile(SF_FORMAT_ALAW | SF_FORMAT_WAV));
-					break;
+					// outFileRef.reset(new LibSndFileFile(SF_FORMAT_ALAW | SF_FORMAT_WAV));
+					// break;
 				case FfGsm:
-					outFileRef.reset(new LibSndFileFile(SF_FORMAT_GSM610 | SF_FORMAT_WAV));
-					break;
+					// outFileRef.reset(new LibSndFileFile(SF_FORMAT_GSM610 | SF_FORMAT_WAV));
+					// break;
 				case FfOpus:
-					outFileRef.reset( new OggOpusFile());
-					break;
+					// outFileRef.reset( new OggOpusFile());
+					// break;
 				case FfPcmWav:
 				default:
-					outFileRef.reset(new LibSndFileFile(SF_FORMAT_PCM_16 | SF_FORMAT_WAV));
+					outFileRef = std::make_shared<LibSndFileFile>(SF_FORMAT_PCM_16 | SF_FORMAT_WAV);
+					outFileRef = std::dynamic_pointer_cast<LibSndFileFile>(outFileRef);
 				}
 
 				if(CONFIG.m_stereoRecording == true)
@@ -335,7 +335,7 @@ void BatchProcessing::ThreadHandler()
 				CStdString filterName("AudioGain");
 
 				audiogain = FilterRegistry::instance()->GetNewFilter(filterName);
-				if(audiogain.get() == NULL)
+				if(audiogain.get() == nullptr)
 				{
 					debug = "Could not instanciate AudioGain rtpMixer";
 					throw(debug);
@@ -350,10 +350,9 @@ void BatchProcessing::ThreadHandler()
 					// ############ HACK
 
 					AudioChunkDetails details = *chunkRef->GetDetails();
-					int channelToSkip = 0;
 					if(CONFIG.m_directionLookBack == true)					//if DirectionLookBack is not enable, DirectionSelector Tape should have taken care everything
 					{
-						if(BatchProcessing::SkipChunk(audioTapeRef, chunkRef, channelToSkip) == true)
+						if(int channelToSkip = 0; BatchProcessing::SkipChunk(audioTapeRef, chunkRef, channelToSkip) == true)
 						{
 							LOG4CXX_DEBUG(LOG.batchProcessingLog, "[" + trackingId +
 	                                                "] Th" + threadIdString +
@@ -435,13 +434,14 @@ void BatchProcessing::ThreadHandler()
 					if(!voIpSession || (firstChunk && decoder.get()))
 					{
 						firstChunk = false;
-
+						//маркировать буффер с данными
+						//суем в очередь для отправки
 						// At this point, we know we have a working codec, create an RTP mixer and open the output file
 						if(voIpSession)
 						{
 							CStdString filterName("RtpMixer");
 							rtpMixer = FilterRegistry::instance()->GetNewFilter(filterName);
-							if(rtpMixer.get() == NULL)
+							if(rtpMixer.get() == nullptr)
 							{
 								debug = "Could not instanciate RTP mixer";
 								throw(debug);
@@ -474,7 +474,6 @@ void BatchProcessing::ThreadHandler()
 						FileRecursiveMkdir(path, CONFIG.m_audioFilePermissions, CONFIG.m_audioFileOwner, CONFIG.m_audioFileGroup, audioTapeRef->m_audioOutputPath);
 
 						CStdString file = path + "/" + audioTapeRef->GetIdentifier();
-						//тут открываем пайп
 						outFileRef->Open(file, AudioFile::WRITE, false, fileRef->GetSampleRate());
 
 						if(CONFIG.m_audioOutputPathSecondary.length() > 3)
@@ -497,7 +496,7 @@ void BatchProcessing::ThreadHandler()
 								numSamplesS2 += tmpChunkRef->GetNumSamples();
 							}
 
-							if(rtpMixerSecondary.get() != NULL)
+							if(rtpMixerSecondary.get() != nullptr)
 							{
 								decoder2->AudioChunkOut(tmpChunkSecondaryRef);
 							}
@@ -511,7 +510,7 @@ void BatchProcessing::ThreadHandler()
 								numSamplesS1 += tmpChunkRef->GetNumSamples();
 							}
 
-							if(rtpMixerSecondary.get() != NULL)
+							if(rtpMixerSecondary.get() != nullptr)
 							{
 								decoder1->AudioChunkOut(tmpChunkSecondaryRef);
 							}
@@ -521,7 +520,7 @@ void BatchProcessing::ThreadHandler()
 						audiogain->AudioChunkOut(tmpChunkRef);
 						rtpMixer->AudioChunkIn(tmpChunkRef);
 						rtpMixer->AudioChunkOut(tmpChunkRef);
-						if(rtpMixerSecondary.get() != NULL)
+						if(rtpMixerSecondary.get() != nullptr)
 						{
 							rtpMixerSecondary->AudioChunkIn(tmpChunkSecondaryRef);
 							rtpMixerSecondary->AudioChunkOut(tmpChunkSecondaryRef);
@@ -533,7 +532,7 @@ void BatchProcessing::ThreadHandler()
 					}
 
 					outFileRef->WriteChunk(tmpChunkRef);
-					if(rtpMixerSecondary.get() != NULL)
+					if(rtpMixerSecondary.get() != nullptr)
 					{
 						outFileSecondaryRef->WriteChunk(tmpChunkSecondaryRef);
 					}
@@ -550,7 +549,7 @@ void BatchProcessing::ThreadHandler()
 					
 					if(CONFIG.m_transcodingSleepEveryNumFrames > 0 && CONFIG.m_transcodingSleepUs > 0)
 					{
-						if(frameSleepCounter >= (unsigned int)CONFIG.m_transcodingSleepEveryNumFrames)
+						if(frameSleepCounter >= static_cast<unsigned int>(CONFIG.m_transcodingSleepEveryNumFrames))
 						{
 							frameSleepCounter = 0;
 							OrkSleepMicrSec(CONFIG.m_transcodingSleepUs);
@@ -573,7 +572,7 @@ void BatchProcessing::ThreadHandler()
 					if (tmpChunkRef.get()) {
 						tmpChunkRef->GetDetails()->m_marker = MEDIA_CHUNK_EOS_MARKER;
 					}
-					if(rtpMixerSecondary.get() != NULL)
+					if(rtpMixerSecondary.get() != nullptr)
 					{
 						rtpMixerSecondary->AudioChunkOut(tmpChunkSecondaryRef);
 					}
@@ -593,7 +592,7 @@ void BatchProcessing::ThreadHandler()
 
 				fileRef->Close();
 				outFileRef->Close();
-				if(rtpMixerSecondary.get() != NULL)
+				if(rtpMixerSecondary.get() != nullptr)
 				{
 					outFileSecondaryRef->Close();
 				}
@@ -602,9 +601,10 @@ void BatchProcessing::ThreadHandler()
 
 				CStdString audioFilePath = audioTapeRef->m_audioOutputPath + "/" + audioTapeRef->GetPath();
 				CStdString audioFileName;
-				CStdString storageFilePath, storageFileName;
+				CStdString storageFileName;
 				if(CONFIG.m_audioOutputPathSecondary.length() > 3)
 				{
+					CStdString storageFilePath;
 					storageFilePath = CONFIG.m_audioOutputPathSecondary + "/" + audioTapeRef->GetPath();
 					storageFileName = storageFilePath + "/" + audioTapeRef->GetIdentifier() + outFileRef->GetExtension();
 				}

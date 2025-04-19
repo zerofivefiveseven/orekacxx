@@ -122,7 +122,7 @@ void LoadPlugins(std::vector<void*>& pluginDlls)
 {
 	OrkAprSubPool locPool;
 
-	std::string pluginsDirectory = CONFIG.m_pluginsDirectory;
+	std::string pluginsDirectory{CONFIG.m_pluginsDirectory};
 	if(pluginsDirectory.empty())
 	{
 		// default unix plugins directory
@@ -367,6 +367,14 @@ void MainThread()
 	} catch(const std::exception &ex){
 		logMsg.Format("Failed to start ImmediateProcessing thread reason:%s",  ex.what());
 		LOG4CXX_ERROR(LOG.rootLog, logMsg);	
+	}
+
+	try{
+		std::thread handler(&RecorderSender::ThreadHandler);
+		handler.detach();
+	} catch(const std::exception &ex){
+		logMsg.Format("Failed to start RecorderSender thread reason:%s",  ex.what());
+		LOG4CXX_ERROR(LOG.rootLog, logMsg);
 	}
 	
 	if(CONFIG.m_storageAudioFormat != FfNative)

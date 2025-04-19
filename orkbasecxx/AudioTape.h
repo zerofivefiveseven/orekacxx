@@ -101,7 +101,7 @@ public:
 	void AddAudioChunk(const AudioChunkRef& chunkRef);
 	void Write();
 	void SetShouldStop();
-	bool IsStoppedAndValid();
+	[[nodiscard]] bool IsStoppedAndValid() const;
 	void AddCaptureEvent(CaptureEventRef eventRef, bool send = true);
 	void GetMessage(MessageRef& msg);
 	/// Returns an identifier for the tape which corresponds to the filename without extension
@@ -110,12 +110,12 @@ public:
 	CStdString GetFilename();
 	CStdString GetPath();
 	CStdString GetExtension();
-	void SetExtension(CStdString& ext);
+	void SetExtension(const CStdString &ext);
 	void SetOrkUid(CStdString& orkuid);
 	AudioFileRef GetAudioFileRef();
 	bool IsReadyForBatchProcessing();
 	void GetDetails(TapeMsg* msg);
-	void PopulateTag(CStdString key, CStdString value);
+	void PopulateTag(const CStdString &key, const CStdString &value);
 
 	std::vector<AudioDirectionMarksRef> m_audioDirectionMarks;
 	CStdString m_portId;

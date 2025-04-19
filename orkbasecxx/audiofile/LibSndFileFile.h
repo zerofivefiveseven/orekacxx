@@ -27,17 +27,17 @@
 class LibSndFileFile : public AudioFile
 {
 public:
-	LibSndFileFile(int fileFormat);	// fileFormat is described at http://www.mega-nerd.com/libsndfile/api.html
-	~LibSndFileFile();
+	explicit LibSndFileFile(int fileFormat);	// fileFormat is described at http://www.mega-nerd.com/libsndfile/api.html
+	~LibSndFileFile() override;
 
-	void Open(CStdString& filename, fileOpenModeEnum mode, bool stereo = false, int sampleRate = 8000);
-	void Close();
+	void Open(CStdString& filename, fileOpenModeEnum mode, bool stereo, int sampleRate) override;
+	void Close() override;
 
-	void WriteChunk(AudioChunkRef chunkRef);
-	int ReadChunkMono(AudioChunkRef& chunk);
+	void WriteChunk(AudioChunkRef chunkRef) override;
+	int ReadChunkMono(AudioChunkRef& chunk) override;
 
-	CStdString GetExtension();
-	void SetNumOutputChannels(int numChan);
+	CStdString GetExtension() override;
+	void SetNumOutputChannels(int numChan) override;
 private:
 	SF_INFO	m_fileInfo;
 	SNDFILE*	m_pFile;

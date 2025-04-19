@@ -49,7 +49,7 @@ protected:
 //===================================================================
 /** TapeProcessor Registry
 */
-class TapeProcessorRegistry
+class	TapeProcessorRegistry
 {
 public:
 	static TapeProcessorRegistry* instance();

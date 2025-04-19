@@ -24,6 +24,8 @@
 class AudioFile
 {
 public:
+	virtual ~AudioFile() = default;
+
 	AudioFile();
 	typedef enum {READ = 0, WRITE = 1} fileOpenModeEnum;
 
@@ -52,8 +54,11 @@ public:
 
 	/** Move the file to a new name including ".orig" suffix */
 	void MoveOrig();
-	void SetFilename(CStdString&);
+
 	void Delete();
+
+	void SetFilename(CStdString&);
+	void Delete() const;
 	virtual CStdString GetExtension() = 0;
 	virtual int GetSampleRate();
 	virtual void SetNumOutputChannels(int numChan) = 0;

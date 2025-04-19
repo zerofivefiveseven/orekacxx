@@ -55,8 +55,8 @@ void LiveStreamFilter::AudioChunkIn(AudioChunkRef & inputAudioChunk) {
         isFirstPacket = false;
     }
 
-    if (silentChannelBuffer == NULL){
-        silentChannelBuffer = (char *)malloc(inputDetails.m_numBytes);
+    if (silentChannelBuffer == nullptr){
+        silentChannelBuffer = static_cast<char *>(malloc(inputDetails.m_numBytes));
         if (!silentChannelBuffer) {
             CStdString logMsg;
             logMsg.Format("LiveStreamFilter::AudioChunkIn [%s] SilentChannelBuffer Memory allocation failed.", m_orkRefId);

@@ -19,12 +19,12 @@
 class DeleteTapeMsg : public SyncMessage
 {
 public:
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 
 	CStdString m_filename;
 };

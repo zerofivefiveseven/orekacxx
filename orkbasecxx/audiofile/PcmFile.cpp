@@ -51,7 +51,7 @@ void PcmFile::WriteChunk(AudioChunkRef chunkRef)
 	if(m_stream.is_open())
 	{
 		numWritten = chunkRef->GetNumSamples()*sizeof(short);
-		m_stream.write((char*)chunkRef->m_pBuffer, numWritten);
+		m_stream.write(static_cast<char *>(chunkRef->m_pBuffer), numWritten);
 	}
 	else
 	{

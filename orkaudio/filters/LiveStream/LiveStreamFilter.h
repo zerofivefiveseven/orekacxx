@@ -42,12 +42,12 @@ class LiveStreamFilter : public Filter {
 
     private:
         AudioChunkRef m_outputAudioChunk;
-        bool m_initialized;
+        bool m_initialized{};
         CStdString m_callId;
         CStdString m_orkRefId;
         bool status = false;
         bool isFirstPacket = true;
-        unsigned char headChannel;
+        unsigned char headChannel{};
         srs_rtmp_t rtmp = NULL;
         u_int32_t timestamp = 0;
         RingBuffer<AudioChunkRef> bufferQueue;

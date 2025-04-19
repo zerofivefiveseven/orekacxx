@@ -165,12 +165,12 @@ void DirectionSelector::ThreadHandler()
 	apr_status_t ret;
 	CStdString processorName("DirectionSelector");
 	TapeProcessorRef directionSelector = TapeProcessorRegistry::instance()->GetNewTapeProcessor(processorName);
-	if(directionSelector.get() == NULL)
+	if(directionSelector.get() == nullptr)
 	{
 		LOG4CXX_ERROR(LOG.directionSelectorLog, "Could not instanciate DirectionSelector");
 		return;
 	}
-	DirectionSelector* pDirectionSelector = (DirectionSelector*)(directionSelector->Instanciate().get());
+	auto pDirectionSelector = dynamic_cast<DirectionSelector *>(directionSelector->Instanciate().get());
 
 	pDirectionSelector->SetQueueSize(CONFIG.m_directionSelectorQueueSize);
 
@@ -200,7 +200,7 @@ void DirectionSelector::ThreadHandler()
 		try
 		{
 			audioTapeRef = pDirectionSelector->m_audioTapeQueue.pop();
-			if(audioTapeRef.get() == NULL)
+			if(audioTapeRef.get() == nullptr)
 			{
 				if(Daemon::Singleton()->IsStopping())
 				{
@@ -213,12 +213,12 @@ void DirectionSelector::ThreadHandler()
 			}
 			else
 			{
-			//Iterating through area codes map to check which side will be retain
+			//Iterating through area codes map to check which side will be retained
 				bool found = false;
 				int foundPos = -1;
 				CStdString side;
 				std::map<CStdString, CStdString>::iterator it;
-				for(it = pDirectionSelector->m_areaCodesMap.begin(); it!= pDirectionSelector->m_areaCodesMap.end() && found == false; it++)
+				for(it = pDirectionSelector->m_areaCodesMap.begin(); it!= pDirectionSelector->m_areaCodesMap.end() && found == false; ++it)
 				{
 					//For now, we dont consider local party which has nothing to do with area codes
 //					foundPos = audioTapeRef->m_localParty.find(it->first);
@@ -249,7 +249,8 @@ void DirectionSelector::ThreadHandler()
 						defaultKeptSide->m_nextTimestampMark = (*it)->m_timestamp;	//next mark, will be the first api called, if any
 					}
 
-					defaultKeptSide->m_audioKeepDirectionEnum = (CaptureEvent::AudioKeepDirectionEnum)CaptureEvent::AudioKeepDirectionToEnum(side);
+					defaultKeptSide->m_audioKeepDirectionEnum = static_cast<CaptureEvent::AudioKeepDirectionEnum>(
+						CaptureEvent::AudioKeepDirectionToEnum(side));
 					audioTapeRef->m_audioDirectionMarks.insert(audioTapeRef->m_audioDirectionMarks.begin(),defaultKeptSide);
 
 				}
@@ -279,34 +280,33 @@ void DirectionSelector::ThreadHandler()
 				{
 					AudioChunkDetails details = *chunkRef->GetDetails();
 
-					std::vector<AudioDirectionMarksRef>::iterator it;
-					for(it = audioTapeRef->m_audioDirectionMarks.begin(); it != audioTapeRef->m_audioDirectionMarks.end(); it++)
+					for(const auto& it : audioTapeRef->m_audioDirectionMarks)
 					{
-						if(((*it)->m_timestamp == 0))
+						if((it->m_timestamp == 0))
 						{
 							continue;
 						}
 
-						if((details.m_arrivalTimestamp >= (*it)->m_timestamp) && ((details.m_arrivalTimestamp < (*it)->m_nextTimestampMark) || ((*it)->m_nextTimestampMark == 0)))	//this audio chunk is in between 2 kept-direction reports marks
+						if((details.m_arrivalTimestamp >= it->m_timestamp) && ((details.m_arrivalTimestamp < it->m_nextTimestampMark) || (it->m_nextTimestampMark == 0)))	//this audio chunk is in between 2 kept-direction reports marks
 						{
 							if(audioTapeRef->m_localSide == CaptureEvent::LocalSideSide1)
 							{
-								if(((*it)->m_audioKeepDirectionEnum == CaptureEvent::AudioKeepDirectionLocal) && (details.m_channel == 2))
+								if((it->m_audioKeepDirectionEnum == CaptureEvent::AudioKeepDirectionLocal) && (details.m_channel == 2))
 								{
 									memset(chunkRef->m_pBuffer, 0, details.m_numBytes);		//blank side 2
 								}
-								else if(((*it)->m_audioKeepDirectionEnum == CaptureEvent::AudioKeepDirectionRemote) && (details.m_channel == 1))
+								else if((it->m_audioKeepDirectionEnum == CaptureEvent::AudioKeepDirectionRemote) && (details.m_channel == 1))
 								{
 									memset(chunkRef->m_pBuffer, 0, details.m_numBytes);		//blank side 1
 								}
 							}
 							else if(audioTapeRef->m_localSide == CaptureEvent::LocalSideSide2)
 							{
-								if(((*it)->m_audioKeepDirectionEnum == CaptureEvent::AudioKeepDirectionLocal) && (details.m_channel == 1))
+								if((it->m_audioKeepDirectionEnum == CaptureEvent::AudioKeepDirectionLocal) && (details.m_channel == 1))
 								{
 									memset(chunkRef->m_pBuffer, 0, details.m_numBytes);
 								}
-								else if(((*it)->m_audioKeepDirectionEnum == CaptureEvent::AudioKeepDirectionRemote) && (details.m_channel == 2))
+								else if((it->m_audioKeepDirectionEnum == CaptureEvent::AudioKeepDirectionRemote) && (details.m_channel == 2))
 								{
 									memset(chunkRef->m_pBuffer, 0, details.m_numBytes);
 								}

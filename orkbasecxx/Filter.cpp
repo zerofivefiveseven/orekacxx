@@ -82,23 +82,21 @@ FilterRef FilterRegistry::GetNewFilter(int rtpPayloadType)
 
 FilterRef FilterRegistry::GetNewFilter(CStdString& filterName)
 {
-	for(std::list<FilterRef>::iterator it = m_Filters.begin(); it!=m_Filters.end(); it++)
+	for(auto Filter : m_Filters)
 	{
-		FilterRef Filter = *it;
-
-		if(	Filter->GetName().CompareNoCase(filterName) == 0 ) 
+			if(	Filter->GetName().CompareNoCase(filterName) == 0 )
 		{
 			return Filter->Instanciate();
 		}
 	}
-	return FilterRef();	// No filter found
+	return {};	// No filter found
 }
 
-FilterRegistry* FilterRegistry::m_singleton = 0;
+FilterRegistry* FilterRegistry::m_singleton = nullptr;
 
 FilterRegistry* FilterRegistry::instance()
 {
-	if(m_singleton == NULL)
+	if(m_singleton == nullptr)
 	{
 		m_singleton = new FilterRegistry();
 	}
@@ -117,7 +115,7 @@ void AlawToPcmFilter::AudioChunkIn(AudioChunkRef& inputAudioChunk)
 {
 	m_outputAudioChunk.reset();
 
-	if(inputAudioChunk.get() == NULL)
+	if(inputAudioChunk.get() == nullptr)
 	{
 		return;
 	}

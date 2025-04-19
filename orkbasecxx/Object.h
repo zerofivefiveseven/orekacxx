@@ -34,6 +34,8 @@ typedef oreka::shared_ptr<Object> ObjectRef;
 class Object
 {
 public:
+	virtual ~Object() = default;
+
 	virtual void Define(Serializer* s) = 0;
 	virtual void Validate() = 0;
 

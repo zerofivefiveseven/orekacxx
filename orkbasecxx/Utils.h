@@ -77,9 +77,9 @@ template <class T> class OrkSingleton
 {
 public:
     static T* GetInstance(){
-        if(m_instance.load() == NULL){
+        if(m_instance.load() == nullptr){
             std::lock_guard<std::mutex> lg(m_singleLock);
-            if(m_instance.load() == NULL){
+            if(m_instance.load() == nullptr){
                 m_instance = new T();
             }
         }

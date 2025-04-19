@@ -29,10 +29,10 @@
 	<TrackerTcpPort>8080</TrackerTcpPort>
 
 	<CapturePortFilters>LiveMonitoring</CapturePortFilters>
-	<TapeProcessors>BatchProcessing, Reporting</TapeProcessors>
-
+	<TapeProcessors>BatchProcessing, RecorderSender</TapeProcessors>
+	<BatchProcessingQueueSize>100</BatchProcessingQueueSize>
 	<BatchProcessingEnhancePriority>true</BatchProcessingEnhancePriority>
-	<NumBatchThreads>25</NumBatchThreads>
+	<NumBatchThreads>3</NumBatchThreads>
 
 	<AudioFileOwner>tomcat</AudioFileOwner>
 	<AudioFileGroup>tomcat</AudioFileGroup>

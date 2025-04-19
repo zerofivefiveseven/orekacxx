@@ -61,7 +61,7 @@ void Reporting::Initialize()
 {
 	CStdString logMsg;
 
-	if(m_singleton.get() == NULL)
+	if(m_singleton.get() == nullptr)
 	{
 		m_singleton.reset(new Reporting());
 

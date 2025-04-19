@@ -29,6 +29,8 @@ Config::Config()
 	m_capturePluginPath = CAPTURE_PLUGIN_PATH_DEFAULT;
 	m_storageAudioFormat = STORAGE_AUDIO_FORMAT_DEFAULT;
 	m_numBatchThreads = NUM_BATCH_THREADS_DEFAULT;
+	m_numBatchThreads = NUM_RECORDER_SENDER_THREADS_DEFAULT;
+	m_numRecorderSenderThreads =  NUM_BATCH_THREADS_DEFAULT;
 	m_numDirectionSelectorThreads = NUM_DIRECTIONSELECTOR_THREADS_DEFAULT;
 	m_numCommandThreads = NUM_COMMAND_THREADS_DEFAULT;
 	m_deleteNativeFile = DELETE_NATIVE_FILE_DEFAULT;
@@ -275,7 +277,7 @@ void Config::Validate()
 	{
 		throw CStdString(CStdString("Config::Validate: value out of range:") + STORAGE_AUDIO_FORMAT_PARAM);
 	}
-	if (m_numBatchThreads > 2)
+	if (m_numBatchThreads > std::thread::hardware_concurrency())
 	{
 		LOG4CXX_WARN(m_log, "It is not recommended to have more batch threads than CPUs");
 	}

@@ -44,6 +44,7 @@ public:
 	LoggerPtr clientLog;
 	LoggerPtr directionSelectorLog;
 	LoggerPtr reporting;
+	LoggerPtr recordingSenderlog;
 	LoggerPtr ipfragmentation;
 	LoggerPtr messaging;
 
