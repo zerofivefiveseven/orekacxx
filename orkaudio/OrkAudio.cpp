@@ -368,14 +368,6 @@ void MainThread()
 		logMsg.Format("Failed to start ImmediateProcessing thread reason:%s",  ex.what());
 		LOG4CXX_ERROR(LOG.rootLog, logMsg);	
 	}
-
-	try{
-		std::thread handler(&RecorderSender::ThreadHandler);
-		handler.detach();
-	} catch(const std::exception &ex){
-		logMsg.Format("Failed to start RecorderSender thread reason:%s",  ex.what());
-		LOG4CXX_ERROR(LOG.rootLog, logMsg);
-	}
 	
 	if(CONFIG.m_storageAudioFormat != FfNative)
 	{

@@ -20,6 +20,9 @@
 
 #include "ConfigManager.h"
 #include "BatchProcessing.h"
+
+#include <RecorderSender.h>
+
 #include "audiofile/LibSndFileFile.h"
 #include "audiofile/OggOpusFile.h"
 #include "Daemon.h"
@@ -476,6 +479,9 @@ void BatchProcessing::ThreadHandler()
 						CStdString file = path + "/" + audioTapeRef->GetIdentifier();
 						outFileRef->Open(file, AudioFile::WRITE, false, fileRef->GetSampleRate());
 
+						RecorderSender::RegisterAudioTape(audioTapeRef);
+
+
 						if(CONFIG.m_audioOutputPathSecondary.length() > 3)
 						{
 							path = CONFIG.m_audioOutputPathSecondary + "/" + audioTapeRef->GetPath();
@@ -532,6 +538,7 @@ void BatchProcessing::ThreadHandler()
 					}
 
 					outFileRef->WriteChunk(tmpChunkRef);
+					RecorderSender::SendAudioChunk(audioTapeRef->m_localIp, static_cast<const std::byte *>(tmpChunkRef.get()->m_pBuffer), tmpChunkRef->GetNumSamples());
 					if(rtpMixerSecondary.get() != nullptr)
 					{
 						outFileSecondaryRef->WriteChunk(tmpChunkSecondaryRef);
@@ -582,6 +589,9 @@ void BatchProcessing::ThreadHandler()
 						outFileRef->WriteChunk(tmpChunkRef);
 						numSamplesOut += tmpChunkRef->GetNumSamples();
 						rtpMixer->AudioChunkOut(tmpChunkRef);
+						RecorderSender::SendAudioChunk(audioTapeRef->m_localIp, static_cast<const std::byte *>(tmpChunkRef.get()->m_pBuffer), tmpChunkRef->GetNumSamples());
+						RecorderSender::FinalizeAudioTape(audioTapeRef->m_localIp);
+
 					}
 					while(tmpChunkSecondaryRef.get())
 					{

@@ -37,8 +37,6 @@ public:
 
     void __CDECL__ Close();
 
-    void TransferAudio(AudioTapeDescription);
-
     RecorderSender();
 
     void SetQueueSize(int size);

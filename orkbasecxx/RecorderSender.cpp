@@ -200,7 +200,7 @@ void RecorderSender::Initialize() {
     if (m_singleton.get() == nullptr) {
         m_singleton = std::make_shared<RecorderSender>();
 
-        uint threadCount = CONFIG.m_numBatchThreads;
+        uint threadCount = CONFIG.m_numRecorderSenderThreads;
         if (threadCount == 0) { 
             threadCount = std::thread::hardware_concurrency(); 
         }
