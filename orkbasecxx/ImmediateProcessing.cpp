@@ -23,7 +23,7 @@
 
 ImmediateProcessing::ImmediateProcessing()
 {
-	m_lastQueueFullTime = time(NULL);
+	m_lastQueueFullTime = time(nullptr);
 	m_semaphore.acquire();
 }
 
@@ -43,7 +43,7 @@ AudioTapeRef ImmediateProcessing::Pop(CStdString& after)
 	{
 		audioTapeRef = m_audioTapeQueue.front();
 		m_audioTapeQueue.pop_front();
-		if (audioTapeRef.get() != NULL)
+		if (audioTapeRef.get() != nullptr)
 		{
 			audioTapeRef->m_isQueued = false;
 		}

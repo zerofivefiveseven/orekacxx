@@ -15,11 +15,19 @@
 class RecorderSender;
 typedef oreka::shared_ptr<RecorderSender> RecorderSenderRef;
 
-class RecorderSender : public OrkSingleton<RecorderSender> {
+class RecorderSender : public TapeProcessor {
 public:
+    TapeProcessorRef  Instanciate() override;
+    void  AddAudioTape(AudioTapeRef& audioTapeRef) override;
     CStdString __CDECL__ GetName() override;
     static void Initialize();
-    TapeProcessorRef __CDECL__ Instanciate() override;
+
+    static bool RegisterAudioTape(AudioTapeRef &audioTape);
+
+    bool SendAudioChunk(const CStdString &tapeId, const std::byte *data, size_t size);
+
+    void FinalizeAudioTape(const CStdString &tapeId);
+
     // FilterRef __CDECL__ Instanciate() override;
     // //кусок
     // void AudioChunkIn(AudioChunkRef &chunk) override;
@@ -37,18 +45,23 @@ public:
 
 
 
-    void __CDECL__ AddAudioTape(AudioTapeRef& audioTapeRef) override;
-    // void __CDECL__ AddAudioChunk(AudioTapeRef& audioTapeRef);
-
+    void __CDECL__ Open(TapeMsg& msg);
+    void __CDECL__ Close();
+    void TransferAudio (AudioTapeDescription);
     static void ThreadHandler();
+
+    RecorderSender *Instance();
+
+    RecorderSender();
+
+    void Run();
 
     void SetQueueSize(int size);
 private:
-    RecorderSender();
 
     static TapeProcessorRef m_singleton;
     ThreadSafeQueue<AudioTapeRef> m_audioTapeQueue;
-    size_t m_threadCount;
+    size_t m_threadCount{};
     std::mutex m_mutex;
 };
 
