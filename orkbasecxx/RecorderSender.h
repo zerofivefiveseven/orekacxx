@@ -10,12 +10,11 @@
 #include "ThreadSafeQueue.h"
 #include "TapeProcessor.h"
 #include "AudioTape.h"
-#include <map>
 
 class RecorderSender;
 typedef oreka::shared_ptr<RecorderSender> RecorderSenderRef;
 
-class RecorderSender : public TapeProcessor {
+class RecorderSender final : public TapeProcessor {
 public:
     TapeProcessorRef Instanciate() override;
 
