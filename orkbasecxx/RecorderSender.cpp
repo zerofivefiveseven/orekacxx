@@ -84,7 +84,7 @@ void RecorderSubThread::Run() {
         return;
     }
 
-    std::unique_lock<std::mutex> lock(m_mutex);
+    std::unique_lock lock(m_mutex);
     while (!m_stopFlag) {
         m_cv.wait(lock, [this]() {
             return !m_chunkQueue.empty() || m_stopFlag;
