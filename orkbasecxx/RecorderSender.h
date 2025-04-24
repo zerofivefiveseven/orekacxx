@@ -17,48 +17,33 @@ typedef oreka::shared_ptr<RecorderSender> RecorderSenderRef;
 
 class RecorderSender : public TapeProcessor {
 public:
-    TapeProcessorRef  Instanciate() override;
-    void  AddAudioTape(AudioTapeRef& audioTapeRef) override;
+    TapeProcessorRef Instanciate() override;
+
+    void AddAudioTape(AudioTapeRef &audioTapeRef) override;
+
     CStdString __CDECL__ GetName() override;
+
     static void Initialize();
 
-    static bool RegisterAudioTape(AudioTapeRef &audioTape);
+    static void Shutdown();
 
-    bool SendAudioChunk(const CStdString &tapeId, const std::byte *data, size_t size);
+    static bool RegisterAudioTape(const AudioTapeRef &audioTape);
 
-    void FinalizeAudioTape(const CStdString &tapeId);
+    static bool SendAudioChunk(const CStdString &tapeId, const std::byte *data, size_t size);
 
-    // FilterRef __CDECL__ Instanciate() override;
-    // //кусок
-    // void AudioChunkIn(AudioChunkRef &chunk) override;
-    //
-    // void AudioChunkOut(AudioChunkRef &chunk) override;
-    //
-    // AudioEncodingEnum GetInputAudioEncoding() override;
-    //
-    // AudioEncodingEnum GetOutputAudioEncoding() override;
-    //
-    // void CaptureEventIn(CaptureEventRef &event) override;
-    //
-    // void CaptureEventOut(CaptureEventRef &event) override;
-    //
+    static void FinalizeAudioTape(const CStdString &tapeId);
 
+    void __CDECL__ Open(TapeMsg &msg);
 
-
-    void __CDECL__ Open(TapeMsg& msg);
     void __CDECL__ Close();
-    void TransferAudio (AudioTapeDescription);
-    static void ThreadHandler();
 
-    RecorderSender *Instance();
+    void TransferAudio(AudioTapeDescription);
 
     RecorderSender();
 
-    void Run();
-
     void SetQueueSize(int size);
-private:
 
+private:
     static TapeProcessorRef m_singleton;
     ThreadSafeQueue<AudioTapeRef> m_audioTapeQueue;
     size_t m_threadCount{};
