@@ -187,7 +187,7 @@ bool RecorderSender::RegisterAudioTape(const AudioTapeRef &audioTape) {
 
 bool RecorderSender::SendAudioChunk(const CStdString &localIp, const std::byte *data, size_t size) {
     std::lock_guard lock(s_mapMutex);
-    auto it = s_TapeToThreadMap.find(static_cast<std::string>(localIp));
+    auto it = s_TapeToThreadMap.find(localIp);
     if (it != s_TapeToThreadMap.end()) {
         return it->second->EnqueueChunk(localIp, data, size);
     }
@@ -196,7 +196,7 @@ bool RecorderSender::SendAudioChunk(const CStdString &localIp, const std::byte *
 
 void RecorderSender::FinalizeAudioTape(const CStdString &localIp) {
     std::lock_guard lock(s_mapMutex);
-    auto it = s_TapeToThreadMap.find(static_cast<std::string>(localIp));
+    auto it = s_TapeToThreadMap.find(localIp);
     if (it != s_TapeToThreadMap.end()) {
         it->second->FinalizeCurrentTape();
         s_TapeToThreadMap.erase(it);
