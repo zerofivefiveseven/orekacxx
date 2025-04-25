@@ -28,7 +28,7 @@
 #define DEVICE_PARAM "Device"
 
 /** This class defines various configuration parameters for the generator. */
-class VoIpConfig : public AcpConfig
+class VoIpConfig final : public AcpConfig
 {
 public:
 	VoIpConfig();	

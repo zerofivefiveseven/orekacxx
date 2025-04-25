@@ -35,7 +35,9 @@ typedef oreka::shared_ptr<Object> ObjectRef;
 class Serializer
 {
 public:
-	Serializer(Object* object);
+	virtual ~Serializer() = default;
+
+	explicit Serializer(Object* object);
 	void SetObject(Object* object);
 
 	void DeSerialize();
@@ -45,14 +47,14 @@ public:
 	void StringValue(const char* key, CStdString& value, bool required = false);
 	void BoolValue(const char* key, bool& value, bool required = false);
 	void EnumValue(const char* key, int& value, StringToEnumFunction, EnumToStringFunction, bool required = false);
-	virtual void ObjectValue(const char* key, Object& value, bool required = false) = 0;
+	virtual void ObjectValue(const char* key, Object& value, bool required);
 	void CsvValue(const char* key, std::list<CStdString>& value, bool required = false);
 	void CsvMapValue(const char* key, std::map<CStdString, CStdString>& value, bool required = false);
 	void DateValue(const char* key, time_t& value, bool required = false);
-	virtual void ListValue(const char* key, std::list<ObjectRef>& value, Object& model, bool required = false) = 0;
+	virtual void ListValue(const char* key, std::list<ObjectRef>& value, Object& model, bool required) = 0;
 	void IpRangesValue(const char* key, IpRanges& value, bool required = false);
 
-	void AddInt(const char* key, int value);
+	virtual void AddInt(const char* key, int value);
 	void AddDouble(const char* key, double value);
 	void AddBool(const char* key, bool value);
 	void AddEnum(const char* key, int value, EnumToStringFunction);
@@ -69,7 +71,7 @@ public:
 	void GetCsv(const char* key,  std::list<CStdString>& value, bool required = false);
 	void GetCsvMap(const char* key,  std::map<CStdString, CStdString>& value, bool required = false);
 	void GetDate(const char* key, time_t& value, bool required = false);
-	virtual void GetString(const char* key, CStdString& value, bool required = false) = 0;
+	virtual void GetString(const char* key, CStdString& value, bool required) = 0;
 	void GetIpRanges(const char* key,  IpRanges& value, bool required = false);
 
 	void EscapeCsv(CStdString& in, CStdString& out);
@@ -90,12 +92,12 @@ typedef oreka::shared_ptr<Serializer> SerializerRef;
 class KeyValueSerializer : public Serializer
 {
 public:
-	KeyValueSerializer(Object* object) : Serializer(object), m_numParams(0){};
+	explicit KeyValueSerializer(Object* object) : Serializer(object), m_numParams(0){};
 
-	void ObjectValue(const char* key, Object& value, bool required = false);
-	void ListValue(const char* key, std::list<ObjectRef>& value, Object& model, bool required = false);
+	void ObjectValue(const char* key, Object& value, bool required) override;
+	void ListValue(const char* key, std::list<ObjectRef>& value, Object& model, bool required) override;
 
-	void GetString(const char* key, CStdString& value, bool required = false);
+	void GetString(const char* key, CStdString& value, bool required) override;
 
 protected:
 	int m_numParams;

@@ -13,11 +13,8 @@
 #ifndef __TAPEPROCESSOR_H__
 #define __TAPEPROCESSOR_H__
 
-//#include <list>
-#include "AudioCapture.h"
 #include "AudioTape.h"
 #include "dll.h"
-#include "OrkBase.h"
 
 
 class TapeProcessor;

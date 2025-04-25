@@ -1,9 +1,11 @@
+#include "apr_support.h"
 #include "Utils.h"
 #include "time.h"
 #include <fstream>
 #include "AudioCapture.h"
 #include "Config.h"
 #include "ConfigManager.h"
+#include "apr_support.h"
 #ifndef WIN32
 #include <pwd.h>
 #include <grp.h>
@@ -1015,6 +1017,11 @@ void GetHostFqdn(CStdString& fqdn, int size)
 	hp = gethostbyname(hostname);
 	fqdn.Format("%s", hp->h_name);
 #endif
+}
+
+OrkTimeValue OrkTimeValue::operator=(const OrkTimeValue other) {
+	timeVal = other.timeVal;
+	return OrkTimeValue{timeVal};
 }
 
 //=========================

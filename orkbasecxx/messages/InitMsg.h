@@ -1,4 +1,4 @@
-/*
+ /*
  * RfbRecorder -- A Simple RFB recording program
  *
  * Copyright (C) 2007, orecx LLC
@@ -32,12 +32,12 @@ class InitMsg : public SyncMessage
 public:
 	InitMsg();
 
-	void Define(Serializer* s);
-	void Validate();
+	void Define(Serializer* s) override;
+	void Validate() override;
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 
 	CStdString m_name;
 	CStdString m_hostname;

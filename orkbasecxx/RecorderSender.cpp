@@ -45,7 +45,6 @@ public:
     std::atomic<bool> m_stopFlag;
 };
 
-// Глобальные переменные
 TapeProcessorRef RecorderSender::m_singleton;
 static std::vector<std::shared_ptr<RecorderSubThread> > s_RecorderSenderThreads;
 static std::unordered_map<std::string, std::shared_ptr<RecorderSubThread> > s_TapeToThreadMap;
@@ -162,7 +161,7 @@ bool RecorderSubThread::EnqueueChunk(const CStdString &localIp, const std::byte 
 void RecorderSubThread::FinalizeCurrentTape() {
     if (!m_currentTape) return;
 
-    CStdString footer = "END_TAPE";
+    const CStdString footer = "END_TAPE";
     send(m_socketFd, footer, footer.GetLength(), 0);
 
     m_currentTape.reset();
@@ -172,7 +171,7 @@ bool RecorderSender::RegisterAudioTape(const AudioTapeRef &audioTape) {
     std::lock_guard lock(s_mapMutex);
 
     // Ищем свободный тред
-    for (auto &thread: s_RecorderSenderThreads) {
+    for (const auto &thread: s_RecorderSenderThreads) {
         if (thread->RegisterTape(audioTape)) {
             s_TapeToThreadMap[static_cast<std::string>(audioTape->m_localIp)] = thread;
             return true;
@@ -187,8 +186,7 @@ bool RecorderSender::RegisterAudioTape(const AudioTapeRef &audioTape) {
 
 bool RecorderSender::SendAudioChunk(const CStdString &localIp, const std::byte *data, size_t size) {
     std::lock_guard lock(s_mapMutex);
-    auto it = s_TapeToThreadMap.find(localIp);
-    if (it != s_TapeToThreadMap.end()) {
+    if (auto it = s_TapeToThreadMap.find(localIp); it != s_TapeToThreadMap.end()) {
         return it->second->EnqueueChunk(localIp, data, size);
     }
     return false;
@@ -196,16 +194,13 @@ bool RecorderSender::SendAudioChunk(const CStdString &localIp, const std::byte *
 
 void RecorderSender::FinalizeAudioTape(const CStdString &localIp) {
     std::lock_guard lock(s_mapMutex);
-    auto it = s_TapeToThreadMap.find(localIp);
-    if (it != s_TapeToThreadMap.end()) {
+    if (auto it = s_TapeToThreadMap.find(localIp); it != s_TapeToThreadMap.end()) {
         it->second->FinalizeCurrentTape();
         s_TapeToThreadMap.erase(it);
     }
 }
 
 void RecorderSender::Initialize() {
-    if (m_singleton.get() == nullptr) {
-        m_singleton = std::make_shared<RecorderSender>();
 
         uint threadCount = CONFIG.m_numRecorderSenderThreads;
         if (threadCount == 0) {
@@ -227,7 +222,7 @@ void RecorderSender::Initialize() {
             }
         }
     }
-}
+
 
 void RecorderSender::Shutdown() {
     for (const auto &thread: s_RecorderSenderThreads) {

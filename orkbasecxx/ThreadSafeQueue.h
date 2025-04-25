@@ -49,7 +49,7 @@ template <class T> bool ThreadSafeQueue<T>::push(T &element)
 	bool result = false;
 	MutexSentinel mutexSentinel(m_mutex);
 
-	if (m_queue.size() < (unsigned int)m_size)
+	if (m_queue.size() < static_cast<unsigned int>(m_size))
 	{
 		m_queue.push(element);
 		result = true;

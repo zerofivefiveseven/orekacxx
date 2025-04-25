@@ -15,7 +15,6 @@
 
 
 #include "StdString.h"
-#include "OrkBase.h"
 #include "Utils.h"
 #include <list>
 #include "LogManager.h"
@@ -25,6 +24,8 @@ class SocketStreamerFactory;
 
 class CdrInfo {
 	public:
+	virtual ~CdrInfo() = default;
+
 	CdrInfo () :
 		m_duration(0)
 	{}
@@ -47,7 +48,9 @@ typedef oreka::shared_ptr<CdrInfo> CdrInfoRef;
 
 class SocketStreamer {
 public:
-	static void Initialize(std::list<CStdString>& targetList, SocketStreamerFactory *factory=NULL);
+	virtual ~SocketStreamer() = default;
+
+	static void Initialize(std::list<CStdString>& targetList, SocketStreamerFactory *factory=nullptr);
 
 protected:
 	SocketStreamer(LoggerPtr log, CStdString threadName);
@@ -79,10 +82,13 @@ private:
 
 class SocketStreamerFactory
 {
+public:
+	virtual ~SocketStreamerFactory() = default;
+
 protected:
 	SocketStreamerFactory() {}
     virtual SocketStreamer* Create();
-	virtual bool Accepts(CStdString protocolName) { return (protocolName == ""); }
+	virtual bool Accepts(CStdString protocolName) { return (protocolName.empty()); }
 
 	friend class SocketStreamer;
 };

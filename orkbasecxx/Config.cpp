@@ -12,13 +12,13 @@
  */
 
 #define _WINSOCKAPI_		// prevents the inclusion of winsock.h
-
+#include <AudioCapture.h>
 #include "Utils.h"
 #include "serializers/Serializer.h"
 #include "Config.h"
 
-#include <AudioCapture.h>
 
+#include<apr_env.h>
 Config::Config()
 {
 	m_log = log4cxx::Logger::getLogger("config");
@@ -126,7 +126,7 @@ void Config::Define(Serializer* s)
 	s->StringValue(CAPTURE_PLUGIN_PARAM, m_capturePlugin);
 	s->StringValue(CAPTURE_PLUGIN_PATH_PARAM, m_capturePluginPath);
 	s->StringValue(PLUGINS_DIRECTORY_PARAM, m_pluginsDirectory);
-	s->EnumValue(STORAGE_AUDIO_FORMAT_PARAM, reinterpret_cast<int&>(m_storageAudioFormat), reinterpret_cast<StringToEnumFunction>(FileFormatToEnum), FileFormatToString);
+	s->EnumValue(STORAGE_AUDIO_FORMAT_PARAM, (int&)m_storageAudioFormat, StringToEnumFunction(FileFormatToEnum), FileFormatToString);
 	s->IntValue(NUM_BATCH_THREADS_PARAM, m_numBatchThreads);
 	s->IntValue(NUM_DIRECTIONSELECTOR_THREADS_PARAM, m_numDirectionSelectorThreads);
 	s->IntValue(NUM_COMMAND_THREADS_PARAM, m_numCommandThreads);

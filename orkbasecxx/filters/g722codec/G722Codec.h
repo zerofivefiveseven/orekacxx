@@ -13,7 +13,6 @@
 #ifndef __G722DECODER_H__
 #define __G722DECODER_H__ 1
 
-#include "LogManager.h"
 #include "Filter.h"
 #include "G722.h"
 
@@ -21,17 +20,17 @@ class G722ToPcmFilter : public Filter
 {
 public:
 	G722ToPcmFilter();
-	~G722ToPcmFilter();
+	~G722ToPcmFilter() override;
 
-	FilterRef __CDECL__ Instanciate();
-	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk);
-	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk);
-	AudioEncodingEnum __CDECL__ GetInputAudioEncoding();
-	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding();
-	CStdString __CDECL__ GetName();
-	bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType );
-	void __CDECL__ CaptureEventIn(CaptureEventRef& event);
-	void __CDECL__ CaptureEventOut(CaptureEventRef& event);
+	FilterRef __CDECL__ Instanciate() override;
+	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk) override;
+	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk) override;
+	AudioEncodingEnum __CDECL__ GetInputAudioEncoding() override;
+	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding() override;
+	CStdString __CDECL__ GetName() override;
+	bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType ) override;
+	void __CDECL__ CaptureEventIn(CaptureEventRef& event) override;
+	void __CDECL__ CaptureEventOut(CaptureEventRef& event) override;
 
 private:
 	AudioChunkRef m_outputAudioChunk;

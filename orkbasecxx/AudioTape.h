@@ -54,17 +54,17 @@ public:
 	static CStdString MediaTypeToString(int mediaType);
 };
 
-class AudioTapeDescription : public Object
+class AudioTapeDescription final : public Object
 {
 public:
 	AudioTapeDescription();
-	void Define(Serializer* s);
-	void Validate();
+	void Define(Serializer* s) override;
+	void Validate() override;
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
 
-	ObjectRef Process();
+	ObjectRef Process() override;
 
 	CStdString m_capturePort;
 	CStdString m_localParty;
@@ -95,7 +95,7 @@ public:
 		StateInvalid = 5
 	} StateEnum; 
 
-	AudioTape(CStdString& portId);
+	explicit AudioTape(CStdString& portId);
 	AudioTape(CStdString& portId, CStdString& file);
 
 	void AddAudioChunk(const AudioChunkRef& chunkRef);

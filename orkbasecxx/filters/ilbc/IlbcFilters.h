@@ -10,6 +10,7 @@
  * Please refer to http://www.gnu.org/copyleft/gpl.html
  *
  */
+#pragma once
 #include "LogManager.h"
 #include "Filter.h"
 extern "C"
@@ -18,21 +19,21 @@ extern "C"
 #include "iLBC_decode.h"
 }
 
-class IlbcToPcmFilter : public Filter
+class IlbcToPcmFilter final : public Filter
 {
 public:
 	IlbcToPcmFilter();
-	~IlbcToPcmFilter();
+	~IlbcToPcmFilter() override;
 
-	FilterRef __CDECL__ Instanciate();
-	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk);
-	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk);
-	AudioEncodingEnum __CDECL__ GetInputAudioEncoding();
-	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding();
-	CStdString __CDECL__ GetName();
-	bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType );
-	void __CDECL__ CaptureEventIn(CaptureEventRef& event);
-	void __CDECL__ CaptureEventOut(CaptureEventRef& event);
+	FilterRef __CDECL__ Instanciate() override;
+	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk) override;
+	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk) override;
+	AudioEncodingEnum __CDECL__ GetInputAudioEncoding() override;
+	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding() override;
+	CStdString __CDECL__ GetName() override;
+	bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType ) override;
+	void __CDECL__ CaptureEventIn(CaptureEventRef& event) override;
+	void __CDECL__ CaptureEventOut(CaptureEventRef& event) override;
 
 private:
 	AudioChunkRef m_outputAudioChunk;

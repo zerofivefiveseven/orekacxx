@@ -13,34 +13,40 @@
 #ifndef __G721DECODER_H__
 #define __G721DECODER_H__ 1
 
-#include "LogManager.h"
 #include "Filter.h"
 
 #ifdef __cplusplus
-extern "C"
-{
-	#include "g72x.h"
+extern "C" {
+#include "g72x.h"
 }
 #endif
-class G721CodecDecoder : public Filter
-{
+class G721CodecDecoder final : public Filter {
 public:
-	G721CodecDecoder();
-	~G721CodecDecoder();
+    G721CodecDecoder();
 
-	FilterRef __CDECL__ Instanciate();
-	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk);
-	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk);
-	AudioEncodingEnum __CDECL__ GetInputAudioEncoding();
-	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding();
-	CStdString __CDECL__ GetName();
-	bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType );
-	void __CDECL__ CaptureEventIn(CaptureEventRef& event);
-	void __CDECL__ CaptureEventOut(CaptureEventRef& event);
+    ~G721CodecDecoder() override;
+
+    FilterRef __CDECL__ Instanciate() override;
+
+    void __CDECL__ AudioChunkIn(AudioChunkRef &chunk) override;
+
+    void __CDECL__ AudioChunkOut(AudioChunkRef &chunk) override;
+
+    AudioEncodingEnum __CDECL__ GetInputAudioEncoding() override;
+
+    AudioEncodingEnum __CDECL__ GetOutputAudioEncoding() override;
+
+    CStdString __CDECL__ GetName() override;
+
+    bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType) override;
+
+    void __CDECL__ CaptureEventIn(CaptureEventRef &event) override;
+
+    void __CDECL__ CaptureEventOut(CaptureEventRef &event) override;
 
 private:
-	AudioChunkRef m_outputAudioChunk;
-	struct g72x_state m_decoderState;
+    AudioChunkRef m_outputAudioChunk;
+    g72x_state m_decoderState;
 };
 
 #endif

@@ -22,12 +22,12 @@
     key and values are separated by equal signs.
     example: message=doit what=run
 */
-class SingleLineSerializer : public KeyValueSerializer
+class SingleLineSerializer final : public KeyValueSerializer
 {
 public:
-	SingleLineSerializer(Object* object) : KeyValueSerializer(object){};
+	explicit SingleLineSerializer(Object* object) : KeyValueSerializer(object){};
 
-	void AddString(const char* key, CStdString& value);
+	void AddString(const char* key, CStdString& value) override;
 	CStdString Serialize();
 
 	void DeSerialize(CStdString& input);

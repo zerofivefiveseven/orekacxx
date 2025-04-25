@@ -10,18 +10,9 @@
  * Please refer to http://www.gnu.org/copyleft/gpl.html
  *
  */
-#include "LogManager.h"
-#include "Filter.h"
-#include <math.h>
 #include "Utils.h"
-#include <queue>
 #include <list>
-#include "shared_ptr.h"
 #include "AudioCapture.h"
-#include "ConfigManager.h"
-#include "CapturePluginProxy.h"
-#include "AudioTape.h"
-#include "dll.h"
 #include "messages/AddTagMsg.h"
 
 //==========================================================

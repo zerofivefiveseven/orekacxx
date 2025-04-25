@@ -12,22 +12,22 @@
  */
 #include "LogManager.h"
 #include "Filter.h"
-#include <math.h>
 
-class AudioGainFilter : public Filter
+
+class AudioGainFilter final : public Filter
 {
 public:
 	AudioGainFilter();
-	~AudioGainFilter();
+	~AudioGainFilter() override;
 
-	FilterRef __CDECL__ Instanciate();
-	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk);
-	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk);
-	AudioEncodingEnum __CDECL__ GetInputAudioEncoding();
-	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding();
-	CStdString __CDECL__ GetName();
-	inline void __CDECL__ CaptureEventIn(CaptureEventRef& event);
-	inline void __CDECL__ CaptureEventOut(CaptureEventRef& event);
+	FilterRef __CDECL__ Instanciate() override;
+	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk) override;
+	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk) override;
+	AudioEncodingEnum __CDECL__ GetInputAudioEncoding() override;
+	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding() override;
+	CStdString __CDECL__ GetName() override;
+	inline void __CDECL__ CaptureEventIn(CaptureEventRef& event) override;
+	inline void __CDECL__ CaptureEventOut(CaptureEventRef& event) override;
 
 private:
 	AudioChunkRef m_outputAudioChunk;

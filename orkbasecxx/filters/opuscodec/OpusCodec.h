@@ -13,25 +13,24 @@
 #ifndef __OPUSDECODER_H__
 #define __OPUSDECODER_H__ 1
 
-#include "LogManager.h"
 #include "Filter.h"
 #include "opus.h"
 
-class OpusCodecDecoder : public Filter
+class OpusCodecDecoder final : public Filter
 {
 public:
 	OpusCodecDecoder();
-	~OpusCodecDecoder();
+	~OpusCodecDecoder() override;
 
-	FilterRef __CDECL__ Instanciate();
-	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk);
-	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk);
-	AudioEncodingEnum __CDECL__ GetInputAudioEncoding();
-	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding();
-	CStdString __CDECL__ GetName();
-	bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType );
-	void __CDECL__ CaptureEventIn(CaptureEventRef& event);
-	void __CDECL__ CaptureEventOut(CaptureEventRef& event);
+	FilterRef __CDECL__ Instanciate() override;
+	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk) override;
+	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk) override;
+	AudioEncodingEnum __CDECL__ GetInputAudioEncoding() override;
+	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding() override;
+	CStdString __CDECL__ GetName() override;
+	bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType ) override;
+	void __CDECL__ CaptureEventIn(CaptureEventRef& event) override;
+	void __CDECL__ CaptureEventOut(CaptureEventRef& event) override;
 
 private:
 	AudioChunkRef m_outputChunk;

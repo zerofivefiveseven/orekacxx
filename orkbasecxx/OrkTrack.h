@@ -16,11 +16,11 @@
 
 class OrkTrack {
 	public:
-		static void Initialize(const std::list<CStdString>& hostnames, const CStdString defaultServiceName, const int defaultTcpPort, const int defaultTlsPort);
+		static void Initialize(const std::list<CStdString>& hostnames, CStdString defaultServiceName, int defaultTcpPort, int defaultTlsPort);
 		static const std::vector<OrkTrack>& getTrackers() {
 			return s_trackers;
 		}
-		CStdString ToString() {
+		[[nodiscard]] CStdString ToString() const {
 			CStdString logMsg;
 			logMsg.Format ("%s:%u/%s",m_hostname,m_port,m_servicename);
 			return logMsg;

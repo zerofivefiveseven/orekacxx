@@ -20,9 +20,9 @@
 
 class SizedBuffer {
 	public:
-		SizedBuffer(size_t len);
+		explicit SizedBuffer(size_t len);
 		SizedBuffer(unsigned char* buf,size_t len);
-		SizedBuffer() : m_buffer(NULL), m_size(0) {} ;
+		SizedBuffer() : m_buffer(nullptr), m_size(0) {} ;
 		~SizedBuffer();
 
 		unsigned char* get(size_t offset=0) { 
@@ -31,7 +31,7 @@ class SizedBuffer {
 			}
 			return m_buffer+offset; 
 		}
-		size_t size() {
+		size_t size() const {
 		   	return m_size; 
 		};
 

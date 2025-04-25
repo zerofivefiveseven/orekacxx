@@ -17,6 +17,7 @@
 #include <log4cxx/propertyconfigurator.h>
 #include <log4cxx/basicconfigurator.h>
 #include <log4cxx/logmanager.h>
+#include<apr_env.h>
 #include "Utils.h"
 #include <fstream>
 

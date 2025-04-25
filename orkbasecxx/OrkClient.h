@@ -23,8 +23,10 @@
 class OrkClient
 {
 public:
+	virtual ~OrkClient() = default;
+
 	OrkClient();
-	virtual bool Execute(SyncMessage& request, AsyncMessage& response, const CStdString& hostname, const int tcpPort, const CStdString& serviceName, int timeout = 5, bool useHttps = false) = 0;
+	virtual bool Execute(SyncMessage& request, AsyncMessage& response, const CStdString& hostname, int tcpPort, const CStdString& serviceName, int timeout, bool useHttps) = 0;
 protected:
 	void LogError(CStdString& errorString);
 
@@ -36,9 +38,9 @@ protected:
 class OrkHttpClient : public OrkClient
 {
 public:
-	bool ExecuteUrl(const CStdString& request, CStdString& response, const CStdString& hostname, const int tcpPort, int timeout = 5);
+	bool ExecuteUrl(const CStdString& request, CStdString& response, const CStdString& hostname, int tcpPort, int timeout = 5);
 #ifdef SUPPORT_TLS_CLIENT
-	bool ExecuteSslUrl(const std::string& request, std::string& responseString, const std::string& hostname, const int tcpPort, int timeout = 5);
+	bool ExecuteSslUrl(const std::string& request, std::string& responseString, const std::string& hostname, int tcpPort, int timeout = 5);
 protected:
 
 private:
@@ -46,18 +48,18 @@ private:
 
 	oreka::shared_ptr<SSL_Session> ssl_session;  //opaque pointer to underlying SSL session (see SslUtils.h)
 
-	bool ExecuteSSLRequest(const std::string& request, std::string& responseString, const std::string& hostname, const int tcpPort, int timeout);
+	bool ExecuteSSLRequest(const std::string& request, std::string& responseString, const std::string& hostname, int tcpPort, int timeout);
 	bool SSL_SessionEstablished();
 	void SSL_CloseSession();
-	bool SSL_OpenSession(const std::string& hostname, const int tcpPort, int timeout);
+	bool SSL_OpenSession(const std::string& hostname, int tcpPort, int timeout);
 #endif
 };
 
 /** Client that uses a HTTP URL request and receives the response back in the SingleLine format. */
-class OrkHttpSingleLineClient : public OrkHttpClient
+class OrkHttpSingleLineClient final : public OrkHttpClient
 {
 public:
-	bool Execute(SyncMessage& request, AsyncMessage& response, const CStdString& hostname, const int tcpPort, const CStdString& serviceName, int timeout = 5, bool useHttps = false);
+	bool Execute(SyncMessage& request, AsyncMessage& response, const CStdString& hostname, int tcpPort, const CStdString& serviceName, int timeout, bool useHttps) override;
 };
 
 #endif

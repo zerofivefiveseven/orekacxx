@@ -18,37 +18,37 @@
 #include "messages/AsyncMessage.h"
 
 
-class ReadLoggingPropertiesMsg : public SyncMessage
+class ReadLoggingPropertiesMsg final : public SyncMessage
 {
 public:
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 };
 
-class ListLoggingPropertiesMsg : public SyncMessage
+class ListLoggingPropertiesMsg final : public SyncMessage
 {
 public:
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 };
 
-class ListLoggingPropertiesResponseMsg : public SimpleResponseMsg
+class ListLoggingPropertiesResponseMsg final : public SimpleResponseMsg
 {
 public:
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	inline ObjectRef Process() {return ObjectRef();};
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	inline ObjectRef Process() override {return ObjectRef();};
 
 	CStdString m_loggerInfo;
 	int	m_count;

@@ -1,7 +1,7 @@
 METASOURCES = AUTO
 plugindir= $(prefix)/lib/orkaudio/plugins
 plugin_LTLIBRARIES = livestream.la
-livestream_la_SOURCES = LiveStreamConfig.cpp LiveStreamFilter.cpp LiveStreamSession.cpp LiveStreamServer.cpp RecorderSenderPool.cpp
+livestream_la_SOURCES = LiveStreamConfig.cpp LiveStreamFilter.cpp LiveStreamSession.cpp LiveStreamServer.cpp
 livestream_la_LDFLAGS = -module
 AM_CPPFLAGS = -D_REENTRANT
 livestream_la_LIBADD = -L@SYSROOT@/usr/lib -llog4cxx -lapr-1 -lpthread -ldl -lm -lcrypto -lstdc++ -L@SYSROOT@/usr/lib -lsrs_librtmp

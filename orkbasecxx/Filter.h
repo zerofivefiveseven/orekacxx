@@ -16,7 +16,6 @@
 #include <list>
 #include "AudioCapture.h"
 #include "dll.h"
-#include "OrkBase.h"
 
 class FilterConfigurationParameters
 {
@@ -38,6 +37,8 @@ typedef oreka::shared_ptr<Filter> FilterRef;
 class Filter
 {
 public:
+	virtual ~Filter() = default;
+
 	Filter();
 	virtual FilterRef __CDECL__ Instanciate() = 0;
 	virtual void __CDECL__ AudioChunkIn(AudioChunkRef& chunk) = 0;
@@ -60,18 +61,18 @@ protected:
 };
 //===================================================================
 
-class AlawToPcmFilter : public Filter
+class AlawToPcmFilter final : public Filter
 {
 public:
-	FilterRef __CDECL__ Instanciate();
-	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk);
-	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk);
-	AudioEncodingEnum __CDECL__ GetInputAudioEncoding();
-	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding();
-	CStdString __CDECL__ GetName();
-	virtual bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType );
-	void __CDECL__ CaptureEventIn(CaptureEventRef& event);
-	void __CDECL__ CaptureEventOut(CaptureEventRef& event);
+	FilterRef __CDECL__ Instanciate() override;
+	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk) override;
+	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk) override;
+	AudioEncodingEnum __CDECL__ GetInputAudioEncoding() override;
+	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding() override;
+	CStdString __CDECL__ GetName() override;
+	bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType ) override;
+	void __CDECL__ CaptureEventIn(CaptureEventRef& event) override;
+	void __CDECL__ CaptureEventOut(CaptureEventRef& event) override;
 
 private:
 	AudioChunkRef m_outputAudioChunk;
@@ -79,18 +80,18 @@ private:
 
 //===================================================================
 
-class UlawToPcmFilter : public Filter
+class UlawToPcmFilter final : public Filter
 {
 public:
-	FilterRef __CDECL__ Instanciate();
-	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk);
-	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk);
-	AudioEncodingEnum __CDECL__ GetInputAudioEncoding();
-	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding();
-	CStdString __CDECL__ GetName();
-	virtual bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType );
-	void __CDECL__ CaptureEventIn(CaptureEventRef& event);
-	void __CDECL__ CaptureEventOut(CaptureEventRef& event);
+	FilterRef __CDECL__ Instanciate() override;
+	void __CDECL__ AudioChunkIn(AudioChunkRef& chunk) override;
+	void __CDECL__ AudioChunkOut(AudioChunkRef& chunk) override;
+	AudioEncodingEnum __CDECL__ GetInputAudioEncoding() override;
+	AudioEncodingEnum __CDECL__ GetOutputAudioEncoding() override;
+	CStdString __CDECL__ GetName() override;
+	bool __CDECL__ SupportsInputRtpPayloadType(int rtpPayloadType ) override;
+	void __CDECL__ CaptureEventIn(CaptureEventRef& event) override;
+	void __CDECL__ CaptureEventOut(CaptureEventRef& event) override;
 
 private:
 	AudioChunkRef m_outputAudioChunk;

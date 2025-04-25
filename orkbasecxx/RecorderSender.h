@@ -14,13 +14,9 @@
 class RecorderSender;
 typedef oreka::shared_ptr<RecorderSender> RecorderSenderRef;
 
-class RecorderSender final : public TapeProcessor {
+class RecorderSender : public OrkSingleton<RecorderSender>  { //смысл этого наследования остаётся под большим вопросом
 public:
-    TapeProcessorRef Instanciate() override;
-
-    void AddAudioTape(AudioTapeRef &audioTapeRef) override;
-
-    CStdString __CDECL__ GetName() override;
+    RecorderSender() = default;
 
     static void Initialize();
 
@@ -36,7 +32,7 @@ public:
 
     void __CDECL__ Close();
 
-    RecorderSender();
+    void Process();
 
     void SetQueueSize(int size);
 

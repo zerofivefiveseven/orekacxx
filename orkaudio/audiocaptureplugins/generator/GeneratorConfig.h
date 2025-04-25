@@ -26,16 +26,16 @@
 #define AUDIO_FILE_NAME_DEFAULT "test.wav"
 
 /** This class defines various configuration parameters for the generator. */
-class GeneratorConfig : public Object
+class GeneratorConfig final : public Object
 {
 public:
 	GeneratorConfig();	
-	void Define(Serializer* s);
-	void Validate();
+	void Define(Serializer* s) override;
+	void Validate() override;
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	inline ObjectRef Process() {return ObjectRef();};
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	inline ObjectRef Process() override {return ObjectRef();};
 
 	int m_numConcurrentPorts;
 	int m_audioDuration;
@@ -47,15 +47,15 @@ public:
 #define GENERATOR_CONFIG_PARAM "GeneratorPlugin"
 
 /** This class represents the top of the configuration hierarchy for the generator. */
-class GeneratorConfigTopObject : public Object
+class GeneratorConfigTopObject final : public Object
 {
 public:
-	void Define(Serializer* s);
-	void Validate();
+	void Define(Serializer* s) override;
+	void Validate() override;
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	inline ObjectRef Process() {return ObjectRef();};
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	inline ObjectRef Process() override {return ObjectRef();};
 	
 	GeneratorConfig m_config;
 };

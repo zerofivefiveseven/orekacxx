@@ -19,9 +19,6 @@
 #pragma warning( disable: 4018 ) // signed/unsigned mismatch
 //#endif
 
-#include "dll.h"
-#include "OrkBase.h"
-
 #include "serializers/Serializer.h"
 #include "Object.h"
 
@@ -47,7 +44,7 @@ public:
 	virtual bool IsValid() {return true;};
 
 	CStdString m_hostname;
-	time_t Age() { return (time(NULL) - m_creationTime);};
+	[[nodiscard]] time_t Age() const { return (time(nullptr) - m_creationTime);};
 protected:
 	time_t m_creationTime;
 	bool m_sent;
@@ -58,7 +55,9 @@ typedef oreka::shared_ptr<Message> MessageRef;
 // Implement this interafce if you want to pass messages to Reporting::AddMessage
 class IReportable {
 	public:
-		virtual bool IsRealtime() = 0;
+	virtual ~IReportable() = default;
+
+	virtual bool IsRealtime() = 0;
 		virtual MessageRef CreateResponse() = 0;
 		virtual void HandleResponse(MessageRef responseRef) = 0;
 		virtual MessageRef Clone() = 0;

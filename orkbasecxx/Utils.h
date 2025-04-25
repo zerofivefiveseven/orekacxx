@@ -21,8 +21,6 @@
 #ifndef WIN32
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <arpa/inet.h>
-#include <pwd.h>
 #include <grp.h>
 #include <netdb.h>
 #include <unistd.h>
@@ -41,31 +39,19 @@
 
 #include "StdString.h"
 
-#include "OrkBase.h"
-#include "dll.h"
-
 #include <thread>
 #include <chrono>
 #include <memory>
 #include <mutex>
 #include <atomic>
 #include <condition_variable>
-#include <exception>
-#include <stdexcept>
 #include "apr_network_io.h"
 #include "apr_errno.h"
 #include "apr_general.h"
-#include "apr_file_io.h"
-#include "apr_file_info.h"
-#include "apr_errno.h"
 #include "apr_strings.h"
-#include "apr_dso.h"
-#include "apr_env.h"
 #include "apr_portable.h"
-#include "apr_support.h"
 #ifndef CENTOS_6
 #include "openssl/ssl.h"
-#include "openssl/bio.h"
 #include "openssl/err.h"
 #endif
 #include <log4cxx/logger.h>
@@ -78,7 +64,7 @@ template <class T> class OrkSingleton
 public:
     static T* GetInstance(){
         if(m_instance.load() == nullptr){
-            std::lock_guard<std::mutex> lg(m_singleLock);
+            std::lock_guard lg(m_singleLock);
             if(m_instance.load() == nullptr){
                 m_instance = new T();
             }
@@ -92,7 +78,7 @@ protected:
     static std::atomic<T*> m_instance;
 	static std::mutex m_singleLock;
  //   OrkSingleton(){
-    ~OrkSingleton(){};
+    ~OrkSingleton()= default;
     
 };
 template<class T> std::mutex OrkSingleton<T>::m_singleLock;
@@ -102,25 +88,28 @@ template<class T> std::atomic<T*> OrkSingleton<T>::m_instance(NULL);
 class OrkSemaphore {
 public:
     OrkSemaphore() : m_count(1){}
-	OrkSemaphore(int count) : m_count(count){}
-	inline void release()	
+	explicit OrkSemaphore(int count) : m_count(count){}
+
+    void release()
     {
-		std::unique_lock<std::mutex> lock(m_mtx);
+		std::unique_lock lock(m_mtx);
 		m_count++;
 		m_cv.notify_one();
     }
-    inline void acquire()	
+
+    void acquire()
     {
-		std::unique_lock<std::mutex> lock(m_mtx);
+		std::unique_lock lock(m_mtx);
 		m_cv.wait(lock,[&]{return (m_count > 0);});
 		
 		m_count--;   
     }
-	inline void acquire(int timeoutMs)
+
+    void acquire(int timeoutMs)
 	{
 		auto now = std::chrono::steady_clock::now();
-		std::unique_lock<std::mutex> lock(m_mtx);
-		m_cv.wait_until(lock, now + std::chrono::milliseconds(timeoutMs), [&]{return (m_count > 0);});
+		std::unique_lock lock(m_mtx);
+		m_cv.wait_until(lock, now + std::chrono::milliseconds(timeoutMs), [&]{return m_count > 0;});
 		if(m_count > 0){
 			m_count--;
 		}
@@ -156,7 +145,7 @@ public:
 	// when OrkAprSubPool passes out of scope, everything on it
 	// will be destroyed, so make sure that nothing on it has a lifetime
 	// exceeding OrkAprSubPool
-	OrkAprSubPool(apr_pool_t *pool)
+	explicit OrkAprSubPool(apr_pool_t *pool)
 	{
 		m_aprPool = pool;
 	}
@@ -168,7 +157,7 @@ public:
 	~OrkAprSubPool() { apr_pool_destroy(m_aprPool);}
 	apr_pool_t *GetAprPool() { return m_aprPool; }
 private:
-	apr_pool_t *m_aprPool;
+	apr_pool_t *m_aprPool{};
 };
 #define AprLp locPool.GetAprPool()
 
@@ -192,15 +181,15 @@ private:
 class OrkSslStructure
 {
 public:
-	OrkSslStructure(SSL_CTX* ctx) { ssl = SSL_new(ctx); };
-	OrkSslStructure() { ssl = NULL; };
+	explicit OrkSslStructure(SSL_CTX* ctx) { ssl = SSL_new(ctx); };
+	OrkSslStructure() { ssl = nullptr; };
 	~OrkSslStructure() { 
 		if (ssl) {SSL_shutdown(ssl); SSL_free(ssl);};
 	};
 
 	void SetSsl(SSL_CTX* ctx) { ssl=SSL_new(ctx);};
 	void SetSsl() { ssl=SSL_new(OrkOpenSslSingleton::GetInstance()->GetServerCtx());};
-	SSL* GetSsl(SSL_CTX* ctx) { if (ssl == NULL) ssl=SSL_new(ctx); return ssl;};
+	SSL* GetSsl(SSL_CTX* ctx) { if (ssl == nullptr) ssl=SSL_new(ctx); return ssl;};
 	SSL* GetSsl() { return ssl; };
 private:
 	SSL *ssl;
@@ -227,8 +216,8 @@ inline  CStdString IntToString(int integer)
 
 inline int StringToInt(CStdString& value)
 {
-	char* errorLocation = NULL;
-	PCSTR szValue = (PCSTR)value;
+	char* errorLocation = nullptr;
+	auto szValue = (PCSTR)value;
 	int intValue = strtol(szValue, &errorLocation, 10);
 	if(*errorLocation != '\0')
 		throw CStdString(CStdString("StringToInt: invalid integer:") + value);
@@ -244,8 +233,8 @@ inline CStdString DoubleToString(double value)
 
 inline double StringToDouble(CStdString& value)
 {
-	char* errorLocation = NULL;
-	PCSTR szValue = (PCSTR)value;
+	char* errorLocation = nullptr;
+	auto szValue = (PCSTR)value;
 	double doubleValue = strtod(szValue, &errorLocation);
 	if(errorLocation == szValue)
 		throw CStdString(CStdString("StringToDouble: invalid double:") + value);
@@ -255,7 +244,7 @@ inline double StringToDouble(CStdString& value)
 inline CStdString IpToString(const struct in_addr& ip) {
 	char s[16];
 	inet_ntopV4(AF_INET, (void*)&ip, s, sizeof(s));
-	return CStdString(s);
+	return {s};
 }
 
 bool StringIsDigit(CStdString& string);
@@ -359,7 +348,7 @@ void GetHostFqdn(CStdString& fqdn, int size);
 class AlphaCounter
 {
 public:
-	inline AlphaCounter(int start = 0, const std::string& prefix="")
+	inline explicit AlphaCounter(const int start = 0, const std::string& prefix="")
 	{
 		if(start)
 		{
@@ -427,55 +416,53 @@ public:
 	OrkTimeValue(apr_time_t sec, apr_time_t usec){
         timeVal = sec*1000*1000 + usec;
     }
-	OrkTimeValue(apr_time_t us){
+	explicit OrkTimeValue(apr_time_t us){
         timeVal = us;
     }
-    OrkTimeValue operator=(const OrkTimeValue other){
-        timeVal = other.timeVal;
-		return OrkTimeValue(timeVal);
-    }
-    OrkTimeValue operator+(const OrkTimeValue other){
+    OrkTimeValue operator=(OrkTimeValue other);
+
+	OrkTimeValue operator+(const OrkTimeValue other) const{
         apr_time_t timeV = timeVal + other.timeVal;
         return OrkTimeValue(timeV);
     }
-    OrkTimeValue operator-(const OrkTimeValue other){
+    OrkTimeValue operator-(const OrkTimeValue other) const{
         apr_time_t timeV = timeVal - other.timeVal;
         return OrkTimeValue(timeV);
     }
-    bool operator<(const OrkTimeValue other){
+    bool operator<(const OrkTimeValue other) const{
         if(other.timeVal < timeVal) return false;
         else return true;
     }
-    bool operator>(const OrkTimeValue other){
+    bool operator>(const OrkTimeValue other) const{
         if(other.timeVal < timeVal) return true;
         else return false;
     }
-    bool operator==(const OrkTimeValue other){
+    bool operator==(const OrkTimeValue other) const{
         if(other.timeVal == timeVal) return true;
         else return false;
     }
-    bool operator!=(const OrkTimeValue other){
+    bool operator!=(const OrkTimeValue other) const{
         if(other.timeVal != timeVal) return true;
         else return false;
     }
-    bool operator>=(const OrkTimeValue other){
+    bool operator>=(const OrkTimeValue other) const{
         if(other.timeVal <= timeVal) return true;
         else return false;
     }
-    bool operator<=(const OrkTimeValue other){
+    bool operator<=(const OrkTimeValue other) const{
         if(other.timeVal >= timeVal) return true;
         else return false;
     }
     void SetTimeValue(apr_time_t sec, apr_time_t usec){
         timeVal = sec*1000*1000 + usec;
     }
-	apr_time_t sec(){
+	[[nodiscard]] apr_time_t sec() const{
 		return timeVal/(1000*1000);
 	}
-	apr_time_t usec(){
+	[[nodiscard]] apr_time_t usec() const{
 		return timeVal;
 	}
-	apr_time_t msec(){
+	[[nodiscard]] apr_time_t msec() const{
 		return timeVal/1000;
 	}
 	void GetTimeNow(){

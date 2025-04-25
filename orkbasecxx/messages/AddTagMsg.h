@@ -17,22 +17,22 @@
 #include "messages/SyncMessage.h"
 #include "messages/AsyncMessage.h"
 
-class AddTagMsg : public SyncMessage, public IReportable
+class AddTagMsg final : public SyncMessage, public IReportable
 {
 public:
 	AddTagMsg();
-	void Define(Serializer* s);
-	void Validate();
+	void Define(Serializer* s) override;
+	void Validate() override;
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 
 	//IReportable interface
-	bool IsRealtime();
-	MessageRef CreateResponse();
-	void HandleResponse(MessageRef responseRef);
-	MessageRef Clone();
+	bool IsRealtime() override;
+	MessageRef CreateResponse() override;
+	void HandleResponse(MessageRef responseRef) override;
+	MessageRef Clone() override;
 
 	CStdString m_party;
 	CStdString m_orkuid;

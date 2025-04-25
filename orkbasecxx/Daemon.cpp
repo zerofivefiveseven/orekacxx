@@ -17,7 +17,7 @@
 #ifdef WIN32
 #include <windows.h>
 #include <tchar.h>
-#include <direct.h> 
+#include <direct.h>
 SERVICE_STATUS serviceStatus;
 SERVICE_STATUS_HANDLE serviceStatusHandle = 0;
 HANDLE stopServiceEvent = 0;
@@ -27,6 +27,8 @@ HANDLE stopServiceEvent = 0;
 #include <apr_portable.h>
 #include <apr_file_io.h>
 #include <apr_mmap.h>
+#include<apr_env.h>
+
 void handle_signal(int sig_num)
 {
 #ifndef WIN32

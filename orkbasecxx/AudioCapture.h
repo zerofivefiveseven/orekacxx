@@ -14,10 +14,7 @@
 #ifndef __AUDIOCAPTURE_H__
 #define __AUDIOCAPTURE_H__
 
-#include "time.h"
 #include "StdString.h"
-#include "dll.h"
-#include "OrkBase.h"
 
 #include "shared_ptr.h"
 
@@ -73,7 +70,7 @@ class AudioChunk
 {
 public:
 	AudioChunk();
-	AudioChunk(int numChannels);
+	explicit AudioChunk(int numChannels);
 	~AudioChunk();
 
 	void ToString(CStdString&);
@@ -99,10 +96,10 @@ public:
 	void FreeAll();
 
 	int GetNumSamples();
-	int GetNumBytes() const;
-	int GetSampleRate() const;
+	[[nodiscard]] int GetNumBytes() const;
+	[[nodiscard]] int GetSampleRate() const;
 	double GetDurationSec();
-	AudioEncodingEnum GetEncoding() const;
+	[[nodiscard]] AudioEncodingEnum GetEncoding() const;
 	AudioChunkDetails* GetDetails();
 	void SetDetails(AudioChunkDetails* details);
 
@@ -254,7 +251,7 @@ typedef oreka::shared_ptr<CaptureEvent> CaptureEventRef;
 		FfInvalid = 7
 	} FileFormatEnum;
 
-int FileFormatToEnum(const CStdString& format);
+int FileFormatToEnum(CStdString& format);
 CStdString FileFormatToString(int formatEnum);
 CStdString FileFormatGetExtension(FileFormatEnum);
 

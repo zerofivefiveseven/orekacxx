@@ -9,7 +9,9 @@
 
 class OrkSession {
 	public:
-		OrkSession(AcpConfig * config);
+	virtual ~OrkSession() = default;
+
+	explicit OrkSession(AcpConfig * config);
 
 		bool m_started;
 		bool m_stopped;
@@ -45,7 +47,7 @@ class OrkSession {
 
 		std::vector<FilterRef> m_decoders;
 
-		void	UpdateRtpPayloadMap(unsigned char *map)
+		void	UpdateRtpPayloadMap(const unsigned char *map)
 		{
 			for (int i = 0; i < 32; i++)
 			{

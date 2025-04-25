@@ -33,9 +33,9 @@ class DirectionSelector : public TapeProcessor
 public:
 	static void Initialize();
 
-	CStdString  GetName();
-	TapeProcessorRef  Instanciate();
-	void  AddAudioTape(AudioTapeRef& audioTapeRef);
+	CStdString  GetName() override;
+	TapeProcessorRef  Instanciate() override;
+	void  AddAudioTape(AudioTapeRef& audioTapeRef) override;
 	static void ThreadHandler();
 	void SetQueueSize(int size);
 

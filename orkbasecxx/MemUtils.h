@@ -15,7 +15,6 @@
 #define __MEMUTILS_H__
 
 #include "StdString.h"
-#include "OrkBase.h"
 #include <boost/utility/string_ref.hpp>
 
 void	MemToHex(unsigned char* input, size_t len, CStdString&output);
@@ -28,7 +27,7 @@ void 	MemGrabString(char* start, char* stop, CStdString& out);
 void  MemMacToHumanReadable(unsigned char* macAddress, CStdString&output);
  char* MemGrabAlphaNumSpace(char* in, char* limit, CStdString& out);
  char* MemGrabDigits(char* in, char* limit, CStdString& out);
- char* memFindAfterBinary(const char * const memToFind, size_t size, const char* const  memStart, const char * const memEnd);
+ char* memFindAfterBinary(const char * memToFind, size_t size, const char*  memStart, const char * memEnd);
 
 typedef  boost::string_ref OrkStringView;
 

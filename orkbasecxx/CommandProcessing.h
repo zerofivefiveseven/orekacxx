@@ -17,7 +17,6 @@
 #include "ThreadSafeQueue.h"
 #include "TapeProcessor.h"
 #include "AudioTape.h"
-#include <map>
 
 class  CommandProcessing;
 typedef oreka::shared_ptr<CommandProcessing> CommandProcessingRef;
@@ -30,9 +29,9 @@ class CommandProcessing : public TapeProcessor
 public:
 	static void Initialize();
 
-	CStdString __CDECL__ GetName();
-	TapeProcessorRef __CDECL__ Instanciate();
-	void __CDECL__ AddAudioTape(AudioTapeRef& audioTapeRef);
+	CStdString __CDECL__ GetName() override;
+	TapeProcessorRef __CDECL__ Instanciate() override;
+	void __CDECL__ AddAudioTape(AudioTapeRef& audioTapeRef) override;
 
 	static void ThreadHandler();
 

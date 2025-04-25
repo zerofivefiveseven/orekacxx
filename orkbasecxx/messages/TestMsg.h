@@ -24,17 +24,17 @@
 #define DIRECTION_PARAM "direction"
 #define LOCALENTRYPOINT_PARAM "localentrypoint"
 
-class TestMsg : public SyncMessage
+class TestMsg final : public SyncMessage
 {
 public:
 	TestMsg();
 
-	void Define(Serializer* s);
-	void Validate();
+	void Define(Serializer* s) override;
+	void Validate() override;
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	inline ObjectRef Process() {return ObjectRef();};
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	inline ObjectRef Process() override {return ObjectRef();};
 
 	CStdString m_stage;
 	time_t m_timestamp;

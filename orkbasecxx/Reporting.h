@@ -14,10 +14,8 @@
 #ifndef __REPORTING_H__
 #define __REPORTING_H__
 
-#include "ThreadSafeQueue.h"
 #include "TapeProcessor.h"
 #include "AudioTape.h"
-#include <mutex>
 
 class Reporting : public TapeProcessor
 {
@@ -25,9 +23,9 @@ public:
 	static void Initialize();
 	static Reporting* Instance();
 
-	CStdString  GetName();
+	CStdString  GetName() override;
 	TapeProcessorRef  Instanciate() override;
-	void  AddAudioTape(AudioTapeRef& audioTapeRef);
+	void  AddAudioTape(AudioTapeRef& audioTapeRef) override;
 	bool  AddMessage(MessageRef messageRef);
 	void  SkipTapes(int number, CStdString trackingServer="");
 
@@ -54,12 +52,12 @@ class ReportingSkipTapeMsg : public SyncMessage
 public:
 	ReportingSkipTapeMsg();
 
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 
 	int m_number;
 	CStdString m_tracker;

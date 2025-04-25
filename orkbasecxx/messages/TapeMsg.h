@@ -37,24 +37,24 @@
 //#define LOCALSIDE_PARAM "localside"
 #define AUDIOKEEPDIRECTION_PARAM "side"
 
-class TapeMsg :  public SyncMessage, public IReportable
+class TapeMsg final :  public SyncMessage, public IReportable
 {
 public:
 	TapeMsg();
 
-	void Define(Serializer* s);
-	void Validate();
+	void Define(Serializer* s) override;
+	void Validate() override;
 
 	//IReportable interface
-	MessageRef CreateResponse();
-	void HandleResponse(MessageRef responseRef);
-	virtual bool IsRealtime();
-	MessageRef Clone();
-	bool IsValid();
+	MessageRef CreateResponse() override;
+	void HandleResponse(MessageRef responseRef) override;
+	bool IsRealtime() override;
+	MessageRef Clone() override;
+	bool IsValid() override;
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 
 	CStdString m_recId;
 	CStdString m_stage;
@@ -84,16 +84,16 @@ typedef oreka::shared_ptr<TapeMsg> TapeMsgRef;
 
 /** A TapeResponse is a response to TapeMsg 
 */
-class TapeResponse : public SimpleResponseMsg
+class TapeResponse final : public SimpleResponseMsg
 {
 public:
 	TapeResponse();
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	inline ObjectRef Process() {return ObjectRef();};
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	inline ObjectRef Process() override {return ObjectRef();};
 
 	bool m_deleteTape;
 };

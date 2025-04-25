@@ -17,16 +17,16 @@
 #include "messages/SyncMessage.h"
 #include "AudioCapture.h"
 
-class RecordMsg : public SyncMessage
+class RecordMsg final : public SyncMessage
 {
 public:
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
 	void EnsureValidSide();
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 
 	CStdString m_party;
 	CStdString m_orkuid;
@@ -34,15 +34,15 @@ public:
 	CStdString m_side;
 };
 
-class PauseMsg : public SyncMessage
+class PauseMsg final : public SyncMessage
 {
 public:
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 
 	CStdString m_party;
 	CStdString m_orkuid;
@@ -52,12 +52,12 @@ public:
 class StopMsg : public SyncMessage
 {
 public:
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 
 	CStdString m_party;
 	CStdString m_orkuid;

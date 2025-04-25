@@ -23,9 +23,10 @@ class AcpConfig : public Object
 {
 public:
 	AcpConfig();
-	void Define(Serializer* s);
-	void Validate();
-	void Reset();
+	void Define(Serializer* s) override;
+	void Validate() override;
+
+	virtual void Reset();
 
 	CStdString m_onDemandViaDtmfDigitsString;
 	CStdString m_onDemandPauseViaDtmfDigitsString;

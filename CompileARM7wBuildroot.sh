@@ -6,6 +6,7 @@ if [ ! -d ./arm-buildroot-linux-gnueabihf_sdk-buildroot ]; then
 fi
 mkdir ./dependencies
 pushd ./dependencies
+sudo mkdir -p /share/aclocal
 echo "user directory $(../whoami.sh)"
 DEFAULTVALUE=$(../whoami.sh)
 VARIABLE="${1:-$DEFAULTVALUE}"
@@ -181,6 +182,6 @@ automake=$BUILDROOT_SDK/bin/automake PERL5LIB=$PERL5LIB CC=$CC CXX=$CXX autom4te
  env PATH="$PATH" autom4te=$autom4te ACLOCAL_PATH=$ACLOCAL_PATH PERL5LIB=$PERL5LIB m4="$BUILDROOT_SDK/bin/m4" make -j$(nproc)
  CC=$CC CXX=$CXX env PATH="$PATH" make install
 
- setcap cap_net_raw,cap_net_admin+ep /usr/sbin/orkaudio
+sudo setcap cap_net_raw,cap_net_admin+ep /usr/sbin/orkaudio
 popd
 

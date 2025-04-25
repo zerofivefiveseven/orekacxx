@@ -17,7 +17,6 @@
 #include "ThreadSafeQueue.h"
 #include "TapeProcessor.h"
 #include "AudioTape.h"
-#include <map>
 
 class TapeFileNaming;
 typedef oreka::shared_ptr<TapeFileNaming> TapeFileNamingRef;

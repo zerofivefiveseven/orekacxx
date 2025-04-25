@@ -297,7 +297,7 @@ void VoIpConfig::Validate()
 	std::list<CStdString>::iterator it;
 	for(it = m_asciiLanMasks.begin(); it != m_asciiLanMasks.end(); it++)
 	{
-		struct in_addr a;
+		struct in_addr a{};
 		if(inet_pton4((PCSTR)*it, &a))
 		{
 			m_lanMasks.push_back((unsigned int)a.s_addr);

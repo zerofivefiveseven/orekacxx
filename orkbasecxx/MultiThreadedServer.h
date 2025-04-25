@@ -16,12 +16,8 @@
 
 #include <log4cxx/logger.h>
 
-#include "OrkBase.h"
-#include "dll.h"
 #include "Utils.h"
 #include <openssl/ssl.h>
-#include <openssl/bio.h>
-#include <openssl/err.h>
 
 /** This server accepts permanent telnet like connections.
 	commands are accepted in "single line" format.
@@ -30,7 +26,7 @@
 class CommandLineServer
 {
 public:
-	CommandLineServer(int port);
+	explicit CommandLineServer(int port);
 	bool Initialize();
 	void Run();
 
@@ -52,7 +48,7 @@ private:
 class HttpServer
 {
 public:
-	HttpServer(int port);
+	explicit HttpServer(int port);
 	bool Initialize();
 	void Run();
 	void RunHttpServer();
@@ -75,7 +71,7 @@ class HttpsServer
 {
 public:
 	HttpsServer();
-	bool Initialize(int port, FN_HandleSslHttpMessage msgThread=NULL);
+	bool Initialize(int port, FN_HandleSslHttpMessage msgThread=nullptr);
 	void Run();
 	void RunHttpsServer();
 
@@ -91,14 +87,14 @@ private:
 class OrekaSslCtx
 {
 public:
-	OrekaSslCtx(SSL_CTX* ctx) { ssl = SSL_new(ctx); };
+	explicit OrekaSslCtx(SSL_CTX* ctx) { ssl = SSL_new(ctx); };
 	~OrekaSslCtx() { SSL_shutdown(ssl); SSL_free(ssl); };
 
 	SSL* SslCtx() { return ssl; };
 private:
 	SSL *ssl;
 };
-#endif //#ifndef CENTOS_6
+#endif //SUPPORT_TLS_SERVER
 
 //==========================================================
 
@@ -109,7 +105,7 @@ private:
 class EventStreamingServer
 {
 public:
-	EventStreamingServer(int port);
+	explicit EventStreamingServer(int port);
 	~EventStreamingServer() { apr_pool_destroy(m_mp);};
 	bool Initialize();
 	void Run();

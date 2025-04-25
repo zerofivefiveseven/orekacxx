@@ -30,7 +30,7 @@
 class CapturePort
 {
 public:
-	CapturePort(CStdString& Id);
+	explicit CapturePort(CStdString& Id);
 	CStdString ToString();
 	CStdString GetId();
 

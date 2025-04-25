@@ -14,7 +14,6 @@
 #ifndef __IMMEDIATEPROCESSING_H__
 #define __IMMEDIATEPROCESSING_H__
 
-#include "ThreadSafeQueue.h"
 #include "AudioTape.h"
 #include <mutex>
 class ImmediateProcessing : public OrkSingleton<ImmediateProcessing>

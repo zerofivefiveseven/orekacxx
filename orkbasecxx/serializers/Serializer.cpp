@@ -97,6 +97,9 @@ void Serializer::EnumValue(const char* key, int& value, StringToEnumFunction toE
 	}
 }
 
+void Serializer::ObjectValue(const char *key, Object &value, bool required) {
+}
+
 void Serializer::CsvValue(const char* key, std::list<CStdString>& value, bool required)
 {
 	if (m_deSerialize == true)

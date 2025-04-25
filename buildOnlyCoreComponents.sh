@@ -7,7 +7,9 @@ unset BUILDROOT_SDK SYSROOT PATH PKG_CONFIG_PATH LDFLAGS LIBTOOL pkgconf PATH CC
 #    echo "C++ toolchain not found"
 #    exit 1
 #fi
+sudo mkdir -p /share/aclocal
 chmod -R 777 ./
+export ACLOCAL_PATH="/usr/share/aclocal:/usr/local/share/aclocal"
 echo "user directory $(./whoami.sh)"
 DEFAULTVALUE=$(./whoami.sh)
 VARIABLE="${1:-$DEFAULTVALUE}"
@@ -68,6 +70,7 @@ export CXXFLAGS="-I/usr/include -std=c++17"
 libtoolize --force --copy --automake
 
 autoupdate
+sudo mkdir -p /share/aclocal
 aclocal -I m4 -I /usr/share/aclocal -I "/share/aclocal/"
 autoconf
 automake --add-missing
@@ -77,5 +80,5 @@ LDFLAGS="-L$SYSROOT/usr/lib" CXXFLAGS=$CXXFLAGS CFLAGS=""  CC=$CC CXX=$CXX ./con
 make -j$(nproc)
 sudo CC=$CC CXX=$CXX env PATH="$PATH" make install
 
-setcap cap_net_raw,cap_net_admin+ep /usr/sbin/orkaudio
+sudo setcap cap_net_raw,cap_net_admin+ep /usr/sbin/orkaudio
 cd ../

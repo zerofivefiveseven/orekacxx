@@ -24,6 +24,8 @@
 
 #include "DomSerializer.h"
 
+#include <Object.h>
+
 void DomSerializer::ObjectValue(const char* key, Object& value, bool required)
 {
 	if (m_deSerialize == true)
@@ -186,7 +188,7 @@ DOMNode* DomSerializer::FindElementByName(DOMNode *node, CStdString name)
 		}
 		child = child->getNextSibling();
 	}
-	return NULL;
+	return nullptr;
 }
 
 //XERCES3

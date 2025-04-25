@@ -56,19 +56,19 @@ typedef struct
 	size_t payloadLen() {
 		return packetLen() - headerLen();
 	}
-	unsigned short packetId () {
+	[[nodiscard]] unsigned short packetId () const {
 		return ntohs(ip_id);
 	}
-	size_t offset() { 
+	[[nodiscard]] size_t offset() const {
 		   return ((ntohs(ip_off)) & 0x1FFF) << 3; // last 13 bits * 8
 	}
-	unsigned int fragmentFlags() {
+	[[nodiscard]] unsigned int fragmentFlags() const {
 		return (ntohs(ip_off)) >> 13; // first 3 bits
 	}
-	size_t headerLen() {
+	size_t headerLen() const {
 		return ip_hl*4;
 	}
-	size_t packetLen() {
+	size_t packetLen() const {
 		return ntohs(ip_len);
 	}
 	void setPacketLen(size_t len) {
@@ -122,11 +122,11 @@ struct RtpExtendedHeaderInfo {
 	unsigned short int headerId;
 	unsigned short int length;
 
-	inline bool isOneByteRtpExension() const
+	[[nodiscard]] inline bool isOneByteRtpExension() const
 	{
 		return ntohs(headerId) == RTP_RFC5285_ONE_BYTE_SIGNATURE;
 	}
-	inline bool isTwoBytesRtpExension() const
+	[[nodiscard]] inline bool isTwoBytesRtpExension() const
 	{
 		return (ntohs(headerId) & RTP_RFC5285_TWO_BYTE_TEST_MASK) == RTP_RFC5285_TWO_BYTE_SIGNATURE;
 	}
@@ -147,18 +147,18 @@ struct RtpHeaderStruct
 
 
 	// Return the size of the header without the extension data
-	inline int getPureHeaderSize() const
+	[[nodiscard]] inline int getPureHeaderSize() const
 	{
 		return sizeof(RtpHeaderStruct) + cc * 4; 
 	}
 
 	// Compute the distance to the first payload byte 
-	inline int getPayloadOffset() const
+	[[nodiscard]] inline int getPayloadOffset() const
 	{
 
 		int currentSize = getPureHeaderSize();
 		int extensionSize = 0;
-		const unsigned char* pCurrentByte = reinterpret_cast<const unsigned char*> (this);
+		const auto* pCurrentByte = reinterpret_cast<const unsigned char*> (this);
 		if (x)
 		{
 			//  the packet has an extension,
@@ -171,7 +171,7 @@ struct RtpHeaderStruct
 	}
 
 	// Return a pointer to the first byte in the extension data
-	inline RtpExtendedHeaderInfo* getExtendedHeaderInfoPtr() const
+	[[nodiscard]] inline RtpExtendedHeaderInfo* getExtendedHeaderInfoPtr() const
 	{
 		if (x == 0) return nullptr;
 		const unsigned char* pFirstByte = (const unsigned char*)this;
@@ -236,7 +236,7 @@ typedef struct {
 	/** Reserved bits */
 	uint32_t pad:8;
 
-	inline uint32_t getVNI() const 
+	[[nodiscard]] inline uint32_t getVNI() const
 	{
 		return (ntohl(vni) >> 8); 
 	}

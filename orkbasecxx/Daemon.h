@@ -15,7 +15,7 @@
 #define __DAEMON_H__
 
 #include "StdString.h"
-typedef void (*DaemonHandler)(void);
+typedef void (*DaemonHandler)();
 
 class Daemon
 {

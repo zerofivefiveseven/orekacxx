@@ -33,12 +33,12 @@ class SimpleResponseMsg : public AsyncMessage
 {
 public:
 	SimpleResponseMsg();
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	inline ObjectRef Process() {return ObjectRef();};
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	inline ObjectRef Process() override {return ObjectRef();};
 
 	bool m_success;
 	CStdString m_comment;

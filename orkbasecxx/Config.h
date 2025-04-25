@@ -51,9 +51,9 @@
 #define VAD_PARAM "VAD"
 #define VAD_DEFAULT false
 #define VAD_HIGH_THRESHOLD_DB_PARAM "VadHighThresholdDb"
-#define VAD_HIGH_THRESHOLD_DB_DEFAULT -12.2
+#define VAD_HIGH_THRESHOLD_DB_DEFAULT (-12.2)
 #define VAD_LOW_THRESHOLD_DB_PARAM "VadLowThresholdDb"
-#define VAD_LOW_THRESHOLD_DB_DEFAULT -12.5
+#define VAD_LOW_THRESHOLD_DB_DEFAULT (-12.5)
 #define VAD_HOLD_ON_SEC_PARAM "VadHoldOnSec"
 #define VAD_HOLD_ON_SEC_DEFAULT 4
 #define TRACKER_HOSTNAME_PARAM "TrackerHostname"
@@ -188,12 +188,12 @@ class Config : public Object
 {
 public:
 	Config();	
-	void Define(Serializer* s);
-	void Validate();
+	void Define(Serializer* s) override;
+	void Validate() override;
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	inline ObjectRef Process() {return ObjectRef();};
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	inline ObjectRef Process() override {return ObjectRef();};
 	time_t m_serviceStartedTime;
 	bool m_logMessages;
 	bool m_logRms;

@@ -16,6 +16,9 @@
 
 #include "ConfigManager.h"
 #include "Reporting.h"
+
+#include <ThreadSafeQueue.h>
+
 #include "LogManager.h"
 #include "messages/Message.h"
 #include "messages/TapeMsg.h"

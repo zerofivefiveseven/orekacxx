@@ -13,7 +13,7 @@
 #ifndef __PARTYFILTER_H__
 #define __PARTYFILTER_H__ 1
 
-bool PartyFilterActive(void);
+bool PartyFilterActive();
 bool PartyFilterMatches(CStdString& party);
 
 #endif

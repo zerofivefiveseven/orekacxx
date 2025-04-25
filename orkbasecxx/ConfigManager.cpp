@@ -19,10 +19,10 @@
 #include <xercesc/sax/ErrorHandler.hpp>
 #include <xercesc/sax/SAXParseException.hpp>
 #include <xercesc/dom/DOMImplementation.hpp>
-#include <xercesc/dom/DOMImplementationRegistry.hpp>
 #include "serializers/DomSerializer.h"
 #include "ConfigManager.h"
 #include <fstream>
+#include<apr_env.h>
 
 #define CONFIG_FILE_NAME "config.xml"
 #define ETC_CONFIG_FILE_NAME "/etc/orkaudio/config.xml"

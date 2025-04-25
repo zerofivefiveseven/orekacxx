@@ -22,12 +22,12 @@
 class CaptureResponseMsg : public AsyncMessage
 {
 public:
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	inline ObjectRef Process() {return ObjectRef();};
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	inline ObjectRef Process() override {return {};};
 
 	bool m_success;
 	CStdString m_comment;
@@ -36,12 +36,12 @@ public:
 class CaptureMsg : public SyncMessage
 {
 public:
-	void Define(Serializer* s);
-	inline void Validate() {};
+	void Define(Serializer* s) override;
+	inline void Validate() override {};
 
-	CStdString GetClassName();
-	ObjectRef NewInstance();
-	ObjectRef Process();
+	CStdString GetClassName() override;
+	ObjectRef NewInstance() override;
+	ObjectRef Process() override;
 
 	CaptureEvent::EventTypeEnum m_eventType;
 	CStdString m_capturePort;
